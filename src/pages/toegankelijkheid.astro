@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../config';
+---
+
+<Base title="Toegankelijkheid">
+  <section class="section">
+    <div class="container prose">
+      <h1>Toegankelijkheid</h1>
+      <p>Deze website is gebouwd met het doel te voldoen aan WCAG 2.1 niveau AA: voldoende kleurcontrast, bruikbaar met toetsenbord en schermlezer, en goed leesbaar op elk scherm.</p>
+      <p>Loop je toch ergens tegenaan? Laat het weten via <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    </div>
+  </section>
+</Base>

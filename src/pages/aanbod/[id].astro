@@ -1,0 +1,75 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { url } from '../../lib/url';
+import { themaKleur } from '../../lib/thema';
+
+export async function getStaticPaths() {
+  const trainingen = await getCollection('trainingen');
+  return trainingen.map((training) => ({ params: { id: training.id }, props: { training } }));
+}
+
+const { training } = Astro.props;
+const { Content } = await render(training);
+const d = training.data;
+---
+
+<Base title={d.titel} description={d.samenvatting}>
+  <article class="section" style={`--accent: ${themaKleur[d.thema]}`}>
+    <div class="container layout">
+      <div>
+        <a href={url('aanbod/')} class="back">← Alle trainingen</a>
+        <p class="eyebrow">{d.thema}</p>
+        <h1>{d.titel}</h1>
+        <p class="lead">{d.samenvatting}</p>
+        <div class="prose">
+          <Content />
+        </div>
+      </div>
+      <aside class="facts" aria-label="Kenmerken van de training">
+        <dl>
+          <dt>Doelgroep</dt><dd>{d.doelgroep}</dd>
+          <dt>Duur</dt><dd>{d.duur}</dd>
+          <dt>Vorm</dt><dd>{d.vorm.join(', ')}</dd>
+          <dt>Groepsgrootte</dt><dd>{d.groepsgrootte}</dd>
+          <dt>Investering</dt><dd>{d.prijsindicatie}</dd>
+        </dl>
+        <a class="button" href={url(`contact/?training=${training.id}`)}>Offerte aanvragen</a>
+      </aside>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .layout { display: grid; grid-template-columns: minmax(0, 1fr) 20rem; gap: var(--space-xl); align-items: start; }
+  .back { display: inline-block; margin-bottom: var(--space-m); font-size: var(--step--1); }
+  .facts {
+    position: sticky;
+    top: 6rem;
+    background: var(--paper-deep);
+    border-radius: var(--radius);
+    padding: var(--space-m);
+    border-top: 8px solid var(--accent);
+  }
+  .facts dl { margin: 0 0 var(--space-m); }
+  .facts dt {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+  }
+  .facts dd { margin: 0 0 var(--space-s); font-weight: 600; }
+  .facts .button { width: 100%; justify-content: center; }
+  .prose :global(blockquote) {
+    margin: var(--space-m) 0;
+    padding: var(--space-s) var(--space-m);
+    background: var(--abrikoos);
+    border-radius: var(--radius-s);
+  }
+  .prose :global(blockquote p) { margin: 0; }
+  @media (max-width: 52rem) {
+    .layout { grid-template-columns: 1fr; gap: var(--space-l); }
+    .facts { position: static; }
+  }
+</style>

@@ -1,0 +1,26 @@
+---
+// Tijdelijk woordmerk: drie verbonden knooppunten (een mini-beslisboom).
+import { site } from '../config';
+---
+
+<span class="logo">
+  <svg viewBox="0 0 32 32" width="32" height="32" aria-hidden="true">
+    <path d="M9 10 L23 10 M9 10 L16 23 M23 10 L16 23" stroke="currentColor" stroke-width="2" fill="none" />
+    <circle cx="9" cy="10" r="5" fill="var(--terracotta)" />
+    <circle cx="23" cy="10" r="5" fill="var(--saffraan)" />
+    <circle cx="16" cy="23" r="5" fill="var(--bosgroen)" />
+  </svg>
+  <span class="logo__text">{site.name}</span>
+</span>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--ink);
+  }
+</style>

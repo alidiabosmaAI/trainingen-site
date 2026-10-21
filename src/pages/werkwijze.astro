@@ -1,0 +1,71 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/url';
+
+const stappen = [
+  { titel: 'Kennismaking', tekst: 'We bespreken jullie vraag, de doelgroep en waar jullie staan met AI en algoritmes.' },
+  { titel: 'Voorstel op maat', tekst: 'Je ontvangt een offerte met programma, planning en een vaste prijs. Geschikt voor jullie inkoopproces.' },
+  { titel: 'Training', tekst: 'Interactieve sessies met casussen uit jullie eigen praktijk, op locatie of online.' },
+  { titel: 'Evaluatie & borging', tekst: 'We evalueren de opbrengst en kijken samen naar vervolgstappen en naslagmateriaal.' },
+];
+---
+
+<Base title="Werkwijze" description="Hoe een traject verloopt: van kennismaking tot evaluatie.">
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Werkwijze</p>
+      <h1>Van vraag tot vervolg</h1>
+      <p class="lead">Een helder proces dat aansluit bij hoe publieke organisaties inkopen en plannen.</p>
+      <ol class="steps">
+        {stappen.map((s, i) => (
+          <li>
+            <span class="steps__nr" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <h2>{s.titel}</h2>
+            <p>{s.tekst}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="prose">
+        <h2>Inkoop en facturatie</h2>
+        <ul>
+          <li>Offerte met vaste prijs per groep of per deelnemer</li>
+          <li>Facturatie via e-factuur mogelijk</li>
+          <li>Algemene voorwaarden op aanvraag</li>
+        </ul>
+        <p><a class="button" href={url('contact/')}>Plan een kennismaking</a></p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-l) 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+    gap: var(--space-m);
+    counter-reset: step;
+  }
+  .steps li {
+    background: var(--paper-deep);
+    border-radius: var(--radius);
+    padding: var(--space-m);
+  }
+  .steps h2 { font-size: var(--step-1); }
+  .steps__nr {
+    display: inline-grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    background: var(--terracotta);
+    margin-bottom: var(--space-s);
+  }
+  .steps li:nth-child(2) .steps__nr { background: var(--saffraan); }
+  .steps li:nth-child(3) .steps__nr { background: var(--abrikoos); }
+  .steps li:nth-child(4) .steps__nr { background: var(--bosgroen); color: var(--paper); }
+</style>

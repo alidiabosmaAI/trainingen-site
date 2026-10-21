@@ -1,0 +1,79 @@
+---
+import Logo from './Logo.astro';
+import { nav } from '../config';
+import { url } from '../lib/url';
+
+const current = Astro.url.pathname;
+---
+
+<header class="header">
+  <div class="container header__inner">
+    <a href={url()} class="header__home" aria-label="Naar de homepage">
+      <Logo />
+    </a>
+    <nav aria-label="Hoofdmenu">
+      <ul class="header__nav">
+        {
+          nav.map((item) => {
+            const href = url(item.href);
+            const active = current.startsWith(href);
+            return (
+              <li>
+                <a href={href} aria-current={active ? 'page' : undefined}>
+                  {item.label}
+                </a>
+              </li>
+            );
+          })
+        }
+        <li><a class="button header__cta" href={url('contact/')}>Offerte aanvragen</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    border-bottom: 1px solid var(--line);
+    background: rgb(251 246 238 / 0.92);
+    backdrop-filter: blur(6px);
+    position: sticky;
+    top: 0;
+    z-index: 5;
+  }
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-s);
+    flex-wrap: wrap;
+    padding-block: 0.9rem;
+  }
+  .header__home { text-decoration: none; }
+  .header__nav {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 1.4rem;
+    margin: 0;
+    padding: 0;
+  }
+  .header__nav a:not(.button) {
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+    padding-block: 0.3em;
+    border-bottom: 2px solid transparent;
+  }
+  .header__nav a:not(.button):hover,
+  .header__nav a[aria-current='page'] {
+    border-bottom-color: var(--terracotta);
+  }
+  .header__cta { padding: 0.55em 1.1em; font-size: var(--step--1); }
+
+  @media (max-width: 40rem) {
+    .header { position: static; }
+    .header__nav { gap: 0.4rem 1rem; }
+  }
+</style>

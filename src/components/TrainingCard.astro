@@ -1,0 +1,72 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { url } from '../lib/url';
+import { themaKleur } from '../lib/thema';
+
+interface Props {
+  training: CollectionEntry<'trainingen'>;
+}
+
+const { training } = Astro.props;
+const { titel, samenvatting, thema, duur, vorm } = training.data;
+---
+
+<article class="card" style={`--accent: ${themaKleur[thema]}`}>
+  <p class="card__thema">{thema}</p>
+  <h3><a href={url(`aanbod/${training.id}/`)}>{titel}</a></h3>
+  <p>{samenvatting}</p>
+  <dl class="card__meta">
+    <div><dt>Duur</dt><dd>{duur}</dd></div>
+    <div><dt>Vorm</dt><dd>{vorm.join(' · ')}</dd></div>
+  </dl>
+</article>
+
+<style>
+  .card {
+    position: relative;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: var(--space-m);
+    padding-top: calc(var(--space-m) + 8px);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.15s ease;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 8px;
+    background: var(--accent);
+  }
+  .card:hover { transform: translateY(-3px); }
+  .card:focus-within { outline: 3px solid var(--bosgroen); outline-offset: 3px; }
+  .card h3 { font-size: var(--step-1); }
+  .card h3 a { color: var(--ink); text-decoration: none; }
+  /* Hele kaart klikbaar, maar één link voor schermlezers */
+  .card h3 a::after { content: ''; position: absolute; inset: 0; }
+  .card h3 a:focus-visible { outline: none; }
+  .card__thema {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    margin-bottom: var(--space-xs);
+  }
+  .card__meta {
+    margin: auto 0 0;
+    padding-top: var(--space-s);
+    border-top: 1px dashed var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.5rem;
+    font-size: var(--step--1);
+  }
+  .card__meta dt { font-weight: 700; display: inline; }
+  .card__meta dt::after { content: ': '; }
+  .card__meta dd { display: inline; margin: 0; }
+</style>

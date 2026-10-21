@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import TrainingCard from '../../components/TrainingCard.astro';
+
+const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.volgorde - b.data.volgorde);
+---
+
+<Base title="Aanbod" description="Overzicht van trainingen in AI-geletterdheid en algoritmisch bestuur.">
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Aanbod</p>
+      <h1>Trainingen</h1>
+      <p class="lead">
+        Alle trainingen zijn incompany te boeken en worden afgestemd op jullie organisatie. Staat er niet precies
+        tussen wat je zoekt? Maatwerk is altijd mogelijk.
+      </p>
+      <div class="cards">
+        {trainingen.map((t) => <TrainingCard training={t} />)}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+    gap: var(--space-m);
+    margin-top: var(--space-l);
+  }
+</style>

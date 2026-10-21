@@ -1,0 +1,58 @@
+---
+import Logo from './Logo.astro';
+import { site, nav } from '../config';
+import { url } from '../lib/url';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer__grid">
+    <div>
+      <Logo />
+      <p class="footer__tagline">{site.tagline}</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul>
+        {nav.map((item) => <li><a href={url(item.href)}>{item.label}</a></li>)}
+      </ul>
+    </nav>
+    <ul>
+      <li><a href={url('privacy/')}>Privacyverklaring</a></li>
+      <li><a href={url('toegankelijkheid/')}>Toegankelijkheid</a></li>
+      <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+    </ul>
+  </div>
+  <div class="container footer__legal">
+    <span>© {year} {site.name}</span>
+    {site.kvk && <span>KvK {site.kvk}</span>}
+    {site.crkbo && <span>CRKBO-geregistreerd</span>}
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding-block: var(--space-l) var(--space-m);
+  }
+  .footer :global(.logo) { color: var(--paper); }
+  .footer a { color: var(--paper); }
+  .footer__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: var(--space-l);
+  }
+  .footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.4rem; }
+  .footer__tagline { color: var(--abrikoos); margin-top: var(--space-xs); }
+  .footer__legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    margin-top: var(--space-l);
+    padding-top: var(--space-s);
+    border-top: 1px solid rgb(251 246 238 / 0.2);
+    font-size: var(--step--1);
+    opacity: 0.8;
+  }
+</style>

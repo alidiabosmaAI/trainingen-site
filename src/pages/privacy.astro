@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../config';
+---
+
+<Base title="Privacyverklaring">
+  <section class="section">
+    <div class="container prose">
+      <h1>Privacyverklaring</h1>
+      <p>[Concept: laat de definitieve tekst controleren.]</p>
+      <h2>Welke gegevens</h2>
+      <p>Via het contactformulier ontvangen we je naam, organisatie, e-mailadres en bericht. We gebruiken deze alleen om je aanvraag te beantwoorden.</p>
+      <h2>Cookies en analyse</h2>
+      <p>Deze website gebruikt geen tracking-cookies. Lettertypes worden vanaf deze website zelf geladen, niet via externe diensten.</p>
+      <h2>Contact</h2>
+      <p>Vragen over privacy? Mail naar <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    </div>
+  </section>
+</Base>
