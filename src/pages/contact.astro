@@ -10,9 +10,9 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
   <section class="section">
     <div class="container layout">
       <div>
-        <p class="eyebrow">Contact</p>
+        <p class="label">Contact</p>
         <h1>Offerte of kennismaking</h1>
-        <p class="lead">Vertel kort wat je zoekt. Je hoort binnen twee werkdagen van mij.</p>
+        <p class="intro">Vertel kort wat je zoekt. Je hoort binnen twee werkdagen van mij.</p>
         <p>Liever direct mailen? <a href={`mailto:${site.email}`}>{site.email}</a></p>
       </div>
 
@@ -32,7 +32,7 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
         </label>
         <label>Aantal deelnemers (indicatie) <input name="deelnemers" inputmode="numeric" /></label>
         <label>Je vraag <textarea name="bericht" rows="5" required></textarea></label>
-        <button class="button" type="submit">Versturen</button>
+        <button class="button button--accent" type="submit">Versturen</button>
         <p class="form__privacy">We gebruiken je gegevens alleen om je aanvraag te beantwoorden.</p>
       </form>
     </div>
@@ -47,27 +47,21 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
 </script>
 
 <style>
-  .layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: var(--space-xl); align-items: start; }
-  .form {
-    display: grid;
-    gap: var(--space-s);
-    background: var(--paper-deep);
-    padding: var(--space-l);
-    border-radius: var(--radius);
-  }
-  .form label { display: grid; gap: 0.3rem; font-weight: 600; }
+  .layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: var(--space-xl); align-items: start; }
+  .form { display: grid; gap: var(--space-s); background: var(--perzik); padding: var(--space-l); }
+  .form label { display: grid; gap: 0.3rem; font-weight: 500; }
   .form input, .form select, .form textarea {
     font: inherit;
-    font-weight: 400;
-    padding: 0.7em 0.9em;
-    border: 1.5px solid var(--line);
-    border-radius: var(--radius-s);
-    background: var(--paper);
+    font-weight: 300;
+    padding: 0.75em 0.9em;
+    border: 1.5px solid transparent;
+    border-bottom-color: var(--ink);
+    background: var(--white);
     color: var(--ink);
   }
-  .form input:focus, .form select:focus, .form textarea:focus { border-color: var(--bosgroen); }
-  .form .button { justify-self: start; cursor: pointer; }
-  .form__note { background: var(--saffraan); padding: 0.6em 1em; border-radius: var(--radius-s); margin: 0; font-size: var(--step--1); }
-  .form__privacy { font-size: var(--step--1); color: var(--ink-soft); margin: 0; }
-  @media (max-width: 52rem) { .layout { grid-template-columns: 1fr; gap: var(--space-l); } .form { padding: var(--space-m); } }
+  .form input:focus, .form select:focus, .form textarea:focus { border-color: var(--ink); outline: none; }
+  .form .button { justify-self: start; cursor: pointer; font: inherit; font-weight: 500; }
+  .form__note { background: var(--white); border-left: 4px solid var(--oranje); padding: 0.6em 1em; margin: 0; font-size: var(--step--1); }
+  .form__privacy { font-size: var(--step--1); margin: 0; }
+  @media (max-width: 56rem) { .layout { grid-template-columns: 1fr; gap: var(--space-l); } .form { padding: var(--space-m); } }
 </style>

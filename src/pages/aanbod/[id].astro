@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import { site } from '../../config';
 import { url } from '../../lib/url';
 import { themaKleur } from '../../lib/thema';
 
@@ -12,64 +13,152 @@ export async function getStaticPaths() {
 const { training } = Astro.props;
 const { Content } = await render(training);
 const d = training.data;
+const kleur = themaKleur[d.thema];
+
+const feiten = [
+  { label: 'Vorm', waarde: d.vorm.join(', ') },
+  { label: 'Groepsgrootte', waarde: d.groepsgrootte },
+  { label: 'Duur', waarde: d.duur },
+  { label: 'Taal', waarde: 'Nederlands' },
+];
 ---
 
 <Base title={d.titel} description={d.samenvatting}>
-  <article class="section" style={`--accent: ${themaKleur[d.thema]}`}>
-    <div class="container layout">
-      <div>
-        <a href={url('aanbod/')} class="back">← Alle trainingen</a>
-        <p class="eyebrow">{d.thema}</p>
-        <h1>{d.titel}</h1>
-        <p class="lead">{d.samenvatting}</p>
-        <div class="prose">
-          <Content />
+  <div style={`--vlak: ${kleur.vlak}; --label-kleur: ${kleur.accent}`}>
+    <section class="top">
+      <div class="container top__grid">
+        <div>
+          <nav class="kruimel" aria-label="Kruimelpad">
+            <a href={url()}>Home</a> / <a href={url('aanbod/')}>Aanbod</a> /
+          </nav>
+          <p class="label">{d.thema}</p>
+          <h1>{d.titel}</h1>
+          <p class="top__ondertitel">{d.ondertitel}</p>
+          <ul class="kernpunten">
+            {d.kernpunten.map((k) => <li>{k}</li>)}
+          </ul>
+        </div>
+        <div class="top__blokken" aria-hidden="true">
+          <span style={`background: ${kleur.accent}`}></span>
+          <span style="background: var(--white)"></span>
+          <span style="background: var(--white)"></span>
+          <span style="background: var(--ink)"></span>
         </div>
       </div>
-      <aside class="facts" aria-label="Kenmerken van de training">
-        <dl>
-          <dt>Doelgroep</dt><dd>{d.doelgroep}</dd>
-          <dt>Duur</dt><dd>{d.duur}</dd>
-          <dt>Vorm</dt><dd>{d.vorm.join(', ')}</dd>
-          <dt>Groepsgrootte</dt><dd>{d.groepsgrootte}</dd>
-          <dt>Investering</dt><dd>{d.prijsindicatie}</dd>
-        </dl>
-        <a class="button" href={url(`contact/?training=${training.id}`)}>Offerte aanvragen</a>
-      </aside>
+    </section>
+
+    <div class="container">
+      <dl class="feiten">
+        {
+          feiten.map((f) => (
+            <div>
+              <dt>{f.label}</dt>
+              <dd>{f.waarde}</dd>
+            </div>
+          ))
+        }
+      </dl>
     </div>
-  </article>
+
+    <section class="section inhoud">
+      <div class="container inhoud__grid">
+        <div>
+          <h2 class="inhoud__kop">Introductie</h2>
+          <div class="prose">
+            <Content />
+            <h2>Voor wie</h2>
+            <p>{d.doelgroep}</p>
+            {
+              d.startdata.length > 0 && (
+                <>
+                  <h2>Startdata open inschrijving</h2>
+                  <ul>
+                    {d.startdata.map((s) => <li>{s}</li>)}
+                  </ul>
+                </>
+              )
+            }
+          </div>
+        </div>
+
+        <aside class="kader" aria-label="Investering en aanvragen">
+          <p class="kader__label">Investering</p>
+          <p class="kader__prijs">{d.prijsindicatie}</p>
+          <p class="kader__noot">Vaste prijs per groep, afgestemd op jullie vraag.</p>
+          <a class="button button--accent" href={url(`contact/?training=${training.id}`)}>Offerte aanvragen</a>
+          <a class="button kader__tweede" href={url('contact/')}>Vrijblijvend kennismaken</a>
+          <p class="kader__mail">Of mail naar <a href={`mailto:${site.email}`}>{site.email}</a></p>
+        </aside>
+      </div>
+    </section>
+  </div>
 </Base>
 
 <style>
-  .layout { display: grid; grid-template-columns: minmax(0, 1fr) 20rem; gap: var(--space-xl); align-items: start; }
-  .back { display: inline-block; margin-bottom: var(--space-m); font-size: var(--step--1); }
-  .facts {
-    position: sticky;
-    top: 6rem;
-    background: var(--paper-deep);
-    border-radius: var(--radius);
-    padding: var(--space-m);
-    border-top: 8px solid var(--accent);
+  .top { background: var(--vlak); padding-block: var(--space-l) calc(var(--space-l) + 2.5rem); }
+  .top__grid { display: grid; grid-template-columns: 1fr 12rem; gap: var(--space-xl); align-items: end; }
+  .kruimel { font-size: var(--step--1); margin-bottom: var(--space-m); }
+  .top h1 { max-width: 18ch; }
+  .top__ondertitel { font-size: var(--step-1); margin-bottom: var(--space-m); }
+  .kernpunten { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.5rem; }
+  .kernpunten li { position: relative; padding-left: 2rem; }
+  .kernpunten li::before {
+    content: '';
+    position: absolute;
+    left: 0.2rem;
+    top: 0.35em;
+    width: 0.5rem;
+    height: 0.9rem;
+    border: solid var(--ink);
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
   }
-  .facts dl { margin: 0 0 var(--space-m); }
-  .facts dt {
-    font-family: var(--font-mono);
-    font-size: var(--step--1);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--ink-soft);
+  .top__blokken { display: grid; grid-template-columns: 1fr 1fr; }
+  .top__blokken span { aspect-ratio: 1; }
+
+  .feiten {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: -2.5rem 0 0;
+    background: var(--white);
+    border: 1px solid var(--line);
+    position: relative;
   }
-  .facts dd { margin: 0 0 var(--space-s); font-weight: 600; }
-  .facts .button { width: 100%; justify-content: center; }
-  .prose :global(blockquote) {
-    margin: var(--space-m) 0;
-    padding: var(--space-s) var(--space-m);
-    background: var(--abrikoos);
-    border-radius: var(--radius-s);
-  }
+  .feiten div { padding: var(--space-s) var(--space-m); border-left: 1px solid var(--line); }
+  .feiten div:first-child { border-left: 0; }
+  .feiten dt { font-size: var(--step--1); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+  .feiten dd { margin: 0; }
+
+  .inhoud { padding-top: var(--space-l); }
+  .inhoud__grid { display: grid; grid-template-columns: minmax(0, 1fr) 21rem; gap: var(--space-xl); align-items: start; }
+  .inhoud__kop { font-size: var(--step-1); }
+  .prose :global(blockquote) { margin: 0 0 var(--space-m); padding: var(--space-s) var(--space-m); background: var(--roos); }
   .prose :global(blockquote p) { margin: 0; }
-  @media (max-width: 52rem) {
-    .layout { grid-template-columns: 1fr; gap: var(--space-l); }
-    .facts { position: static; }
+
+  .kader {
+    position: sticky;
+    top: 7rem;
+    background: var(--ink);
+    color: var(--white);
+    padding: var(--space-m);
+    display: grid;
+    gap: var(--space-s);
+  }
+  .kader p { margin: 0; }
+  .kader a:not(.button) { color: var(--white); }
+  .kader__label { font-size: var(--step--1); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+  .kader__prijs { font-size: var(--step-2); font-weight: 650; line-height: 1.1; }
+  .kader__noot, .kader__mail { font-size: var(--step--1); opacity: 0.9; }
+  .kader .button { justify-content: center; }
+  .kader__tweede { background: transparent; border-color: var(--white); }
+  .kader__tweede:hover { background: var(--white); color: var(--ink); border-color: var(--white); }
+
+  @media (max-width: 56rem) {
+    .top__grid, .inhoud__grid { grid-template-columns: 1fr; gap: var(--space-l); }
+    .top__blokken { display: none; }
+    .feiten { grid-template-columns: 1fr 1fr; }
+    .feiten div:nth-child(3) { border-left: 0; }
+    .feiten div:nth-child(n + 3) { border-top: 1px solid var(--line); }
+    .kader { position: static; }
   }
 </style>

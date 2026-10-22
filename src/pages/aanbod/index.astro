@@ -1,7 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import TrainingCard from '../../components/TrainingCard.astro';
+import TrainingPanel from '../../components/TrainingPanel.astro';
+import { url } from '../../lib/url';
 
 const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.volgorde - b.data.volgorde);
 ---
@@ -9,24 +10,23 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
 <Base title="Aanbod" description="Overzicht van trainingen in AI-geletterdheid en algoritmisch bestuur.">
   <section class="section">
     <div class="container">
-      <p class="eyebrow">Aanbod</p>
+      <p class="label" style="--label-kleur: var(--vermiljoen)">Aanbod</p>
       <h1>Trainingen</h1>
-      <p class="lead">
-        Alle trainingen zijn incompany te boeken en worden afgestemd op jullie organisatie. Staat er niet precies
-        tussen wat je zoekt? Maatwerk is altijd mogelijk.
+      <p class="intro">
+        Alle trainingen zijn incompany te boeken en worden afgestemd op jullie organisatie. Maatwerk is altijd
+        mogelijk.
       </p>
-      <div class="cards">
-        {trainingen.map((t) => <TrainingCard training={t} />)}
+      <div class="panels">
+        {trainingen.map((t) => <TrainingPanel training={t} />)}
       </div>
+      <p class="maatwerk">
+        Staat er niet tussen wat je zoekt? <a href={url('contact/')}>Neem contact op</a> voor een training op maat.
+      </p>
     </div>
   </section>
 </Base>
 
 <style>
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
-    gap: var(--space-m);
-    margin-top: var(--space-l);
-  }
+  .panels { display: grid; gap: var(--space-m); margin-top: var(--space-l); }
+  .maatwerk { margin-top: var(--space-l); }
 </style>

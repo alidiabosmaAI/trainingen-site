@@ -8,13 +8,17 @@ const trainingen = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/trainingen' }),
   schema: z.object({
     titel: z.string(),
+    ondertitel: z.string(),
     samenvatting: z.string(),
+    kernpunten: z.array(z.string()).max(4),
     thema: z.enum(['AI-geletterdheid', 'Algoritmisch bestuur', 'AI in de praktijk']),
     doelgroep: z.string(),
     duur: z.string(),
     vorm: z.array(z.string()),
     groepsgrootte: z.string(),
     prijsindicatie: z.string(),
+    // Alleen invullen voor open inschrijving, bijv. "dinsdag 17 november 2026, Utrecht"
+    startdata: z.array(z.string()).default([]),
     volgorde: z.number().default(99),
   }),
 });

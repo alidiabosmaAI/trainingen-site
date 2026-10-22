@@ -1,0 +1,62 @@
+---
+// Kerngegevens van een training als kleine labels (duur, groep, vorm, prijs).
+interface Props {
+  duur: string;
+  groepsgrootte: string;
+  vorm: string[];
+  prijsindicatie: string;
+}
+
+const { duur, groepsgrootte, vorm, prijsindicatie } = Astro.props;
+
+const items = [
+  { icoon: 'klok', label: 'Duur', waarde: duur },
+  { icoon: 'groep', label: 'Groepsgrootte', waarde: groepsgrootte },
+  { icoon: 'vorm', label: 'Vorm', waarde: vorm.join(', ') },
+  { icoon: 'euro', label: 'Investering', waarde: prijsindicatie },
+];
+
+const paden: Record<string, string> = {
+  klok: 'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 5v4.6l3.2 3.2-1.4 1.4L11 12.4V7h2Z',
+  groep: 'M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm8 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM1 20c0-3.3 3.6-6 8-6s8 2.7 8 6v1H1v-1Zm17.5 1v-1c0-1.9-.8-3.6-2.1-4.9 3.6.3 6.6 2.3 6.6 4.9v1h-4.5Z',
+  vorm: 'M3 4h18v12H3V4Zm2 2v8h14V6H5Zm3 12h8v2H8v-2Z',
+  euro: 'M15 4c1.6 0 3 .5 4.2 1.4l-1.2 1.6A5 5 0 0 0 10.4 9H16v2h-6.1v2H16v2h-5.6a5 5 0 0 0 7.6 2l1.2 1.6A7 7 0 0 1 8.3 15H5v-2h3V11H5V9h3.3A7 7 0 0 1 15 4Z',
+};
+---
+
+<ul class="facts">
+  {
+    items.map((item) => (
+      <li>
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+          <path d={paden[item.icoon]} fill="currentColor" />
+        </svg>
+        <span class="visually-hidden">{item.label}:</span>
+        {item.waarde}
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .facts { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; padding: 0; }
+  .facts li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    background: var(--white);
+    padding: 0.35em 0.8em;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+</style>

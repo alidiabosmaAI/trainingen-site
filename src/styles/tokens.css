@@ -2,44 +2,44 @@
  * Design tokens: de huisstijl in variabelen.
  * Deze file kan later één-op-één mee naar de leeromgeving.
  *
- * Regel: de warme accentkleuren gebruik je als vlak met donkere tekst erop.
- * Voor tekst en links op lichte achtergrond gebruik je --ink of --terracotta-text.
+ * Regels:
+ * - Tekst is altijd --ink (op wit of op een pastel) of wit (op --ink / --vermiljoen).
+ * - De felle accenten (oranje, vermiljoen-licht, groen) zijn voor vlakken en iconen, niet voor tekst.
  */
 :root {
   /* Basis */
-  --ink: #2b2024;            /* warm, bijna zwart: tekst */
-  --ink-soft: #5a4a4f;       /* secundaire tekst */
-  --paper: #fbf6ee;          /* achtergrond, warm crème */
-  --paper-deep: #f3e8d8;     /* vlakken, kaarten */
-  --line: #e2d3bf;           /* randen, rasterlijnen */
+  --ink: #0e5a73;            /* diep petrol: alle tekst, hoofdkleur */
+  --ink-deep: #0a4558;       /* hover, footer */
+  --white: #ffffff;
+  --mist: #f4f8f9;           /* rustige achtergrondsectie */
+  --line: #d6e3e7;
 
-  /* Warme accenten */
-  --terracotta: #dc6f4a;
-  --terracotta-text: #a8432a; /* toegankelijke variant voor tekst/links */
-  --saffraan: #eaa53a;
-  --abrikoos: #f4b994;
-  --bosgroen: #2f5d50;       /* tegenwicht: rust en vakkennis */
-  --pruim: #6e3a55;
+  /* Warme pastels (achtergrondvlakken) */
+  --perzik: #fbe7d6;
+  --roos: #f7ddd6;
+  --lila: #e3d7ee;
+  --mint: #cde6d8;
 
-  /* Typografie */
-  --font-display: 'Fraunces Variable', Georgia, serif;
-  --font-body: 'Source Sans 3', system-ui, sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  /* Accenten (vlakken, iconen, blokjes) */
+  --oranje: #ee8a1e;
+  --vermiljoen: #e0532a;
+  --vermiljoen-knop: #c4461f; /* toegankelijke variant met witte tekst */
+  --groen: #13906f;
 
-  --step--1: clamp(0.88rem, 0.85rem + 0.15vw, 0.95rem);
-  --step-0: clamp(1.06rem, 1rem + 0.25vw, 1.19rem);
-  --step-1: clamp(1.3rem, 1.2rem + 0.5vw, 1.55rem);
-  --step-2: clamp(1.65rem, 1.45rem + 1vw, 2.2rem);
-  --step-3: clamp(2.1rem, 1.7rem + 2vw, 3.3rem);
+  /* Typografie: Lexend is ontworpen voor leesbaarheid */
+  --font: 'Lexend Variable', system-ui, sans-serif;
 
-  /* Ruimte en vorm */
+  --step--1: 0.875rem;
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --step-1: clamp(1.2rem, 1.1rem + 0.4vw, 1.4rem);
+  --step-2: clamp(1.6rem, 1.35rem + 1.1vw, 2.4rem);
+  --step-3: clamp(2.1rem, 1.6rem + 2.4vw, 3.6rem);
+
+  /* Ruimte */
   --space-xs: 0.5rem;
   --space-s: 1rem;
-  --space-m: 1.5rem;
-  --space-l: 2.5rem;
-  --space-xl: clamp(3.5rem, 2.5rem + 5vw, 6.5rem);
-  --radius: 14px;
-  --radius-s: 8px;
-  --max: 72rem;
-  --shadow: 0 1px 0 var(--line), 0 12px 28px -18px rgb(43 32 36 / 0.35);
+  --space-m: 1.75rem;
+  --space-l: 3rem;
+  --space-xl: clamp(4rem, 3rem + 5vw, 8rem);
+  --max: 70rem;
 }

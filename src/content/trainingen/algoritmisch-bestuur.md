@@ -1,11 +1,16 @@
 ---
 titel: Algoritmisch bestuur in de praktijk
+ondertitel: Grip op algoritmes in besluitvorming
 samenvatting: Voor beleidsmakers, juristen en bestuurders die algoritmes verantwoord willen inzetten bij besluitvorming. Van algoritmeregister tot impact assessment.
+kernpunten:
+  - Je weet hoe algoritmes doorwerken in besluiten over burgers en huurders
+  - Je kunt werken met het Algoritmeregister en impact assessments
+  - Je richt rollen, verantwoording en toezicht goed in
 thema: Algoritmisch bestuur
-doelgroep: Beleidsadviseurs, juristen, privacy officers, bestuurders
+doelgroep: Beleidsadviseurs, juristen, privacy officers en bestuurders
 duur: 2 dagdelen
 vorm: [Incompany, Open inschrijving]
-groepsgrootte: 6 tot 16 deelnemers
+groepsgrootte: 6-16 personen
 prijsindicatie: Op aanvraag
 volgorde: 2
 ---

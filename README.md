@@ -20,7 +20,7 @@ Open daarna http://localhost:4321/trainingen-site/ in je browser. Wijzigingen zi
 | Wat | Waar |
 |---|---|
 | Naam, e-mail, KvK, menu | `src/config.ts` |
-| Kleuren en lettertypes (huisstijl) | `src/styles/tokens.css` |
+| Kleuren en lettertype (huisstijl) | `src/styles/tokens.css` |
 | Trainingen | `src/content/trainingen/*.md` (één bestand per training) |
 | Pagina's | `src/pages/` |
 | Logo, header, footer | `src/components/` |
