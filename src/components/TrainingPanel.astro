@@ -25,7 +25,7 @@ const kleur = themaKleur[d.thema];
     <h3><a href={url(`aanbod/${training.id}/`)}>{d.titel}</a></h3>
     <p>{d.samenvatting}</p>
     <Facts duur={d.duur} groepsgrootte={d.groepsgrootte} vorm={d.vorm} prijsindicatie={d.prijsindicatie} />
-    <p class="panel__more" aria-hidden="true">Meer over deze training</p>
+    <p class="panel__more" aria-hidden="true">Meer over deze training →</p>
   </div>
 </article>
 
@@ -33,46 +33,29 @@ const kleur = themaKleur[d.thema];
   .panel {
     position: relative;
     display: grid;
-    grid-template-columns: 15rem 1fr;
-    column-gap: var(--space-l);
-    background: var(--white);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: 0 1px 0 var(--lijn), 0 14px 30px -22px rgb(58 33 64 / 0.35);
-    transition: transform 0.15s ease;
-  }
-  .panel:hover { transform: translateY(-2px); }
-  .panel__side {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-l);
     background: var(--vlak);
-    padding: var(--space-l) var(--space-m);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: var(--space-m);
+    border-radius: var(--radius);
+    padding: var(--space-l);
   }
-  .panel__body { padding: var(--space-l) var(--space-l) var(--space-l) 0; }
-  .panel__vormen { display: flex; align-items: flex-end; gap: 0.5rem; }
-  .panel__kwart { width: 3.5rem; height: 3.5rem; border-radius: 100% 0 0 0; }
-  .panel__cirkel { width: 1.75rem; height: 1.75rem; border-radius: 50%; background: var(--white); }
+  /* Twee vormen schuin onder elkaar, onder het label */
+  .panel__vormen {
+    display: grid;
+    grid-template-columns: repeat(2, 3.5rem);
+    grid-template-rows: repeat(2, 3.5rem);
+    margin-top: var(--space-m);
+  }
+  .panel__kwart { border-radius: 100% 0 0 0; }
+  .panel__cirkel { grid-column: 2; grid-row: 2; border-radius: 50%; background: var(--white); }
   .panel h3 a { text-decoration: none; }
   .panel h3 a::after { content: ''; position: absolute; inset: 0; }
   .panel:hover h3 a { text-decoration: underline; }
   .panel:focus-within { outline: 3px solid var(--terracotta); outline-offset: 3px; }
   .panel h3 a:focus-visible { outline: none; }
-  .panel__more {
-    margin: var(--space-m) 0 0;
-    font-weight: 700;
-    text-decoration: underline;
-    text-decoration-color: var(--terracotta);
-    text-decoration-thickness: 2px;
-    text-underline-offset: 0.3em;
-  }
+  .panel__more { margin: var(--space-m) 0 0; font-weight: 700; }
   @media (max-width: 44rem) {
-    .panel { grid-template-columns: 1fr; }
-    .panel__side { flex-direction: row; align-items: center; padding: var(--space-s) var(--space-m); }
-    .panel__side .label { margin: 0; }
-    .panel__kwart { width: 2rem; height: 2rem; }
-    .panel__cirkel { display: none; }
-    .panel__body { padding: var(--space-m); }
+    .panel { grid-template-columns: 1fr; gap: 0; padding: var(--space-m); }
+    .panel__vormen { display: none; }
   }
 </style>
