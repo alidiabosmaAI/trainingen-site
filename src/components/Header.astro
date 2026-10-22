@@ -206,4 +206,8 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
     .submenu__all { display: none; }
     .header__cta { justify-content: center; }
   }
+  @media (max-width: 30rem) {
+    .header__inner { gap: var(--space-s); }
+    .header__home :global(.logo) { font-size: 1.05rem; gap: 0.5rem; }
+  }
 </style>

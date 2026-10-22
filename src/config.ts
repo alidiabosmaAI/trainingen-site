@@ -1,8 +1,9 @@
 // Centrale instellingen. Pas hier naam, contactgegevens en navigatie aan;
 // de rest van de site leest deze waarden uit.
 export const site = {
-  // Werknaam: vervang door de definitieve bedrijfsnaam zodra die bekend is.
-  name: 'Alidia Bosma',
+  name: 'Bestuurskundig Leerhuis',
+  // De persoon achter het leerhuis (pagina Over)
+  eigenaar: 'Alidia Bosma',
   tagline: 'AI-geletterdheid & algoritmisch bestuur',
   description:
     'Trainingen in AI-geletterdheid en algoritmisch bestuur voor overheden en semi-publieke organisaties.',
