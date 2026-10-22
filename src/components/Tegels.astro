@@ -5,10 +5,13 @@
 interface Props {
   foto?: string;
   fotoAlt?: string;
+  // Welk deel van de foto zichtbaar blijft bij bijsnijden, bijv. 'center 20%'.
+  fotoPositie?: string;
   variant?: 'a' | 'b';
 }
 
-const { foto, fotoAlt = '', variant = 'a' } = Astro.props;
+const { foto, fotoAlt = '', fotoPositie = 'center', variant = 'a' } = Astro.props;
+const fotoSrc = foto && `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${foto.replace(/^\//, '')}`;
 
 // Per tegel: kleur en vorm. Vormen: vierkant, cirkel, leeg, en kwartcirkels met de ronding
 // linksboven (kwart-lb), rechtsboven (kwart-rb), rechtsonder (kwart-ro) of linksonder (kwart-lo).
@@ -35,7 +38,7 @@ const tegels = composities[variant];
 <div class:list={['tegels', `tegels--${variant}`]} aria-hidden={foto ? undefined : 'true'}>
   {
     foto ? (
-      <img class="tegels__foto" src={foto} alt={fotoAlt} />
+      <img class="tegels__foto" src={fotoSrc} alt={fotoAlt} style={`object-position: ${fotoPositie}`} />
     ) : (
       <div class="tegels__foto tegels__foto--leeg">
         <span>Foto volgt</span>
