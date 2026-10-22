@@ -29,4 +29,4 @@ We beginnen bij wat de meeste mensen al gebruiken: generatieve AI zoals ChatGPT 
 
 ## Opzet
 
-Korte inhoudelijke blokken, afgewisseld met spelvormen waarin deelnemers oefenen met begrippen en met herkenbare situaties uit de eigen praktijk.
+Korte inhoudelijke blokken, afgewisseld met games waarin deelnemers spelenderwijs oefenen met begrippen, en een simulatie waarin ze zelf ervaren hoe een systeemadvies een besluit kan sturen.

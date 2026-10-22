@@ -31,4 +31,4 @@ Deze training gaat de diepte in. Niet om je tot programmeur op te leiden, maar z
 
 ## Opzet
 
-Drie dagdelen met casussen en dilemma's. Deelnemers brengen bij voorkeur een algoritme of AI-toepassing uit de eigen organisatie in, die we gedurende de training samen doorlichten.
+Drie dagdelen rond een simulatie: deelnemers vormen een projectteam dat een algoritme moet beoordelen en laten ontwikkelen, van eerste ontwerpvraag tot implementatie. Onderweg stuiten ze op dilemma's over waarden, data en verantwoording. Een eigen casus inbrengen kan ook.

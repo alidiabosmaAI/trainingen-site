@@ -12,10 +12,31 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
 const stappen = [
   { titel: 'Kennismaken', tekst: 'We bespreken jullie vraag, de doelgroep en waar jullie staan.' },
   { titel: 'Voorstel op maat', tekst: 'Een offerte met programma, planning en een vaste prijs.' },
-  { titel: 'Training', tekst: 'Interactief, met spelvormen en casussen uit jullie eigen praktijk.' },
+  { titel: 'Training', tekst: 'Met simulaties en games waarin deelnemers zelf beslissingen nemen.' },
   { titel: 'Borgen', tekst: 'Evaluatie, naslagmateriaal en eventuele vervolgstappen.' },
 ];
 const stapKleuren = ['var(--oker)', 'var(--salie)', 'var(--perzik)', 'var(--hemel)'];
+
+const leervormen = [
+  {
+    titel: 'Simulaties',
+    tekst: 'Deelnemers doorlopen een besluitvormingsproces waarin een algoritme meebeslist, en ervaren zelf waar het schuurt.',
+    kleur: 'var(--oker)',
+    vorm: '100% 0 0 0',
+  },
+  {
+    titel: 'Games',
+    tekst: 'Met spelvormen oefenen deelnemers begrippen en dilemma’s. Actief, met elkaar en met ruimte voor fouten.',
+    kleur: 'var(--denim)',
+    vorm: '50%',
+  },
+  {
+    titel: 'Vertaling naar de praktijk',
+    tekst: 'Na elke ronde vertalen we wat er gebeurde naar het eigen werk. Een eigen casus inbrengen kan ook.',
+    kleur: 'var(--ink)',
+    vorm: '0 0 100% 0',
+  },
+];
 
 const doelgroepen = [
   { naam: 'Gemeenten en provincies', toelichting: 'Beleid, uitvoering en bestuur' },
@@ -32,8 +53,8 @@ const doelgroepen = [
         <p class="label">AI-geletterdheid & algoritmisch bestuur</p>
         <h1>Grip op AI in de publieke sector</h1>
         <p class="intro">
-          Trainingen voor organisaties die AI verantwoord willen inzetten. Helder uitgelegd, inhoudelijk
-          onderbouwd en afgestemd op jullie praktijk.
+          Trainingen in AI-geletterdheid voor overheden en woningcorporaties. Met simulaties en games, zodat
+          deelnemers ervaren wat er op het spel staat.
         </p>
         <div class="hero__actions">
           <a class="button" href={url('aanbod/')}>Bekijk het aanbod</a>
@@ -50,19 +71,16 @@ const doelgroepen = [
     <div class="container visie">
       <div>
         <p class="label" style="--label-kleur: var(--olijf)">Visie</p>
-        <h2>AI begrijpen is de basis voor goed bestuur</h2>
+        <h2>AI-geletterdheid is ambtelijk vakmanschap</h2>
         <p>
-          Algoritmes en AI ondersteunen steeds vaker beslissingen die burgers en huurders direct raken. Dat vraagt
-          om medewerkers en bestuurders die weten wat deze systemen doen, waar de risico's zitten en welke
-          verantwoordelijkheid zij zelf dragen.
+          De overheid zet steeds vaker algoritmes in voor taken die burgers en huurders direct raken. Begrijpen wat
+          er gebeurt is daarom geen specialisme voor IT, maar een basiscompetentie voor iedere ambtenaar.
         </p>
         <p>
-          Mijn trainingen maken dat begrijpelijk, zonder hype en zonder onnodig jargon. Serieus van inhoud, met
-          diepgaande kennis van algoritmisch bestuur en de AI-verordening. Speels in de vorm: deelnemers oefenen
-          met begrippen in spelvormen en werken aan casussen uit hun eigen praktijk, in plaats van te luisteren naar
-          een lange presentatie.
+          Een algoritme is nooit neutraal. Publieke waarden zijn de maatstaf, niet alleen efficiëntie. En de mens
+          blijft verantwoordelijk voor het besluit.
         </p>
-        <p><a href={url('visie/')}>Lees mijn visie op AI in het openbaar bestuur</a></p>
+        <p class="visie__link"><a href={url('visie/')}>Lees mijn visie →</a></p>
       </div>
       <Artikel kop="Artikel 4 · AI-geletterdheid" bron="AI-verordening (EU) 2024/1689, van toepassing sinds 2 februari 2025">
         <p>
@@ -76,9 +94,28 @@ const doelgroepen = [
 
   <section class="section">
     <div class="container">
+      <p class="label" style="--label-kleur: var(--oker)">Aanpak</p>
+      <h2>Leren door te doen</h2>
+      <p class="intro">Serieus van inhoud, speels in de vorm. Geen lange presentaties, maar zelf ervaren wat AI doet in het openbaar bestuur.</p>
+      <ul class="leervormen">
+        {
+          leervormen.map((l) => (
+            <li>
+              <span class="leervormen__vorm" style={`background: ${l.kleur}; border-radius: ${l.vorm}`} aria-hidden="true" />
+              <h3>{l.titel}</h3>
+              <p>{l.tekst}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--papier">
+    <div class="container">
       <p class="label" style="--label-kleur: var(--koper)">Aanbod</p>
-      <h2>Trainingen</h2>
-      <p class="intro">Een basis voor iedereen, verdieping voor adviseurs en een training voor leidinggevenden. Alle trainingen worden afgestemd op jullie organisatie.</p>
+      <h2>Drie rollen, drie trainingen</h2>
+      <p class="intro">Voor de professional die met AI werkt, de adviseur die algoritmes beoordeelt en de leidinggevende die richting geeft.</p>
       <div class="panels">
         {trainingen.map((t) => <TrainingCard training={t} />)}
       </div>
@@ -170,6 +207,19 @@ const doelgroepen = [
     gap: var(--space-m);
     margin-top: var(--space-l);
   }
+  .visie__link { font-weight: 700; }
+  .leervormen {
+    list-style: none;
+    margin: var(--space-l) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-l);
+  }
+  .leervormen__vorm { display: block; width: 3rem; height: 3rem; margin-bottom: var(--space-m); }
+  .leervormen h3 { font-size: var(--step-1); margin-bottom: var(--space-xs); }
+  .leervormen p { margin: 0; }
+
   .panels__maatwerk {
     display: flex;
     flex-wrap: wrap;
@@ -178,7 +228,7 @@ const doelgroepen = [
     gap: var(--space-s);
     margin-top: var(--space-m);
     padding: var(--space-m) var(--space-l);
-    background: var(--papier);
+    background: var(--white);
     border-radius: var(--radius);
   }
   .panels__maatwerk p { margin: 0; }
@@ -219,6 +269,7 @@ const doelgroepen = [
   .over__contact { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-m); margin-top: var(--space-m); }
 
   @media (max-width: 56rem) {
+    .leervormen { grid-template-columns: 1fr; gap: var(--space-m); }
     .hero__grid, .visie, .over { grid-template-columns: 1fr; gap: var(--space-l); }
     .hero__visual { justify-self: start; max-width: 18rem; }
     .stappen { grid-template-columns: 1fr 1fr; }
