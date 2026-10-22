@@ -12,7 +12,6 @@ duur: 3 dagdelen
 vorm: [Incompany, Open inschrijving]
 groepsgrootte: 6-16 personen
 prijsindicatie: Op aanvraag
-boekdelen: [Deel II – Waarden en principes, Deel III – Onder de motorkap, Deel IV – Opdrachtgeverschap]
 volgorde: 2
 ---
 

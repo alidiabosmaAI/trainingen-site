@@ -14,7 +14,7 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
       <h1>Trainingen</h1>
       <p class="intro">
         Een basis voor iedereen, verdieping voor adviseurs en een training voor leidinggevenden. Alle trainingen
-        worden afgestemd op jullie organisatie, en bij elke training hoort mijn boek over algoritmisch bestuur.
+        worden afgestemd op jullie organisatie. Maatwerk is altijd mogelijk.
       </p>
       <div class="panels">
         {trainingen.map((t) => <TrainingCard training={t} />)}

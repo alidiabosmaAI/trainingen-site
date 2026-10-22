@@ -80,17 +80,6 @@ const feiten = [
           <p class="kader__label">Investering</p>
           <p class="kader__prijs">{d.prijsindicatie}</p>
           <p class="kader__noot">Vaste prijs per groep, afgestemd op jullie vraag.</p>
-          {
-            d.boekdelen.length > 0 && (
-              <div class="kader__boek">
-                <p class="kader__label">Met het boek</p>
-                <p class="kader__noot">Bij deze training hoort mijn boek over algoritmisch bestuur (in voorbereiding), met name:</p>
-                <ul>
-                  {d.boekdelen.map((b) => <li>{b}</li>)}
-                </ul>
-              </div>
-            )
-          }
           <a class="button button--accent" href={url(`contact/?training=${training.id}`)}>Offerte aanvragen</a>
           <a class="button kader__tweede" href={url('contact/')}>Vrijblijvend kennismaken</a>
           <p class="kader__mail">Of mail naar <a href={`mailto:${site.email}`}>{site.email}</a></p>
@@ -157,8 +146,6 @@ const feiten = [
   .kader__label { font-size: var(--step--1); font-weight: 700; }
   .kader__prijs { font-size: var(--step-2); font-weight: 650; line-height: 1.1; }
   .kader__noot, .kader__mail { font-size: var(--step--1); opacity: 0.9; }
-  .kader__boek { border-top: 1px solid rgb(255 255 255 / 0.2); padding-top: var(--space-s); display: grid; gap: 0.4rem; }
-  .kader__boek ul { margin: 0; padding-left: 1.1em; font-size: var(--step--1); }
   .kader .button { justify-content: center; }
   .kader__tweede { background: transparent; border-color: var(--white); }
   .kader__tweede:hover { background: var(--white); color: var(--ink); border-color: var(--white); }

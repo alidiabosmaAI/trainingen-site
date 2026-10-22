@@ -1,0 +1,186 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Artikel from '../components/Artikel.astro';
+import { url } from '../lib/url';
+import { themaKleur } from '../lib/thema';
+
+const trainingen = await getCollection('trainingen');
+const trainingVoor = (thema: string) => trainingen.find((t) => t.data.thema === thema);
+
+const uitgangspunten = [
+  {
+    titel: 'AI-geletterdheid is voor iedere ambtenaar',
+    tekst:
+      'Algoritmes veranderen de relatie tussen overheid en burger. Begrijpen hoe ze werken is daarom geen specialisme voor IT, maar een basiscompetentie voor iedereen die beleid maakt, uitvoert of leidinggeeft.',
+  },
+  {
+    titel: 'ChatGPT is het topje van de ijsberg',
+    tekst:
+      'Generatieve AI zette het onderwerp op de agenda, maar de overheid werkt al tientallen jaren met rekenregels en beslisbomen. Wat mensen al gebruiken is de ingang naar die bredere vragen.',
+  },
+  {
+    titel: 'Een algoritme is nooit neutraal',
+    tekst:
+      'Een algoritme is een beleidsinstrument. In elke rekenregel en elke dataset zitten keuzes en aannames. Wie dat ziet, kan ze bespreken en bijsturen.',
+  },
+  {
+    titel: 'Publieke waarden zijn de maatstaf',
+    tekst:
+      'Sneller en goedkoper is begrijpelijk, maar mag niet ten koste gaan van zorgvuldigheid, gelijkheid en rechtsbescherming. De vraag is niet alleen of het werkt, maar ook of het legitiem is.',
+  },
+  {
+    titel: 'De mens blijft verantwoordelijk',
+    tekst:
+      'Menselijke tussenkomst werkt alleen als iemand de tijd, kennis en het mandaat heeft om af te wijken van een systeemadvies. Anders wordt het een vinkje.',
+  },
+  {
+    titel: 'Leren landt in de organisatie',
+    tekst:
+      'Kennis alleen is niet genoeg. Zonder tijd, een duidelijke visie en collega’s die de brug slaan tussen techniek en beleid blijft het geleerde liggen.',
+  },
+];
+const kleuren = ['var(--oker)', 'var(--salie)', 'var(--perzik)', 'var(--hemel)', 'var(--oker)', 'var(--salie)'];
+
+const niveaus = [
+  {
+    rol: 'De professional als gebruiker',
+    tekst: 'Werkt met AI en algoritmes, en weet wanneer een uitkomst kritisch bevraagd moet worden.',
+    thema: 'Basistraining',
+  },
+  {
+    rol: 'De adviseur als beoordelaar en opdrachtgever',
+    tekst: 'Beoordeelt systemen aan de hand van publieke waarden en houdt de regie, ook richting IT en leveranciers.',
+    thema: 'Verdieping voor adviseurs',
+  },
+  {
+    rol: 'De leidinggevende als richtinggever',
+    tekst: 'Geeft richting, maakt ruimte om te leren en organiseert tegenspraak wanneer het schuurt.',
+    thema: 'Voor leidinggevenden',
+  },
+];
+---
+
+<Base title="Visie" description="Mijn visie op AI-geletterdheid en algoritmisch bestuur in de publieke sector.">
+  <section class="section">
+    <div class="container kop">
+      <div>
+        <p class="label" style="--label-kleur: var(--olijf)">Visie</p>
+        <h1>AI-geletterdheid is ambtelijk vakmanschap</h1>
+        <p class="intro">
+          De overheid zet steeds vaker algoritmes in voor taken die burgers direct raken. Dat vraagt om ambtenaren die
+          begrijpen wat er gebeurt, de juiste vragen stellen en de rechtsstaat bewaken.
+        </p>
+      </div>
+      <Artikel kop="Wat is AI-geletterdheid?" bron="Werkdefinitie uit mijn onderzoek">
+        <p>
+          De kennis, vaardigheden en houding die nodig zijn om AI-systemen in het openbaar bestuur
+          <mark>geïnformeerd, kritisch en juridisch verantwoord</mark> te gebruiken, en de daarbij behorende kansen,
+          risico’s en mogelijke schade te herkennen.
+        </p>
+      </Artikel>
+    </div>
+  </section>
+
+  <section class="section section--papier">
+    <div class="container">
+      <h2>Zes uitgangspunten</h2>
+      <ol class="punten">
+        {
+          uitgangspunten.map((u, i) => (
+            <li>
+              <span class="punten__nr" style={`background: ${kleuren[i]}`} aria-hidden="true">
+                {i + 1}
+              </span>
+              <div>
+                <h3>{u.titel}</h3>
+                <p>{u.tekst}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="label" style="--label-kleur: var(--koper)">Van visie naar aanbod</p>
+      <h2>Drie rollen, drie trainingen</h2>
+      <p class="intro">Iedereen in de organisatie heeft een eigen rol bij verantwoord gebruik van AI.</p>
+      <ul class="niveaus">
+        {
+          niveaus.map((n) => {
+            const t = trainingVoor(n.thema);
+            const k = themaKleur[n.thema];
+            return (
+              <li>
+                <span class="niveaus__vorm" style={`background: ${k.accent}; border-radius: ${k.vorm}`} aria-hidden="true" />
+                <h3>{n.rol}</h3>
+                <p>{n.tekst}</p>
+                {t && (
+                  <p class="niveaus__link">
+                    <a href={url(`aanbod/${t.id}/`)}>{t.data.titel} →</a>
+                  </p>
+                )}
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .kop { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-xl); align-items: center; }
+  .kop h1 { max-width: 16ch; }
+
+  .punten {
+    list-style: none;
+    margin: var(--space-l) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-l) var(--space-xl);
+  }
+  .punten li { display: grid; grid-template-columns: 3.25rem 1fr; gap: var(--space-m); align-items: start; }
+  .punten__nr {
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: var(--radius);
+    font-weight: 800;
+    font-size: var(--step-1);
+  }
+  .punten h3 { font-size: var(--step-1); margin-bottom: var(--space-xs); }
+  .punten p { margin: 0; }
+
+  .niveaus {
+    list-style: none;
+    margin: var(--space-l) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-m);
+  }
+  .niveaus li {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--lijn);
+    border-radius: var(--radius);
+    padding: var(--space-m);
+    background: var(--white);
+  }
+  .niveaus__vorm { display: block; width: 3rem; height: 3rem; margin-bottom: var(--space-m); }
+  .niveaus h3 { font-size: var(--step-1); }
+  .niveaus__link { margin: auto 0 0; padding-top: var(--space-s); font-weight: 700; }
+  .niveaus__link a { text-decoration: none; }
+  .niveaus__link a:hover { text-decoration: underline; }
+
+  @media (max-width: 56rem) {
+    .kop, .punten { grid-template-columns: 1fr; gap: var(--space-l); }
+    .niveaus { grid-template-columns: 1fr; }
+  }
+</style>

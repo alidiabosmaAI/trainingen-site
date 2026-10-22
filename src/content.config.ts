@@ -19,8 +19,6 @@ const trainingen = defineCollection({
     prijsindicatie: z.string(),
     // Alleen invullen voor open inschrijving, bijv. "dinsdag 17 november 2026, Utrecht"
     startdata: z.array(z.string()).default([]),
-    // Delen van het boek die bij deze training horen
-    boekdelen: z.array(z.string()).default([]),
     volgorde: z.number().default(99),
   }),
 });

@@ -12,7 +12,6 @@ duur: 1 dagdeel
 vorm: [Incompany]
 groepsgrootte: 6-14 personen
 prijsindicatie: Op aanvraag
-boekdelen: [Deel I – Het algoritme als beleidsinstrument, Deel IV – Het nieuwe ambtelijke vakmanschap]
 volgorde: 3
 ---
 

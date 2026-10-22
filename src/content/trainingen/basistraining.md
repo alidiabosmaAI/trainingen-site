@@ -12,7 +12,6 @@ duur: 1 dagdeel
 vorm: [Incompany, Online]
 groepsgrootte: 8-20 personen
 prijsindicatie: Op aanvraag
-boekdelen: [Deel I – Fundamenten, Deel IV – Jij als gebruiker]
 volgorde: 1
 ---
 
