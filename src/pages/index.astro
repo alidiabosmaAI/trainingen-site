@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import Merk from '../components/Merk.astro';
+import Tegels from '../components/Tegels.astro';
 import Artikel from '../components/Artikel.astro';
 import TrainingPanel from '../components/TrainingPanel.astro';
 import { site } from '../config';
@@ -15,6 +15,8 @@ const stappen = [
   { titel: 'Training', tekst: 'Interactief, met spelvormen en casussen uit jullie eigen praktijk.' },
   { titel: 'Borgen', tekst: 'Evaluatie, naslagmateriaal en eventuele vervolgstappen.' },
 ];
+const stapKleuren = ['var(--oker)', 'var(--salie)', 'var(--abrikoos)', 'var(--roze)'];
+
 const doelgroepen = [
   { naam: 'Gemeenten en provincies', toelichting: 'Beleid, uitvoering en bestuur' },
   { naam: 'Rijksoverheid en uitvoeringsorganisaties', toelichting: 'Van beleidsdirectie tot dienstverlening' },
@@ -39,7 +41,7 @@ const doelgroepen = [
         </div>
       </div>
       <div class="hero__visual">
-        <Merk fotoplek />
+        <Tegels variant="a" />
       </div>
     </div>
   </section>
@@ -111,7 +113,7 @@ const doelgroepen = [
         {
           stappen.map((s, i) => (
             <li>
-              <span class="stappen__nr" aria-hidden="true">
+              <span class="stappen__nr" style={`background: ${stapKleuren[i]}`} aria-hidden="true">
                 {i + 1}
               </span>
               <h3>{s.titel}</h3>
@@ -126,7 +128,7 @@ const doelgroepen = [
   <section class="section section--papier">
     <div class="container over">
       <div class="over__visual">
-        <Merk fotoplek />
+        <Tegels variant="b" />
       </div>
       <div>
         <p class="label" style="--label-kleur: var(--olijf)">Over</p>
@@ -193,11 +195,13 @@ const doelgroepen = [
     gap: var(--space-m);
   }
   .stappen__nr {
-    display: block;
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: var(--radius);
     font-weight: 800;
-    font-size: var(--step-3);
-    line-height: 1;
-    color: var(--knop-accent);
+    font-size: var(--step-1);
     margin-bottom: var(--space-s);
   }
   .stappen h3 { font-size: var(--step-1); margin-bottom: var(--space-xs); }
