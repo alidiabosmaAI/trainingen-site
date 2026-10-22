@@ -13,7 +13,7 @@ npm install
 npm run dev
 ```
 
-Open daarna http://localhost:4321/trainingen-site/ in je browser. Wijzigingen zie je direct.
+Open daarna http://localhost:4321/ in je browser. Wijzigingen zie je direct.
 
 ## Waar pas je wat aan?
 
@@ -35,12 +35,13 @@ git commit -m "Korte omschrijving van de wijziging"
 git push
 ```
 
-## Online testversie (GitHub Pages)
+## Online
 
-Eenmalig: ga op GitHub naar **Settings → Pages** en kies bij *Source* voor **GitHub Actions**.
-Daarna wordt de site bij elke `git push` automatisch gepubliceerd op
-https://alidiabosmaai.github.io/trainingen-site/
+De site staat op https://bestuurskundigleerhuis.nl en wordt gehost via GitHub Pages.
+Bij elke `git push` naar `main` wordt de site automatisch opnieuw gepubliceerd.
 
-## Later: eigen domein
+Het domein is geregistreerd bij Hostnet. De DNS wijst naar GitHub Pages:
+- A-records voor `bestuurskundigleerhuis.nl`: 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153
+- CNAME-record voor `www`: `alidiabosmaai.github.io`
 
-Zet in `astro.config.mjs` de `site` op je eigen domein en verwijder de regel met `base`.
+De MX-records voor e-mail blijven bij Hostnet.
