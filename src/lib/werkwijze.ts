@@ -10,7 +10,7 @@ export const stappen = [
   {
     titel: 'Samen voorbereiden',
     tekst:
-      'We stemmen de training af op jullie praktijk: leerdoelen, voorbeelden en de werkvorm die past bij de groep.',
+      'Samen met jullie stem ik de training af op de praktijk: leerdoelen, voorbeelden en de werkvorm die past bij de groep.',
     krijg: ['Voorstel met programma en vaste prijs', 'Werkvorm op maat: simulatie, game of workshop'],
     kleur: 'var(--salie)',
   },
@@ -22,7 +22,7 @@ export const stappen = [
   },
   {
     titel: 'Borging',
-    tekst: 'We kijken samen terug en spreken af wat er nodig is om het geleerde vast te houden.',
+    tekst: 'Ik kijk samen met jullie terug en spreek af wat er nodig is om het geleerde vast te houden.',
     krijg: ['Evaluatie met opdrachtgever', 'Advies over vervolgstappen'],
     kleur: 'var(--hemel)',
   },

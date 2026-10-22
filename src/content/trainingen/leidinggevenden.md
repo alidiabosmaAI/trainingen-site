@@ -30,4 +30,4 @@ Daar ligt een rol voor leidinggevenden. Deze training helpt je om AI-geletterdhe
 
 ## Opzet
 
-Een simulatie waarin deelnemers als managementteam beslissen over de inzet van AI, onder druk van tijd, budget en politiek. Daarna vertalen we de lessen naar de eigen organisatie. Ook geschikt naast de basistraining voor het team.
+Een simulatie waarin deelnemers als managementteam beslissen over de inzet van AI, onder druk van tijd, budget en politiek. Daarna vertaal ik samen met de deelnemers de lessen naar de eigen organisatie. Ook geschikt naast de basistraining voor het team.

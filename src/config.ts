@@ -12,8 +12,9 @@ export const site = {
   kvk: '',
   btw: '',
   crkbo: '',
-  // Adres van de formulierdienst (bijv. Formspree/Netlify). Leeg = nog niet gekoppeld.
-  formAction: '',
+  // Formulierdienst: FormSubmit stuurt ingevulde formulieren door naar het e-mailadres hierboven.
+  // Het eerste bericht levert een activatiemail op die eenmalig bevestigd moet worden.
+  formAction: 'https://formsubmit.co/alidia@bestuurskundigleerhuis.nl',
 };
 
 export const nav = [

@@ -2,8 +2,10 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import { site } from '../config';
+import { url } from '../lib/url';
 
 const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.volgorde - b.data.volgorde);
+const bedankt = new URL(url('bedankt/'), Astro.site).href;
 ---
 
 <Base title="Contact" description="Vraag een offerte aan of plan een kennismaking.">
@@ -20,20 +22,28 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
         {!site.formAction && (
           <p class="form__note" role="note">Formulier is nog niet gekoppeld aan een verzenddienst.</p>
         )}
+        <input type="hidden" name="_subject" value="Nieuwe aanvraag via bestuurskundigleerhuis.nl" />
+        <input type="hidden" name="_next" value={bedankt} />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_template" value="table" />
+        <!-- Verborgen veld tegen spam: mensen zien het niet, bots vullen het in -->
+        <input type="text" name="_honey" class="form__honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <label>Naam <input name="naam" autocomplete="name" required /></label>
         <label>Organisatie <input name="organisatie" autocomplete="organization" required /></label>
         <label>E-mailadres <input type="email" name="email" autocomplete="email" required /></label>
         <label>
           Interesse in
           <select name="training" id="training">
-            <option value="">Nog niet bekend / maatwerk</option>
-            {trainingen.map((t) => <option value={t.id}>{t.data.titel}</option>)}
+            <option value="Nog niet bekend / maatwerk">Nog niet bekend / maatwerk</option>
+            {trainingen.map((t) => <option value={t.data.titel} data-id={t.id}>{t.data.titel}</option>)}
           </select>
         </label>
         <label>Aantal deelnemers (indicatie) <input name="deelnemers" inputmode="numeric" /></label>
         <label>Je vraag <textarea name="bericht" rows="5" required></textarea></label>
         <button class="button button--accent" type="submit">Versturen</button>
-        <p class="form__privacy">We gebruiken je gegevens alleen om je aanvraag te beantwoorden.</p>
+        <p class="form__privacy">
+          Ik gebruik je gegevens alleen om je aanvraag te beantwoorden. Lees ook de <a href={url('privacy/')}>privacyverklaring</a>.
+        </p>
       </form>
     </div>
   </section>
@@ -43,7 +53,8 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
   // Vul de gekozen training in als iemand via een trainingspagina komt.
   const gekozen = new URLSearchParams(location.search).get('training');
   const select = document.getElementById('training') as HTMLSelectElement | null;
-  if (gekozen && select) select.value = gekozen;
+  const optie = select?.querySelector<HTMLOptionElement>(`option[data-id="${gekozen}"]`);
+  if (optie) optie.selected = true;
 </script>
 
 <style>
@@ -63,5 +74,6 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
   .form .button { justify-self: start; cursor: pointer; font: inherit; font-weight: 500; }
   .form__note { background: var(--white); border-left: 4px solid var(--oker); padding: 0.6em 1em; margin: 0; font-size: var(--step--1); }
   .form__privacy { font-size: var(--step--1); margin: 0; }
+  .form__honey { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
   @media (max-width: 56rem) { .layout { grid-template-columns: 1fr; gap: var(--space-l); } .form { padding: var(--space-m); } }
 </style>

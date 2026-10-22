@@ -17,7 +17,7 @@ volgorde: 1
 
 Sinds 2 februari 2025 moeten organisaties die AI inzetten zorgen voor voldoende AI-geletterdheid van hun medewerkers (artikel 4 van de AI-verordening). Deze training legt die basis: praktisch, zonder hype en toegespitst op het werk van de deelnemers.
 
-We beginnen bij wat de meeste mensen al gebruiken: generatieve AI zoals ChatGPT of Copilot. Van daaruit kijken we breder. De overheid werkt al tientallen jaren met rekenregels en beslisbomen die mee bepalen wie studiefinanciering krijgt of een boete ontvangt. Wie dat begrijpt, kan beter meedenken en beter tegenspraak bieden.
+Ik begin bij wat de meeste mensen al gebruiken: generatieve AI zoals ChatGPT of Copilot. Van daaruit kijken deelnemers breder. De overheid werkt al tientallen jaren met rekenregels en beslisbomen die mee bepalen wie studiefinanciering krijgt of een boete ontvangt. Wie dat begrijpt, kan beter meedenken en beter tegenspraak bieden.
 
 ## Wat je leert
 
