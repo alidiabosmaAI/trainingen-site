@@ -4,8 +4,8 @@
  *
  * Regels:
  * - Tekst is altijd --ink (op wit, papier of een pastel) of wit (op --ink / --knop-accent).
- * - Terracotta, oker en olijf zijn voor vormen en vlakken, niet voor tekst.
- *   Op terracotta staat nooit tekst (te weinig contrast).
+ * - Koper, oker, denim en olijf zijn voor vormen en vlakken, niet voor tekst.
+ *   Op koper en denim staat nooit tekst (te weinig contrast).
  */
 :root {
   /* Basis */
@@ -18,14 +18,16 @@
   /* Lichte vlakken */
   --salie: #dfe8d5;          /* lichtgroen */
   --zand: #f3eadc;
-  --abrikoos: #fadfca;
-  --roze: #f4dcd6;
+  --perzik: #f5d9c6;
+  --hemel: #dce7f1;          /* lichtblauw */
 
-  /* Accenten (vormen en vlakken) */
+  /* Accenten (vormen en vlakken), afgestemd op Alidia: koper (haar),
+     oker (geel overhemd), denim (blauwe jas) */
   --oker: #e4a33a;
-  --terracotta: #cf6a43;
+  --koper: #c0622f;
+  --denim: #5f86ad;
   --olijf: #8aa66a;
-  --knop-accent: #a9472a;    /* terracotta-variant met witte tekst */
+  --knop-accent: #9a4a22;    /* donker koper met witte tekst */
 
   /* Typografie */
   --font: 'Plus Jakarta Sans Variable', system-ui, sans-serif;

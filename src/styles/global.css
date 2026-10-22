@@ -45,7 +45,7 @@ a {
 a:hover { text-decoration-thickness: 2px; }
 
 :focus-visible {
-  outline: 3px solid var(--terracotta);
+  outline: 3px solid var(--koper);
   outline-offset: 3px;
 }
 
@@ -75,7 +75,7 @@ img, svg { max-width: 100%; height: auto; }
   width: 1em;
   height: 1em;
   border-top-left-radius: 100%;
-  background: var(--label-kleur, var(--terracotta));
+  background: var(--label-kleur, var(--koper));
 }
 
 .intro {
@@ -115,7 +115,7 @@ img, svg { max-width: 100%; height: auto; }
   width: 0.5em;
   height: 0.5em;
   border-radius: 50%;
-  background: var(--terracotta);
+  background: var(--koper);
 }
 
 .skip-link {
