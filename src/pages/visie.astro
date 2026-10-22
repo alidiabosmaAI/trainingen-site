@@ -186,6 +186,25 @@ const niveaus = [
       </ul>
     </div>
   </section>
+  <section class="section">
+    <div class="container waaromnu">
+      <div>
+        <p class="label" style="--label-kleur: var(--oker)">Waarom nu</p>
+        <h2>AI-geletterdheid is verplicht</h2>
+        <p class="intro">
+          Sinds 2 februari 2025 moeten organisaties die AI inzetten zorgen dat hun medewerkers voldoende
+          AI-geletterd zijn. Dat geldt ook voor overheden en semi-publieke organisaties.
+        </p>
+      </div>
+      <Artikel kop="Artikel 4 · AI-geletterdheid" bron="AI-verordening (EU) 2024/1689, van toepassing sinds 2 februari 2025">
+        <p>
+          Aanbieders en gebruiksverantwoordelijken van AI-systemen nemen maatregelen om, zoveel als mogelijk, te
+          zorgen voor een <mark>toereikend niveau van AI-geletterdheid</mark> bij hun personeel en andere personen
+          die namens hen AI-systemen exploiteren en gebruiken […]
+        </p>
+      </Artikel>
+    </div>
+  </section>
 </Base>
 
 <style>
@@ -234,6 +253,7 @@ const niveaus = [
   .voorbeelden__waarden { list-style: none; margin: auto 0 0; padding: var(--space-s) 0 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
   .voorbeelden__waarden li { background: var(--salie); border-radius: var(--radius); padding: 0.2em 0.7em; font-size: var(--step--1); font-weight: 650; }
 
+  .waaromnu { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); align-items: center; }
   .niveaus {
     list-style: none;
     margin: var(--space-l) 0 0;
@@ -257,7 +277,7 @@ const niveaus = [
   .niveaus__link a:hover { text-decoration: underline; }
 
   @media (max-width: 56rem) {
-    .kop, .punten { grid-template-columns: 1fr; gap: var(--space-l); }
+    .kop, .punten, .waaromnu { grid-template-columns: 1fr; gap: var(--space-l); }
     .niveaus, .voorbeelden { grid-template-columns: 1fr; }
   }
 </style>

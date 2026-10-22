@@ -5,6 +5,13 @@ import TrainingCard from '../../components/TrainingCard.astro';
 import { url } from '../../lib/url';
 
 const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.volgorde - b.data.volgorde);
+
+const doelgroepen = [
+  { naam: 'Gemeenten en provincies', toelichting: 'Beleid, uitvoering en bestuur' },
+  { naam: 'Rijksoverheid en uitvoeringsorganisaties', toelichting: 'Van beleidsdirectie tot dienstverlening' },
+  { naam: 'Semi-publieke organisaties', toelichting: 'Zoals woningcorporaties, onderwijs- en zorginstellingen' },
+  { naam: 'Waterschappen, toezichthouders en andere publieke organisaties', toelichting: 'Iedere organisatie met een publieke taak' },
+];
 ---
 
 <Base title="Aanbod" description="Overzicht van trainingen in AI-geletterdheid en algoritmisch bestuur.">
@@ -24,6 +31,23 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
       </p>
     </div>
   </section>
+
+  <section class="section section--salie">
+    <div class="container">
+      <p class="label" style="--label-kleur: var(--ink)">Voor wie</p>
+      <h2>Voor organisaties met een publieke taak</h2>
+      <ul class="doelgroepen">
+        {
+          doelgroepen.map((d) => (
+            <li>
+              <h3>{d.naam}</h3>
+              <p>{d.toelichting}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
 </Base>
 
 <style>
@@ -34,4 +58,15 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
     margin-top: var(--space-l);
   }
   .maatwerk { margin-top: var(--space-l); }
+  .doelgroepen {
+    list-style: none;
+    margin: var(--space-l) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-m) var(--space-l);
+  }
+  .doelgroepen h3 { font-size: var(--step-1); margin-bottom: 0.2rem; }
+  .doelgroepen p { margin: 0; }
+  @media (max-width: 56rem) { .doelgroepen { grid-template-columns: 1fr; } }
 </style>
