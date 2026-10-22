@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Tegels from '../components/Tegels.astro';
 import TrainingCard from '../components/TrainingCard.astro';
+import Artikel from '../components/Artikel.astro';
 import { site } from '../config';
 import { url } from '../lib/url';
 
@@ -56,13 +57,25 @@ const stapKleuren = ['var(--oker)', 'var(--salie)', 'var(--perzik)', 'var(--heme
 
   <section class="section section--papier">
     <div class="container visie">
-      <p class="label" style="--label-kleur: var(--olijf)">Visie</p>
-      <h2>In elk algoritme zitten keuzes</h2>
-      <p class="intro">
-        Wie krijgt een toeslag? Welke aanvraag wordt extra gecontroleerd? Achter zulke uitkomsten zitten opvattingen
-        over gelijke behandeling, privacy en de menselijke maat. Wie die herkent, kan ze bespreken en bijsturen.
-      </p>
-      <p class="visie__link"><a href={url('visie/')}>Lees mijn visie →</a></p>
+      <div>
+        <p class="label" style="--label-kleur: var(--olijf)">Visie</p>
+        <h2>In elk algoritme zitten keuzes</h2>
+        <p>
+          Wie krijgt een toeslag? Welke aanvraag wordt extra gecontroleerd? Achter zulke uitkomsten zitten opvattingen
+          over gelijke behandeling, privacy en de menselijke maat. Wie die herkent, kan ze bespreken en bijsturen.
+        </p>
+        <p>
+          Sinds 2 februari 2025 is AI-geletterdheid bovendien verplicht voor iedere organisatie die AI inzet.
+        </p>
+        <p class="visie__link"><a href={url('visie/')}>Lees mijn visie →</a></p>
+      </div>
+      <Artikel kop="Artikel 4 · AI-geletterdheid" bron="AI-verordening (EU) 2024/1689, van toepassing sinds 2 februari 2025">
+        <p>
+          Aanbieders en gebruiksverantwoordelijken van AI-systemen nemen maatregelen om, zoveel als mogelijk, te
+          zorgen voor een <mark>toereikend niveau van AI-geletterdheid</mark> bij hun personeel en andere personen
+          die namens hen AI-systemen exploiteren en gebruiken […]
+        </p>
+      </Artikel>
     </div>
   </section>
 
@@ -138,7 +151,7 @@ const stapKleuren = ['var(--oker)', 'var(--salie)', 'var(--perzik)', 'var(--heme
   .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-s); margin-top: var(--space-m); }
   .hero__visual { max-width: 26rem; justify-self: end; width: 100%; }
 
-  .visie .intro { max-width: 52ch; }
+  .visie { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-xl); align-items: center; }
   .visie__link { font-weight: 700; }
 
   .leervormen {
@@ -186,7 +199,7 @@ const stapKleuren = ['var(--oker)', 'var(--salie)', 'var(--perzik)', 'var(--heme
   .slot__acties { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-m); }
 
   @media (max-width: 56rem) {
-    .hero__grid { grid-template-columns: 1fr; gap: var(--space-l); }
+    .hero__grid, .visie { grid-template-columns: 1fr; gap: var(--space-l); }
     .hero__visual { justify-self: start; max-width: 18rem; }
     .leervormen { grid-template-columns: 1fr; gap: var(--space-m); }
     .stappen { grid-template-columns: 1fr 1fr; }

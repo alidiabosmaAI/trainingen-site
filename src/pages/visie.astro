@@ -10,7 +10,7 @@ const trainingVoor = (thema: string) => trainingen.find((t) => t.data.thema === 
 
 const uitgangspunten = [
   {
-    titel: 'AI-geletterdheid is voor iedere ambtenaar',
+    titel: 'AI-geletterdheid is voor iedereen met een publieke taak',
     tekst:
       'Algoritmes veranderen de relatie tussen overheid en burger. Begrijpen hoe ze werken is daarom geen specialisme voor IT, maar een basiscompetentie voor iedereen die beleid maakt, uitvoert of leidinggeeft.',
   },
@@ -25,9 +25,9 @@ const uitgangspunten = [
       'Een algoritme is een beleidsinstrument. In elke rekenregel en elke dataset zitten keuzes en aannames. Wie dat ziet, kan ze bespreken en bijsturen.',
   },
   {
-    titel: 'Waarden gaan voor snelheid',
+    titel: 'Waarden bewust afwegen',
     tekst:
-      'Sneller en goedkoper is begrijpelijk. Maar gelijke behandeling, privacy, rechtszekerheid en de menselijke maat mogen daar niet voor wijken. De vraag is niet alleen of het werkt, maar ook of het eerlijk is.',
+      'Gelijke behandeling, privacy, rechtszekerheid, transparantie en doelmatigheid zijn allemaal publieke waarden, en ze kunnen botsen. Verantwoord werken met AI betekent die afweging bewust maken en kunnen uitleggen.',
   },
   {
     titel: 'De mens blijft verantwoordelijk',
@@ -40,33 +40,6 @@ const uitgangspunten = [
       'Kennis alleen is niet genoeg. Zonder tijd, een duidelijke visie en collega’s die de brug slaan tussen techniek en beleid blijft het geleerde liggen.',
   },
 ];
-const voorbeelden = [
-  {
-    soort: 'Beslisboom',
-    tekst:
-      'Een rekenregel bepaalt wie recht heeft op een toeslag. Waar ligt de grens, en wat gebeurt er met wie er net buiten valt?',
-    waarden: ['rechtszekerheid', 'menselijke maat'],
-    kleur: 'var(--oker)',
-    vorm: '100% 0 0 0',
-  },
-  {
-    soort: 'Zelflerend algoritme',
-    tekst:
-      'Een risicomodel leert van eerdere controles wie extra gecontroleerd moet worden. Waren die controles scheef, dan leert het model dat ook.',
-    waarden: ['gelijke behandeling', 'doelmatigheid'],
-    kleur: 'var(--ink)',
-    vorm: '0 0 100% 0',
-  },
-  {
-    soort: 'Generatieve AI',
-    tekst:
-      'Een taalmodel vat bezwaarschriften samen. Wat laat het weg, en wat gebeurt er met de persoonsgegevens die je invoert?',
-    waarden: ['transparantie', 'privacy'],
-    kleur: 'var(--denim)',
-    vorm: '50%',
-  },
-];
-
 const kleuren = ['var(--oker)', 'var(--salie)', 'var(--perzik)', 'var(--hemel)', 'var(--oker)', 'var(--salie)'];
 
 const niveaus = [
@@ -90,57 +63,13 @@ const niveaus = [
 
 <Base title="Visie" description="Mijn visie op AI-geletterdheid en algoritmisch bestuur in de publieke sector.">
   <section class="section">
-    <div class="container kop">
-      <div>
-        <p class="label" style="--label-kleur: var(--olijf)">Visie</p>
-        <h1>AI-geletterdheid is ambtelijk vakmanschap</h1>
-        <p class="intro">
-          Of het nu gaat om een beslisboom, een zelflerend model of ChatGPT: elke toepassing maakt keuzes die burgers
-          raken. Dat vraagt om ambtenaren die begrijpen wat er gebeurt, de juiste vragen stellen en de rechtsstaat
-          bewaken.
-        </p>
-      </div>
-      <Artikel kop="Wat is AI-geletterdheid?" bron="Werkdefinitie uit mijn onderzoek">
-        <p>
-          De kennis, vaardigheden en houding die nodig zijn om AI-systemen in het openbaar bestuur
-          <mark>geïnformeerd, kritisch en juridisch verantwoord</mark> te gebruiken, en de daarbij behorende kansen,
-          risico’s en mogelijke schade te herkennen.
-        </p>
-      </Artikel>
-    </div>
-  </section>
-
-  <section class="section section--papier">
     <div class="container">
-      <h2>Waarden in de techniek</h2>
+      <p class="label" style="--label-kleur: var(--olijf)">Visie</p>
+      <h1>AI-geletterdheid is vakmanschap</h1>
       <p class="intro">
-        Publieke waarden zijn de dingen die we van een goede overheid verwachten: gelijke behandeling, privacy,
-        rechtszekerheid, transparantie, de menselijke maat, maar ook doelmatigheid en betrouwbaarheid.
+        De overheid zet steeds vaker algoritmes in voor taken die burgers raken. Dat vraagt om professionals die
+        begrijpen wat er gebeurt, de juiste vragen stellen en de rechtsstaat bewaken. Zes uitgangspunten:
       </p>
-      <p class="toelichting">
-        Bestuurskundigen tellen er tientallen (Jørgensen &amp; Bozeman, 2007). Ze botsen geregeld met elkaar, en elke
-        technologie maakt daarin een keuze. Drie voorbeelden:
-      </p>
-      <ul class="voorbeelden">
-        {
-          voorbeelden.map((v) => (
-            <li>
-              <span class="voorbeelden__vorm" style={`background: ${v.kleur}; border-radius: ${v.vorm}`} aria-hidden="true" />
-              <h3>{v.soort}</h3>
-              <p>{v.tekst}</p>
-              <ul class="voorbeelden__waarden" aria-label="Waarden die hier spelen">
-                {v.waarden.map((w) => <li>{w}</li>)}
-              </ul>
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <h2>Zes uitgangspunten</h2>
       <ol class="punten">
         {
           uitgangspunten.map((u, i) => (
@@ -149,7 +78,7 @@ const niveaus = [
                 {i + 1}
               </span>
               <div>
-                <h3>{u.titel}</h3>
+                <h2>{u.titel}</h2>
                 <p>{u.tekst}</p>
               </div>
             </li>
@@ -160,6 +89,28 @@ const niveaus = [
   </section>
 
   <section class="section section--papier">
+    <div class="container">
+      <h2>Wat is AI-geletterdheid, en waarom nu?</h2>
+      <div class="kaarten">
+        <Artikel kop="Wat is AI-geletterdheid?" bron="Werkdefinitie uit mijn onderzoek">
+          <p>
+            De kennis, vaardigheden en houding die nodig zijn om AI-systemen in het openbaar bestuur
+            <mark>geïnformeerd, kritisch en juridisch verantwoord</mark> te gebruiken, en de daarbij behorende kansen,
+            risico’s en mogelijke schade te herkennen.
+          </p>
+        </Artikel>
+        <Artikel kop="Artikel 4 · AI-geletterdheid" bron="AI-verordening (EU) 2024/1689, van toepassing sinds 2 februari 2025">
+          <p>
+            Aanbieders en gebruiksverantwoordelijken van AI-systemen nemen maatregelen om, zoveel als mogelijk, te
+            zorgen voor een <mark>toereikend niveau van AI-geletterdheid</mark> bij hun personeel en andere personen
+            die namens hen AI-systemen exploiteren en gebruiken […]
+          </p>
+        </Artikel>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
     <div class="container">
       <p class="label" style="--label-kleur: var(--koper)">Van visie naar aanbod</p>
       <h2>Drie rollen, drie trainingen</h2>
@@ -186,30 +137,10 @@ const niveaus = [
       </ul>
     </div>
   </section>
-  <section class="section">
-    <div class="container waaromnu">
-      <div>
-        <p class="label" style="--label-kleur: var(--oker)">Waarom nu</p>
-        <h2>AI-geletterdheid is verplicht</h2>
-        <p class="intro">
-          Sinds 2 februari 2025 moeten organisaties die AI inzetten zorgen dat hun medewerkers voldoende
-          AI-geletterd zijn. Dat geldt ook voor overheden en semi-publieke organisaties.
-        </p>
-      </div>
-      <Artikel kop="Artikel 4 · AI-geletterdheid" bron="AI-verordening (EU) 2024/1689, van toepassing sinds 2 februari 2025">
-        <p>
-          Aanbieders en gebruiksverantwoordelijken van AI-systemen nemen maatregelen om, zoveel als mogelijk, te
-          zorgen voor een <mark>toereikend niveau van AI-geletterdheid</mark> bij hun personeel en andere personen
-          die namens hen AI-systemen exploiteren en gebruiken […]
-        </p>
-      </Artikel>
-    </div>
-  </section>
 </Base>
 
 <style>
-  .kop { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-xl); align-items: center; }
-  .kop h1 { max-width: 16ch; }
+  h1 { max-width: 16ch; }
 
   .punten {
     list-style: none;
@@ -229,31 +160,11 @@ const niveaus = [
     font-weight: 800;
     font-size: var(--step-1);
   }
-  .punten h3 { font-size: var(--step-1); margin-bottom: var(--space-xs); }
+  .punten h2 { font-size: var(--step-1); margin-bottom: var(--space-xs); }
   .punten p { margin: 0; }
 
-  .toelichting { max-width: 60ch; margin-top: var(--space-s); }
-  .voorbeelden {
-    list-style: none;
-    margin: var(--space-l) 0 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-m);
-  }
-  .voorbeelden > li {
-    display: flex;
-    flex-direction: column;
-    background: var(--white);
-    border-radius: var(--radius);
-    padding: var(--space-m);
-  }
-  .voorbeelden__vorm { display: block; width: 3rem; height: 3rem; margin-bottom: var(--space-m); }
-  .voorbeelden h3 { font-size: var(--step-1); margin-bottom: var(--space-xs); }
-  .voorbeelden__waarden { list-style: none; margin: auto 0 0; padding: var(--space-s) 0 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
-  .voorbeelden__waarden li { background: var(--salie); border-radius: var(--radius); padding: 0.2em 0.7em; font-size: var(--step--1); font-weight: 650; }
+  .kaarten { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-l); margin-top: var(--space-l); align-items: start; }
 
-  .waaromnu { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); align-items: center; }
   .niveaus {
     list-style: none;
     margin: var(--space-l) 0 0;
@@ -277,7 +188,7 @@ const niveaus = [
   .niveaus__link a:hover { text-decoration: underline; }
 
   @media (max-width: 56rem) {
-    .kop, .punten, .waaromnu { grid-template-columns: 1fr; gap: var(--space-l); }
-    .niveaus, .voorbeelden { grid-template-columns: 1fr; }
+    .punten, .kaarten { grid-template-columns: 1fr; gap: var(--space-l); }
+    .niveaus { grid-template-columns: 1fr; }
   }
 </style>
