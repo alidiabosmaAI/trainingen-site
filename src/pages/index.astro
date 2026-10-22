@@ -32,30 +32,6 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
     </div>
   </section>
 
-  <section class="section section--papier" id="werkwijze">
-    <div class="container">
-      <p class="label" style="--label-kleur: var(--oker)">Werkwijze</p>
-      <h2>Leren door te doen</h2>
-      <p class="intro">
-        Serieus van inhoud, speels in de vorm. Van het eerste gesprek tot en met de borging: zo ziet een traject eruit.
-      </p>
-      <Werkwijze />
-      <p class="meer"><a href={url('werkwijze/')}>Meer over de werkwijze →</a></p>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <p class="label" style="--label-kleur: var(--koper)">Aanbod</p>
-      <h2>Drie rollen, drie trainingen</h2>
-      <p class="intro">Voor de professional die met AI werkt, de adviseur die algoritmes beoordeelt en de leidinggevende die richting geeft.</p>
-      <div class="panels">
-        {trainingen.map((t) => <TrainingCard training={t} />)}
-      </div>
-      <p class="maatwerk">Niet gevonden wat je zoekt? <a href={url('contact/')}>Maatwerk is altijd mogelijk.</a></p>
-    </div>
-  </section>
-
   <section class="section section--papier">
     <div class="container visie">
       <div>
@@ -77,6 +53,30 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
           die namens hen AI-systemen exploiteren en gebruiken […]
         </p>
       </Artikel>
+    </div>
+  </section>
+
+  <section class="section" id="werkwijze">
+    <div class="container">
+      <p class="label" style="--label-kleur: var(--oker)">Werkwijze</p>
+      <h2>Leren door te doen</h2>
+      <p class="intro">
+        Serieus van inhoud, speels in de vorm. Van het eerste gesprek tot en met de borging: zo ziet een traject eruit.
+      </p>
+      <Werkwijze />
+      <p class="meer"><a href={url('werkwijze/')}>Meer over de werkwijze →</a></p>
+    </div>
+  </section>
+
+  <section class="section section--papier">
+    <div class="container">
+      <p class="label" style="--label-kleur: var(--koper)">Aanbod</p>
+      <h2>Drie rollen, drie trainingen</h2>
+      <p class="intro">Voor de professional die met AI werkt, de adviseur die algoritmes beoordeelt en de leidinggevende die richting geeft.</p>
+      <div class="panels">
+        {trainingen.map((t) => <TrainingCard training={t} />)}
+      </div>
+      <p class="maatwerk">Niet gevonden wat je zoekt? <a href={url('contact/')}>Maatwerk is altijd mogelijk.</a></p>
     </div>
   </section>
 
