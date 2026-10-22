@@ -1,83 +1,35 @@
 ---
-import { getCollection } from 'astro:content';
-import Logo from './Logo.astro';
 import { site, nav } from '../config';
 import { url } from '../lib/url';
 
-const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.volgorde - b.data.volgorde);
 const year = new Date().getFullYear();
 ---
 
 <footer class="footer">
-  <div class="container footer__grid">
-    <div>
-      <Logo />
-      <p class="footer__mail"><a href={`mailto:${site.email}`}>{site.email}</a></p>
-    </div>
-    <div>
-      <h2 class="footer__kop">Trainingen</h2>
-      <ul>
-        {trainingen.map((t) => <li><a href={url(`aanbod/${t.id}/`)}>{t.data.titel}</a></li>)}
-      </ul>
-    </div>
-    <div>
-      <h2 class="footer__kop">Menu</h2>
-      <ul>
-        {nav.map((item) => <li><a href={url(item.href)}>{item.label}</a></li>)}
-      </ul>
-    </div>
-    <div>
-      <h2 class="footer__kop">Informatie</h2>
-      <ul>
-        <li><a href={url('privacy/')}>Privacyverklaring</a></li>
-        <li><a href={url('toegankelijkheid/')}>Toegankelijkheid</a></li>
-      </ul>
-    </div>
+  <div class="container footer__inner">
+    <p>© {year} {site.name}</p>
+    <ul>
+      {nav.map((item) => <li><a href={url(item.href)}>{item.label}</a></li>)}
+      <li><a href={url('privacy/')}>Privacy</a></li>
+      <li><a href={url('toegankelijkheid/')}>Toegankelijkheid</a></li>
+    </ul>
   </div>
-  <div class="container footer__legal">
-    <span>© {year} {site.name}</span>
-    {site.kvk && <span>KvK {site.kvk}</span>}
-    {site.crkbo && <span>CRKBO-geregistreerd</span>}
-  </div>
+  {
+    (site.kvk || site.crkbo) && (
+      <p class="container footer__legal">
+        {site.kvk && <span>KvK {site.kvk}</span>}
+        {site.crkbo && <span>CRKBO-geregistreerd</span>}
+      </p>
+    )
+  }
 </footer>
 
 <style>
-  .footer {
-    background: var(--ink);
-    color: var(--white);
-    padding-block: var(--space-l) var(--space-m);
-    font-size: var(--step--1);
-  }
-  .footer a { color: var(--white); text-decoration: none; }
-  .footer a:hover { text-decoration: underline; }
-  .footer__grid {
-    display: grid;
-    grid-template-columns: 1.4fr repeat(3, 1fr);
-    gap: var(--space-l);
-  }
-  .footer__kop {
-    font-size: var(--step--1);
-    font-family: var(--font-sans);
-    font-weight: 650;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: var(--space-s);
-  }
-  .footer__mail { margin-top: var(--space-s); }
-  .footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
-  .footer__legal {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.5rem;
-    margin-top: var(--space-l);
-    padding-top: var(--space-s);
-    border-top: 1px solid rgb(255 255 255 / 0.25);
-    opacity: 0.8;
-  }
-  @media (max-width: 52rem) {
-    .footer__grid { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 32rem) {
-    .footer__grid { grid-template-columns: 1fr; gap: var(--space-m); }
-  }
+  .footer { padding-block: var(--space-l); font-size: var(--step--1); color: var(--ink-soft); }
+  .footer a { color: var(--ink-soft); text-decoration: none; }
+  .footer a:hover { color: var(--ink); text-decoration: underline; }
+  .footer__inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-s); }
+  .footer p { margin: 0; }
+  .footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+  .footer__legal { display: flex; gap: 1.5rem; margin-top: var(--space-s) !important; }
 </style>

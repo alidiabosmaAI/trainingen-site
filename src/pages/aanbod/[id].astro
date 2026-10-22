@@ -3,7 +3,6 @@ import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { site } from '../../config';
 import { url } from '../../lib/url';
-import { themaKleur } from '../../lib/thema';
 
 export async function getStaticPaths() {
   const trainingen = await getCollection('trainingen');
@@ -13,37 +12,26 @@ export async function getStaticPaths() {
 const { training } = Astro.props;
 const { Content } = await render(training);
 const d = training.data;
-const kleur = themaKleur[d.thema];
 
 const feiten = [
+  { label: 'Voor wie', waarde: d.doelgroep },
+  { label: 'Duur', waarde: d.duur },
   { label: 'Vorm', waarde: d.vorm.join(', ') },
   { label: 'Groepsgrootte', waarde: d.groepsgrootte },
-  { label: 'Duur', waarde: d.duur },
-  { label: 'Taal', waarde: 'Nederlands' },
+  { label: 'Investering', waarde: d.prijsindicatie },
 ];
 ---
 
 <Base title={d.titel} description={d.samenvatting}>
-  <div style={`--vlak: ${kleur.vlak}; --lijn-kleur: ${kleur.lijn}`}>
-    <section class="top">
-      <div class="container top__grid">
-        <div>
-          <nav class="kruimel" aria-label="Kruimelpad">
-            <a href={url()}>Home</a> / <a href={url('aanbod/')}>Aanbod</a> /
-          </nav>
-          <p class="bovenkop">{d.thema}</p>
-          <h1>{d.titel}</h1>
-          <p class="top__ondertitel">{d.ondertitel}</p>
-        </div>
-        <div class="kort">
-          <h2 class="kort__kop">Na deze training</h2>
-          <ul class="kernpunten">
-            {d.kernpunten.map((k) => <li>{k}</li>)}
-          </ul>
-        </div>
-      </div>
-    </section>
+  <section class="section kop">
+    <div class="container">
+      <p class="zacht"><a href={url('aanbod/')}>Trainingen</a></p>
+      <h1>{d.titel}</h1>
+      <p class="intro">{d.ondertitel}</p>
+    </div>
+  </section>
 
+  <section class="section section--groen feiten-sectie">
     <div class="container">
       <dl class="feiten">
         {
@@ -56,109 +44,49 @@ const feiten = [
         }
       </dl>
     </div>
+  </section>
 
-    <section class="section inhoud">
-      <div class="container inhoud__grid">
-        <div>
-          <h2 class="inhoud__kop">Introductie</h2>
-          <div class="prose">
-            <Content />
-            <h2>Voor wie</h2>
-            <p>{d.doelgroep}</p>
-            {
-              d.startdata.length > 0 && (
-                <>
-                  <h2>Startdata open inschrijving</h2>
-                  <ul>
-                    {d.startdata.map((s) => <li>{s}</li>)}
-                  </ul>
-                </>
-              )
-            }
-          </div>
-        </div>
-
-        <aside class="kader" aria-label="Investering en aanvragen">
-          <p class="kader__label">Investering</p>
-          <p class="kader__prijs">{d.prijsindicatie}</p>
-          <p class="kader__noot">Vaste prijs per groep, afgestemd op jullie vraag.</p>
+  <section class="section">
+    <div class="container">
+      <div class="prose">
+        <Content />
+        {
+          d.startdata.length > 0 && (
+            <>
+              <h2>Startdata</h2>
+              <ul>
+                {d.startdata.map((s) => <li>{s}</li>)}
+              </ul>
+            </>
+          )
+        }
+        <div class="aanvragen">
           <a class="button" href={url(`contact/?training=${training.id}`)}>Offerte aanvragen</a>
-          <a class="button kader__tweede" href={url('contact/')}>Vrijblijvend kennismaken</a>
-          <p class="kader__mail">Of mail naar <a href={`mailto:${site.email}`}>{site.email}</a></p>
-        </aside>
+          <p class="zacht">Of mail naar <a href={`mailto:${site.email}`}>{site.email}</a></p>
+        </div>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 </Base>
 
 <style>
-  .top { background: var(--vlak); padding-block: var(--space-l) calc(var(--space-l) + 2.5rem); }
-  .top__grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-xl); align-items: end; }
-  .top .bovenkop { color: var(--ink); }
-  .kort { background: var(--white); padding: var(--space-m); border-top: 4px solid var(--lijn-kleur); }
-  .kort__kop { font-size: var(--step--1); font-family: var(--font-sans); font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; }
-  .kruimel { font-size: var(--step--1); margin-bottom: var(--space-m); }
-  .kruimel a { color: var(--ink); }
-  .top h1 { max-width: 18ch; }
-  .top__ondertitel { font-size: var(--step-1); margin-bottom: var(--space-m); }
-  .kernpunten { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.5rem; }
-  .kernpunten li { position: relative; padding-left: 2rem; }
-  .kernpunten li::before {
-    content: '';
-    position: absolute;
-    left: 0.2rem;
-    top: 0.35em;
-    width: 0.5rem;
-    height: 0.9rem;
-    border: solid var(--roest);
-    border-width: 0 3px 3px 0;
-    transform: rotate(45deg);
-  }
+  .kop { padding-bottom: var(--space-l); }
+  .kop h1 { max-width: 18ch; }
+  .kop .zacht a { color: inherit; }
 
+  .feiten-sectie { padding-block: var(--space-l); }
   .feiten {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    margin: -2.5rem 0 0;
-    background: var(--white);
-    border: 1px solid var(--lijn);
-    position: relative;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: var(--space-m);
+    margin: 0;
   }
-  .feiten div { padding: var(--space-s) var(--space-m); border-left: 1px solid var(--lijn); }
-  .feiten div:first-child { border-left: 0; }
-  .feiten dt { font-size: var(--step--1); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+  .feiten dt { color: var(--ink-soft); font-size: var(--step--1); }
   .feiten dd { margin: 0; }
 
-  .inhoud { padding-top: var(--space-l); }
-  .inhoud__grid { display: grid; grid-template-columns: minmax(0, 1fr) 21rem; gap: var(--space-xl); align-items: start; }
-  .inhoud__kop { font-size: var(--step-1); }
-  .prose :global(blockquote) { margin: 0 0 var(--space-m); padding: var(--space-s) var(--space-m); background: var(--zand); border-left: 3px solid var(--oranje); }
+  .prose :global(blockquote) { margin: 0 0 var(--space-m); color: var(--ink-soft); font-style: italic; }
   .prose :global(blockquote p) { margin: 0; }
 
-  .kader {
-    position: sticky;
-    top: 7rem;
-    background: var(--ink);
-    color: var(--white);
-    padding: var(--space-m);
-    display: grid;
-    gap: var(--space-s);
-  }
-  .kader p { margin: 0; }
-  .kader a:not(.button) { color: var(--white); }
-  .kader__label { font-size: var(--step--1); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
-  .kader__prijs { font-family: var(--font-serif); font-size: var(--step-2); font-weight: 600; line-height: 1.1; }
-  .kader__noot, .kader__mail { font-size: var(--step--1); opacity: 0.9; }
-  .kader .button { justify-content: center; }
-  .kader__tweede { background: transparent; border-color: var(--white); }
-  .kader__tweede:hover { background: var(--white); color: var(--ink); border-color: var(--white); }
-  .kader .button:not(.kader__tweede) { background: var(--abrikoos); border-color: var(--abrikoos); color: var(--ink); }
-  .kader .button:not(.kader__tweede):hover { background: var(--white); border-color: var(--white); }
-
-  @media (max-width: 56rem) {
-    .top__grid, .inhoud__grid { grid-template-columns: 1fr; gap: var(--space-l); }
-    .feiten { grid-template-columns: 1fr 1fr; }
-    .feiten div:nth-child(3) { border-left: 0; }
-    .feiten div:nth-child(n + 3) { border-top: 1px solid var(--lijn); }
-    .kader { position: static; }
-  }
+  .aanvragen { margin-top: var(--space-l); }
+  .aanvragen .zacht { margin-top: var(--space-s); }
 </style>

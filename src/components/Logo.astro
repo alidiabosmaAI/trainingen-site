@@ -1,24 +1,15 @@
 ---
-// Tijdelijk woordmerk: naam in serif met de vakgebieden eronder.
+// Tijdelijk woordmerk: alleen de naam.
 import { site } from '../config';
 ---
 
-<span class="logo">
-  <span class="logo__naam">{site.name}</span>
-  <span class="logo__sub">{site.tagline}</span>
-</span>
+<span class="logo">{site.name}</span>
 
 <style>
-  .logo { display: inline-grid; line-height: 1.15; color: currentColor; }
-  .logo__naam {
+  .logo {
     font-family: var(--font-serif);
-    font-weight: 600;
-    font-size: 1.35rem;
+    font-weight: 500;
+    font-size: 1.3rem;
     letter-spacing: -0.01em;
   }
-  .logo__naam::after {
-    content: '.';
-    color: var(--oranje);
-  }
-  .logo__sub { font-size: 0.75rem; letter-spacing: 0.04em; opacity: 0.85; }
 </style>

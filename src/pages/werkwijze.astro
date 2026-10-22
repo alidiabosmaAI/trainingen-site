@@ -4,47 +4,35 @@ import { url } from '../lib/url';
 
 const stappen = [
   { titel: 'Kennismaking', tekst: 'We bespreken jullie vraag, de doelgroep en waar jullie staan met AI en algoritmes.' },
-  { titel: 'Voorstel op maat', tekst: 'Je ontvangt een offerte met programma, planning en een vaste prijs. Geschikt voor jullie inkoopproces.' },
+  { titel: 'Voorstel op maat', tekst: 'Je ontvangt een offerte met programma, planning en een vaste prijs, passend bij jullie inkoopproces.' },
   { titel: 'Training', tekst: 'Interactieve sessies met casussen uit jullie eigen praktijk, op locatie of online.' },
-  { titel: 'Evaluatie & borging', tekst: 'We evalueren de opbrengst en kijken samen naar vervolgstappen en naslagmateriaal.' },
+  { titel: 'Evaluatie', tekst: 'We kijken samen terug en bespreken eventuele vervolgstappen.' },
 ];
 ---
 
 <Base title="Werkwijze" description="Hoe een traject verloopt: van kennismaking tot evaluatie.">
   <section class="section">
     <div class="container">
-      <p class="bovenkop">Werkwijze</p>
-      <h1>Van vraag tot vervolg</h1>
+      <h1>Werkwijze</h1>
       <p class="intro">Een helder proces dat aansluit bij hoe publieke organisaties inkopen en plannen.</p>
       <ol class="stappen">
-        {stappen.map((s, i) => (
+        {stappen.map((s) => (
           <li>
-            <span class="stappen__nr" aria-hidden="true">{['I', 'II', 'III', 'IV'][i]}</span>
-            <div>
-              <h2>{s.titel}</h2>
-              <p>{s.tekst}</p>
-            </div>
+            <h2>{s.titel}</h2>
+            <p>{s.tekst}</p>
           </li>
         ))}
       </ol>
-    </div>
-  </section>
-  <section class="section section--wit">
-    <div class="container prose">
-      <h2>Inkoop en facturatie</h2>
-      <ul>
-        <li>Offerte met vaste prijs per groep of per deelnemer</li>
-        <li>Facturatie via e-factuur mogelijk</li>
-        <li>Algemene voorwaarden op aanvraag</li>
-      </ul>
-      <p><a class="button" href={url('contact/')}>Plan een kennismaking</a></p>
+      <p class="zacht">Facturatie via e-factuur is mogelijk. Algemene voorwaarden op aanvraag.</p>
+      <a class="button" href={url('contact/')}>Plan een kennismaking</a>
     </div>
   </section>
 </Base>
 
 <style>
-  .stappen { list-style: none; padding: 0; margin: var(--space-l) 0 0; display: grid; gap: var(--space-m); max-width: 46rem; }
-  .stappen li { display: grid; grid-template-columns: 3.5rem 1fr; gap: var(--space-m); align-items: start; border-top: 1px solid var(--lijn); padding-top: var(--space-m); }
-  .stappen__nr { font-family: var(--font-serif); font-size: var(--step-2); line-height: 1; color: var(--roest); }
-  .stappen h2 { font-size: var(--step-1); margin-bottom: var(--space-xs); }
+  .stappen { margin: var(--space-l) 0; padding-left: 1.4em; display: grid; gap: var(--space-m); max-width: 40rem; }
+  .stappen li::marker { font-family: var(--font-serif); font-size: var(--step-1); }
+  .stappen h2 { font-size: var(--step-1); margin-bottom: 0.4rem; }
+  .stappen p { margin: 0; }
+  .zacht { margin-bottom: var(--space-m); }
 </style>

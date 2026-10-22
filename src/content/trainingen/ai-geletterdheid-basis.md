@@ -2,10 +2,6 @@
 titel: AI-geletterdheid voor professionals
 ondertitel: Begrijpen wat AI doet, en wat het van jou vraagt
 samenvatting: Wat is AI eigenlijk, waar kom je het tegen in je werk en wat vraagt de AI-verordening van jou? Een heldere basis voor iedere medewerker.
-kernpunten:
-  - Je begrijpt wat AI is en waar het in je werk een rol speelt
-  - Je herkent kansen en risico's, zoals bias en fouten
-  - Je weet wat de AI-verordening van jouw organisatie vraagt
 thema: AI-geletterdheid
 doelgroep: Medewerkers en leidinggevenden zonder technische achtergrond
 duur: 1 dagdeel

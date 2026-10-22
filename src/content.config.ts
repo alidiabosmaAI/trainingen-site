@@ -10,7 +10,6 @@ const trainingen = defineCollection({
     titel: z.string(),
     ondertitel: z.string(),
     samenvatting: z.string(),
-    kernpunten: z.array(z.string()).max(4),
     thema: z.enum(['AI-geletterdheid', 'Algoritmisch bestuur', 'AI in de praktijk']),
     doelgroep: z.string(),
     duur: z.string(),

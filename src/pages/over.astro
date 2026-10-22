@@ -8,29 +8,20 @@ import { url } from '../lib/url';
 <Base title="Over" description={`Over ${site.name}.`}>
   <section class="section">
     <div class="container over">
-      <div class="over__foto"><Foto achtergrond="var(--abrikoos)" /></div>
+      <div class="over__foto"><Foto /></div>
       <div class="prose">
-        <p class="bovenkop">Over</p>
         <h1>{site.name}</h1>
-        <p class="intro">Expert in algoritmisch bestuur en AI-geletterdheid.</p>
+        <p class="intro">[Eén zin over wie je bent en wat je doet.]</p>
         <p>
-          [Voorbeeldtekst: vertel hier over je achtergrond, ervaring met algoritmisch bestuur, opdrachtgevers en wat
-          je drijft.]
+          [Voorbeeldtekst: je achtergrond, ervaring met algoritmisch bestuur, opdrachtgevers en wat je drijft.]
         </p>
-        <h2>Achtergrond</h2>
-        <ul>
-          <li>[Opleiding / onderzoek]</li>
-          <li>[Relevante werkervaring]</li>
-          <li>[Publicaties, lezingen, netwerken]</li>
-        </ul>
-        <p><a class="button" href={url('contact/')}>Plan een kennismaking</a></p>
+        <p><a class="button" href={url('contact/')}>Neem contact op</a></p>
       </div>
     </div>
   </section>
 </Base>
 
 <style>
-  .over { display: grid; grid-template-columns: 1fr 1.6fr; gap: var(--space-xl); align-items: start; }
-  .over__foto { max-width: 22rem; }
-  @media (max-width: 56rem) { .over { grid-template-columns: 1fr; gap: var(--space-l); } .over__foto { max-width: 14rem; } }
+  .over { display: grid; grid-template-columns: 18rem 1fr; gap: var(--space-l); align-items: start; }
+  @media (max-width: 48rem) { .over { grid-template-columns: 1fr; gap: var(--space-m); } .over__foto { max-width: 14rem; } }
 </style>

@@ -2,10 +2,6 @@
 titel: Slim en verantwoord werken met generatieve AI
 ondertitel: Aan de slag met AI-assistenten, binnen de kaders
 samenvatting: Hands-on training voor teams die AI-assistenten willen gebruiken bij schrijven, samenvatten en analyseren, binnen de kaders van de organisatie.
-kernpunten:
-  - Je formuleert goede opdrachten en controleert de uitkomst kritisch
-  - Je weet wat wel en niet mag met persoonsgegevens
-  - Je maakt met je team heldere afspraken over AI-gebruik
 thema: AI in de praktijk
 doelgroep: Teams en afdelingen die AI-tools (gaan) gebruiken
 duur: 1 dagdeel
