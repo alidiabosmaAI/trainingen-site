@@ -1,34 +1,67 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import Artikel from '../components/Artikel.astro';
 import Foto from '../components/Foto.astro';
 import { site } from '../config';
 import { url } from '../lib/url';
 
 const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.volgorde - b.data.volgorde);
+
+const doelgroepen = [
+  { naam: 'Gemeenten en provincies', toelichting: 'Beleid, uitvoering en bestuur' },
+  { naam: 'Rijksoverheid en uitvoeringsorganisaties', toelichting: 'Van beleidsdirectie tot dienstverlening' },
+  { naam: 'Woningcorporaties', toelichting: 'Toewijzing, onderhoud en huurdersdienstverlening' },
+  { naam: 'Waterschappen en andere publieke organisaties', toelichting: 'Iedere organisatie met een publieke taak' },
+];
+
+const stappen = [
+  { titel: 'Kennismaken', tekst: 'We bespreken jullie vraag, de doelgroep en waar jullie staan.' },
+  { titel: 'Voorstel op maat', tekst: 'Een offerte met programma, planning en een vaste prijs.' },
+  { titel: 'Training', tekst: 'Interactief, met casussen uit jullie eigen praktijk.' },
+  { titel: 'Evaluatie', tekst: 'We kijken samen terug en bespreken vervolgstappen.' },
+];
 ---
 
 <Base>
   <section class="section hero">
-    <div class="container">
-      <h1>Grip op AI in de publieke sector</h1>
-      <p class="intro">Trainingen in AI-geletterdheid en algoritmisch bestuur, voor overheden en woningcorporaties.</p>
-      <a class="button" href={url('aanbod/')}>Bekijk het aanbod</a>
+    <div class="container hero__grid">
+      <div>
+        <h1>Grip op AI in de publieke sector</h1>
+        <p class="intro">Trainingen in AI-geletterdheid en algoritmisch bestuur, voor overheden en woningcorporaties.</p>
+        <a class="button" href={url('aanbod/')}>Bekijk het aanbod</a>
+      </div>
+      <Artikel kop="Artikel 4 · AI-geletterdheid" bron="AI-verordening (EU) 2024/1689, van toepassing sinds 2 februari 2025">
+        <p>
+          Aanbieders en gebruiksverantwoordelijken van AI-systemen nemen maatregelen om, zoveel als mogelijk, te
+          zorgen voor een <mark>toereikend niveau van AI-geletterdheid</mark> bij hun personeel en andere personen
+          die namens hen AI-systemen exploiteren en gebruiken […]
+        </p>
+      </Artikel>
     </div>
   </section>
 
   <section class="section section--groen">
     <div class="container">
-      <p class="statement">
-        Sinds februari 2025 vraagt de AI-verordening dat organisaties zorgen voor voldoende AI-geletterdheid bij
-        hun medewerkers.
-      </p>
+      <h2>AI begrijpen is de basis voor goed bestuur</h2>
+      <div class="kolommen">
+        <p>
+          Algoritmes en AI ondersteunen steeds vaker beslissingen die burgers en huurders direct raken. Dat vraagt
+          om medewerkers en bestuurders die weten wat deze systemen doen, waar de risico's zitten en welke
+          verantwoordelijkheid zij zelf dragen.
+        </p>
+        <p>
+          Mijn trainingen maken dat begrijpelijk, zonder hype en zonder onnodig jargon. Met diepgaande kennis van
+          algoritmisch bestuur en de AI-verordening, vertaald naar jullie dagelijkse praktijk.
+        </p>
+      </div>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
       <h2>Trainingen</h2>
+      <p class="intro">Alle trainingen zijn incompany te boeken en worden afgestemd op jullie organisatie.</p>
       <ul class="aanbod">
         {
           trainingen.map((t) => (
@@ -36,6 +69,40 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
               <h3><a href={url(`aanbod/${t.id}/`)}>{t.data.titel}</a></h3>
               <p>{t.data.samenvatting}</p>
               <p class="zacht">{t.data.duur} · {t.data.vorm.join(', ')}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="maatwerk">Niet gevonden wat je zoekt? <a href={url('contact/')}>Maatwerk is altijd mogelijk.</a></p>
+    </div>
+  </section>
+
+  <section class="section section--groen">
+    <div class="container">
+      <h2>Voor organisaties met een publieke taak</h2>
+      <ul class="raster">
+        {
+          doelgroepen.map((d) => (
+            <li>
+              <h3>{d.naam}</h3>
+              <p class="zacht">{d.toelichting}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Werkwijze</h2>
+      <p class="intro">Een helder proces dat aansluit bij hoe publieke organisaties inkopen en plannen.</p>
+      <ul class="raster raster--vier">
+        {
+          stappen.map((s) => (
+            <li>
+              <h3>{s.titel}</h3>
+              <p>{s.tekst}</p>
             </li>
           ))
         }
@@ -54,7 +121,7 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section--groen">
     <div class="container">
       <h2>Kennismaken?</h2>
       <p class="intro">Vertel me wat jullie zoeken, dan denk ik graag mee.</p>
@@ -64,16 +131,11 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
 </Base>
 
 <style>
+  .hero__grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-l); align-items: center; }
   .hero h1 { max-width: 14ch; }
   .hero .intro { margin-bottom: var(--space-m); }
 
-  .statement {
-    font-family: var(--font-serif);
-    font-size: var(--step-2);
-    line-height: 1.3;
-    max-width: 30ch;
-    margin: 0;
-  }
+  .kolommen { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-m); margin-top: var(--space-m); }
 
   .aanbod {
     list-style: none;
@@ -87,11 +149,30 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
   .aanbod h3 a { text-decoration: none; }
   .aanbod h3 a:hover { text-decoration: underline; }
   .aanbod p { margin-bottom: 0.25rem; }
+  .maatwerk { margin-top: var(--space-l); }
+
+  .raster {
+    list-style: none;
+    margin: var(--space-l) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-m) var(--space-l);
+  }
+  .raster--vier { grid-template-columns: repeat(4, 1fr); gap: var(--space-m); }
+  .raster h3 { margin-bottom: 0.4rem; }
+  .raster p { margin: 0; }
 
   .over { display: grid; grid-template-columns: 18rem 1fr; gap: var(--space-l); align-items: center; }
   .over > div:last-child { max-width: 34rem; }
 
-  @media (max-width: 48rem) {
+  @media (max-width: 56rem) {
+    .hero__grid, .kolommen { grid-template-columns: 1fr; }
+    .raster--vier { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 40rem) {
+    .raster, .raster--vier { grid-template-columns: 1fr; }
+    .kolommen { gap: 0; }
     .over { grid-template-columns: 1fr; gap: var(--space-m); }
     .over__foto { max-width: 14rem; }
   }
