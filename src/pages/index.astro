@@ -4,34 +4,11 @@ import Base from '../layouts/Base.astro';
 import Tegels from '../components/Tegels.astro';
 import TrainingCard from '../components/TrainingCard.astro';
 import Artikel from '../components/Artikel.astro';
+import Werkwijze from '../components/Werkwijze.astro';
 import { site } from '../config';
 import { url } from '../lib/url';
 
 const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.volgorde - b.data.volgorde);
-
-const leervormen = [
-  {
-    titel: 'Simulaties',
-    tekst: 'Deelnemers doorlopen een besluitvormingsproces waarin een algoritme meebeslist, en ervaren zelf waar het schuurt.',
-    kleur: 'var(--oker)',
-    vorm: '100% 0 0 0',
-  },
-  {
-    titel: 'Games',
-    tekst: 'Met spelvormen oefenen deelnemers begrippen en dilemma’s. Actief, met elkaar en met ruimte voor fouten.',
-    kleur: 'var(--denim)',
-    vorm: '50%',
-  },
-  {
-    titel: 'Vertaling naar de praktijk',
-    tekst: 'Na elke ronde vertalen we wat er gebeurde naar het eigen werk. Een eigen casus inbrengen kan ook.',
-    kleur: 'var(--ink)',
-    vorm: '0 0 100% 0',
-  },
-];
-
-const stappen = ['Kennismaken', 'Voorstel op maat', 'Training', 'Borgen'];
-const stapKleuren = ['var(--oker)', 'var(--salie)', 'var(--perzik)', 'var(--hemel)'];
 ---
 
 <Base>
@@ -45,13 +22,38 @@ const stapKleuren = ['var(--oker)', 'var(--salie)', 'var(--perzik)', 'var(--heme
           deelnemers ervaren wat er op het spel staat.
         </p>
         <div class="hero__actions">
-          <a class="button" href={url('aanbod/')}>Bekijk het aanbod</a>
-          <a class="button button--outline" href={url('contact/')}>Plan een kennismaking</a>
+          <a class="button" href={url('#werkwijze')}>Zo werkt het</a>
+          <a class="button button--outline" href={url('aanbod/')}>Bekijk het aanbod</a>
         </div>
       </div>
       <div class="hero__visual">
         <Tegels variant="a" />
       </div>
+    </div>
+  </section>
+
+  <section class="section section--papier" id="werkwijze">
+    <div class="container">
+      <p class="label" style="--label-kleur: var(--oker)">Werkwijze</p>
+      <h2>Zo werkt het</h2>
+      <p class="intro">
+        Serieus van inhoud, speels in de vorm. Elke training stemmen we af op jullie organisatie: op de vraag, de
+        deelnemers en de manier van leren die bij jullie past.
+      </p>
+      <Werkwijze />
+      <p class="meer"><a href={url('werkwijze/')}>Meer over de werkwijze →</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="label" style="--label-kleur: var(--koper)">Aanbod</p>
+      <h2>Drie rollen, drie trainingen</h2>
+      <p class="intro">Voor de professional die met AI werkt, de adviseur die algoritmes beoordeelt en de leidinggevende die richting geeft.</p>
+      <div class="panels">
+        {trainingen.map((t) => <TrainingCard training={t} />)}
+      </div>
+      <p class="maatwerk">Niet gevonden wat je zoekt? <a href={url('contact/')}>Maatwerk is altijd mogelijk.</a></p>
     </div>
   </section>
 
@@ -67,7 +69,7 @@ const stapKleuren = ['var(--oker)', 'var(--salie)', 'var(--perzik)', 'var(--heme
         <p>
           Sinds 2 februari 2025 is AI-geletterdheid bovendien verplicht voor iedere organisatie die AI inzet.
         </p>
-        <p class="visie__link"><a href={url('visie/')}>Lees mijn visie →</a></p>
+        <p class="meer"><a href={url('visie/')}>Lees mijn visie →</a></p>
       </div>
       <Artikel kop="Artikel 4 · AI-geletterdheid" bron="AI-verordening (EU) 2024/1689, van toepassing sinds 2 februari 2025">
         <p>
@@ -79,57 +81,11 @@ const stapKleuren = ['var(--oker)', 'var(--salie)', 'var(--perzik)', 'var(--heme
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <p class="label" style="--label-kleur: var(--oker)">Werkwijze</p>
-      <h2>Leren door te doen</h2>
-      <p class="intro">Serieus van inhoud, speels in de vorm. Geen lange presentaties, maar zelf ervaren wat AI doet.</p>
-      <ul class="leervormen">
-        {
-          leervormen.map((l) => (
-            <li>
-              <span class="leervormen__vorm" style={`background: ${l.kleur}; border-radius: ${l.vorm}`} aria-hidden="true" />
-              <h3>{l.titel}</h3>
-              <p>{l.tekst}</p>
-            </li>
-          ))
-        }
-      </ul>
-
-      <h3 class="stappen__kop">Zo verloopt een traject</h3>
-      <ol class="stappen">
-        {
-          stappen.map((s, i) => (
-            <li>
-              <span class="stappen__nr" style={`background: ${stapKleuren[i]}`} aria-hidden="true">
-                {i + 1}
-              </span>
-              {s}
-            </li>
-          ))
-        }
-      </ol>
-      <p><a class="visie__link" href={url('werkwijze/')}>Meer over de werkwijze →</a></p>
-    </div>
-  </section>
-
-  <section class="section section--papier">
-    <div class="container">
-      <p class="label" style="--label-kleur: var(--koper)">Aanbod</p>
-      <h2>Drie rollen, drie trainingen</h2>
-      <p class="intro">Voor de professional die met AI werkt, de adviseur die algoritmes beoordeelt en de leidinggevende die richting geeft.</p>
-      <div class="panels">
-        {trainingen.map((t) => <TrainingCard training={t} />)}
-      </div>
-      <p class="maatwerk">Niet gevonden wat je zoekt? <a href={url('contact/')}>Maatwerk is altijd mogelijk.</a></p>
-    </div>
-  </section>
-
   <section class="section section--salie">
     <div class="container slot">
       <div>
         <h2>Kennismaken?</h2>
-        <p class="intro">Vertel me wat jullie zoeken, dan denk ik graag mee.</p>
+        <p class="intro">Vertel me wat jullie zoeken, dan stemmen we samen de werkvorm af.</p>
       </div>
       <div class="slot__acties">
         <a class="button" href={url('contact/')}>Neem contact op</a>
@@ -151,40 +107,8 @@ const stapKleuren = ['var(--oker)', 'var(--salie)', 'var(--perzik)', 'var(--heme
   .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-s); margin-top: var(--space-m); }
   .hero__visual { max-width: 26rem; justify-self: end; width: 100%; }
 
-  .visie { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-xl); align-items: center; }
-  .visie__link { font-weight: 700; }
-
-  .leervormen {
-    list-style: none;
-    margin: var(--space-l) 0 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-l);
-  }
-  .leervormen__vorm { display: block; width: 3rem; height: 3rem; margin-bottom: var(--space-m); }
-  .leervormen h3 { font-size: var(--step-1); margin-bottom: var(--space-xs); }
-  .leervormen p { margin: 0; }
-
-  .stappen__kop { font-size: var(--step-1); margin-top: var(--space-xl); }
-  .stappen {
-    list-style: none;
-    margin: var(--space-m) 0 var(--space-m);
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-m);
-  }
-  .stappen li { display: flex; align-items: center; gap: var(--space-s); font-weight: 700; }
-  .stappen__nr {
-    flex: none;
-    display: grid;
-    place-items: center;
-    width: 2.75rem;
-    height: 2.75rem;
-    border-radius: var(--radius);
-    font-weight: 800;
-  }
+  #werkwijze .intro { max-width: 52ch; }
+  .meer { margin: var(--space-m) 0 0; font-weight: 700; }
 
   .panels {
     display: grid;
@@ -194,6 +118,8 @@ const stapKleuren = ['var(--oker)', 'var(--salie)', 'var(--perzik)', 'var(--heme
   }
   .maatwerk { margin: var(--space-m) 0 0; }
 
+  .visie { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-xl); align-items: center; }
+
   .slot { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--space-m); }
   .slot .intro { margin: 0; }
   .slot__acties { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-m); }
@@ -201,10 +127,5 @@ const stapKleuren = ['var(--oker)', 'var(--salie)', 'var(--perzik)', 'var(--heme
   @media (max-width: 56rem) {
     .hero__grid, .visie { grid-template-columns: 1fr; gap: var(--space-l); }
     .hero__visual { justify-self: start; max-width: 18rem; }
-    .leervormen { grid-template-columns: 1fr; gap: var(--space-m); }
-    .stappen { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 32rem) {
-    .stappen { grid-template-columns: 1fr; }
   }
 </style>

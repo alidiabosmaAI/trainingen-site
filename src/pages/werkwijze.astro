@@ -1,15 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { url } from '../lib/url';
-
-const stapKleuren = ['var(--oker)', 'var(--salie)', 'var(--perzik)', 'var(--hemel)'];
-
-const stappen = [
-  { titel: 'Kennismaking', tekst: 'We bespreken jullie vraag, de doelgroep en waar jullie staan met AI en algoritmes.' },
-  { titel: 'Voorstel op maat', tekst: 'Je ontvangt een offerte met programma, planning en een vaste prijs. Geschikt voor jullie inkoopproces.' },
-  { titel: 'Training', tekst: 'Interactieve sessies met simulaties en games, op locatie of online. Een eigen casus inbrengen kan ook.' },
-  { titel: 'Evaluatie & borging', tekst: 'We evalueren de opbrengst en kijken samen naar vervolgstappen en naslagmateriaal.' },
-];
+import Werkwijze from '../components/Werkwijze.astro';
 ---
 
 <Base title="Werkwijze" description="Hoe een traject verloopt: van kennismaking tot evaluatie.">
@@ -17,18 +9,8 @@ const stappen = [
     <div class="container">
       <p class="label" style="--label-kleur: var(--olijf)">Werkwijze</p>
       <h1>Van vraag tot vervolg</h1>
-      <p class="intro">Een helder proces dat aansluit bij hoe publieke organisaties inkopen en plannen.</p>
-      <ol class="stappen">
-        {stappen.map((s, i) => (
-          <li>
-            <span class="stappen__nr" style={`background: ${stapKleuren[i]}`} aria-hidden="true">{i + 1}</span>
-            <div>
-              <h2>{s.titel}</h2>
-              <p>{s.tekst}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
+      <p class="intro">Elke training stemmen we af op jullie organisatie, in een helder proces dat aansluit bij hoe publieke organisaties inkopen en plannen.</p>
+      <Werkwijze />
     </div>
   </section>
   <section class="section section--papier">
@@ -43,11 +25,3 @@ const stappen = [
     </div>
   </section>
 </Base>
-
-<style>
-  .stappen { list-style: none; padding: 0; margin: var(--space-l) 0 0; display: grid; gap: var(--space-m); max-width: 46rem; }
-  .stappen li { display: grid; grid-template-columns: 3.5rem 1fr; gap: var(--space-m); align-items: start; }
-  .stappen__nr { display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border-radius: var(--radius); font-weight: 800; font-size: var(--step-1); }
-  .stappen h2 { font-size: var(--step-1); margin-bottom: var(--space-xs); }
-  .section--papier { margin-top: 0; }
-</style>
