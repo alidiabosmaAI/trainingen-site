@@ -15,7 +15,7 @@ prijsindicatie: Op aanvraag
 volgorde: 2
 ---
 
-Algoritmes ondersteunen steeds vaker besluiten die burgers en huurders direct raken. Als adviseur sta je precies op het snijvlak: je moet een systeem kunnen doorgronden, de publieke waarden bewaken en het gesprek aangaan met data scientists, leveranciers en bestuurders.
+Algoritmes ondersteunen steeds vaker besluiten die burgers direct raken. Als adviseur sta je precies op het snijvlak: je moet een systeem kunnen doorgronden, de publieke waarden bewaken en het gesprek aangaan met data scientists, leveranciers en bestuurders.
 
 Deze training gaat de diepte in. Niet om je tot programmeur op te leiden, maar zodat je weet welke vragen je moet stellen en waar de bestuurlijke keuzes zitten.
 
