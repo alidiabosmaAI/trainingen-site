@@ -12,6 +12,9 @@ import { stappen, spelelementen } from '../lib/werkwijze';
         </span>
         <h3>{s.titel}</h3>
         <p>{s.tekst}</p>
+        <ul class="stappen__krijg" aria-label="Wat je krijgt">
+          {s.krijg.map((k) => <li>{k}</li>)}
+        </ul>
       </li>
     ))
   }
@@ -48,6 +51,27 @@ import { stappen, spelelementen } from '../lib/werkwijze';
   }
   .stappen h3 { font-size: var(--step-1); margin-bottom: var(--space-xs); }
   .stappen p { margin: 0; }
+  .stappen__krijg {
+    list-style: none;
+    margin: var(--space-s) 0 0;
+    padding: 0;
+    display: grid;
+    gap: 0.35rem;
+    font-size: var(--step--1);
+    font-weight: 650;
+  }
+  .stappen__krijg li { padding-left: 1.4rem; position: relative; }
+  .stappen__krijg li::before {
+    content: '';
+    position: absolute;
+    left: 0.15rem;
+    top: 0.3em;
+    width: 0.35rem;
+    height: 0.65rem;
+    border: solid var(--ink);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
 
   .spel {
     display: flex;

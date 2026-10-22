@@ -1,25 +1,29 @@
 // De werkwijze, gedeeld door de homepage en de pagina Werkwijze.
+// Per stap: wat er gebeurt, en concreet wat de klant krijgt.
 export const stappen = [
   {
-    titel: 'Kennismaken',
-    tekst: 'We bespreken jullie vraag, de deelnemers en waar jullie organisatie staat met AI.',
+    titel: 'Kennismaking',
+    tekst: 'Een vrijblijvend gesprek over jullie vraag, de deelnemers en waar jullie organisatie staat met AI.',
+    krijg: ['Kosteloos gesprek', 'Eerste advies over de passende training'],
     kleur: 'var(--oker)',
   },
   {
-    titel: 'Werkvorm op maat',
+    titel: 'Samen voorbereiden',
     tekst:
-      'Samen kiezen we wat past: een simulatie, een game, een interactieve workshop of een combinatie. Afgestemd op jullie praktijk en de groep.',
+      'We stemmen de training af op jullie praktijk: leerdoelen, voorbeelden en de werkvorm die past bij de groep.',
+    krijg: ['Voorstel met programma en vaste prijs', 'Werkvorm op maat: simulatie, game of workshop'],
     kleur: 'var(--salie)',
   },
   {
     titel: 'Training',
-    tekst:
-      'Deelnemers gaan zelf aan de slag. Ze nemen beslissingen, ervaren de gevolgen en vertalen dat naar hun eigen werk.',
+    tekst: 'Deelnemers gaan zelf aan de slag. Ze nemen beslissingen, ervaren de gevolgen en vertalen dat naar hun werk.',
+    krijg: ['Op locatie of online', 'Naslagmateriaal voor deelnemers'],
     kleur: 'var(--perzik)',
   },
   {
-    titel: 'Borgen',
-    tekst: 'We evalueren samen en spreken af wat er nodig is om het geleerde vast te houden.',
+    titel: 'Borging',
+    tekst: 'We kijken samen terug en spreken af wat er nodig is om het geleerde vast te houden.',
+    krijg: ['Evaluatie met opdrachtgever', 'Advies over vervolgstappen'],
     kleur: 'var(--hemel)',
   },
 ];
