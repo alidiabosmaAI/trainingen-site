@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Tegels from '../components/Tegels.astro';
+import Artikel from '../components/Artikel.astro';
 import { site } from '../config';
 import { url } from '../lib/url';
 ---
@@ -25,10 +26,10 @@ import { url } from '../lib/url';
           wie is ervoor verantwoordelijk?
         </p>
         <p>
-          Voor mijn master Management van de Publieke Sector aan de Universiteit Leiden schreef ik mijn scriptie over
-          AI-geletterdheid onder startende ambtenaren, en over hoe je die al tijdens de opleiding aan studenten kunt
-          aanleren. Die kennis gebruik ik nu in mijn trainingen: wat moeten medewerkers echt weten en kunnen, en hoe
-          leer je dat zo dat het blijft hangen?
+          Ik studeerde af in de master Management van de Publieke Sector aan de Universiteit Leiden, met een
+          scriptie over AI-geletterdheid bij startende ambtenaren: wat leren zij in hun opleiding, en wat nemen ze
+          daarvan mee naar de werkvloer? Die kennis gebruik ik in mijn trainingen. Wat moeten medewerkers echt weten
+          en kunnen, en hoe leer je dat zo dat het blijft hangen?
         </p>
         <p>
           Bij De Haagse Hogeschool doceer ik Bestuurskunde en Overheidsmanagement. In de toetscommissie houd ik me
@@ -41,9 +42,46 @@ import { url } from '../lib/url';
           netwerkregisseur in het sociaal domein. Ik ken het openbaar bestuur dus ook van binnenuit.
         </p>
 
+        <h2>Mijn onderzoek</h2>
+        <Artikel
+          kop="Leertransfer van AI-geletterdheid bij startende ambtenaren"
+          bron="Masterscriptie, Management van de Publieke Sector, Universiteit Leiden"
+        >
+          <p>Een studie naar de invloed van onderwijs en de werkpraktijk op leertransfer</p>
+        </Artikel>
+        <p class="onderzoek__intro">
+          Ik onderzocht in hoeverre studenten en pas afgestudeerden van de opleiding Bestuurskunde/Overheidsmanagement
+          hun AI-geletterdheid ook echt toepassen in hun (stage)werk, en wat daarop van invloed is. Met surveys,
+          situatieschetsen en interviews met startende ambtenaren.
+        </p>
+        <h3>Wat ik vond</h3>
+        <ul>
+          <li>
+            <strong>AI-geletterdheid is meer dan techniek.</strong> Het is een gelaagde competentie: technische
+            basiskennis, ethische reflectie (bijvoorbeeld om <em>automation bias</em> te voorkomen) en
+            politiek-bestuurlijke sensitiviteit horen bij elkaar.
+          </li>
+          <li>
+            <strong>Kennis alleen is niet genoeg.</strong> Starters voelen zich bekwaam en gemotiveerd, maar op de
+            werkvloer krijgen ze weinig kans om het toe te passen. AI-gebruik versmalt dan al snel tot alleen
+            generatieve AI-tools.
+          </li>
+          <li>
+            <strong>De organisatie maakt het verschil.</strong> Faciliterend leiderschap, tijd, ruimte voor reflectie
+            en oefenen, en mensen die de brug slaan tussen kennis en praktijk bepalen of het geleerde ook wordt
+            gebruikt.
+          </li>
+        </ul>
+        <h3>Wat dat betekent voor mijn trainingen</h3>
+        <ul>
+          <li>Ik gebruik generatieve AI, waar deelnemers al mee werken, als ingang voor bredere ethische en bestuurlijke afwegingen.</li>
+          <li>Deelnemers oefenen met situaties uit hun eigen werk, zodat de stap naar de praktijk klein is.</li>
+          <li>Ik kijk niet alleen naar de deelnemer, maar ook naar de organisatie: wat is er nodig zodat het geleerde blijft hangen?</li>
+        </ul>
+
         <h2>Achtergrond</h2>
         <ul>
-          <li>MSc Management van de Publieke Sector, Universiteit Leiden. Scriptie over AI-geletterdheid onder startende ambtenaren</li>
+          <li>MSc Management van de Publieke Sector, Universiteit Leiden. Scriptie: <em>Leertransfer van AI-geletterdheid bij startende ambtenaren</em></li>
           <li>BA Bestuurskunde en Overheidsmanagement, De Haagse Hogeschool</li>
           <li>Docent Bestuurskunde en Overheidsmanagement, De Haagse Hogeschool (sinds 2022)</li>
           <li>Lid toetscommissie, met als aandachtspunt AI in het onderwijs</li>
@@ -59,6 +97,9 @@ import { url } from '../lib/url';
 
 <style>
   .over { display: grid; grid-template-columns: 1fr 1.5fr; gap: var(--space-xl); align-items: start; }
-  .over__visual { max-width: 24rem; }
-  @media (max-width: 56rem) { .over { grid-template-columns: 1fr; gap: var(--space-l); } .over__visual { max-width: 16rem; } }
+  .over__visual { max-width: 24rem; position: sticky; top: 7rem; }
+  .prose :global(.artikel) { margin: var(--space-m) 0; }
+  .prose h3 { font-size: var(--step-0); margin-top: var(--space-m); }
+  .onderzoek__intro { margin-top: var(--space-m); }
+  @media (max-width: 56rem) { .over { grid-template-columns: 1fr; gap: var(--space-l); } .over__visual { max-width: 16rem; position: static; } }
 </style>
