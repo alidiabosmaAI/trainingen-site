@@ -1,35 +1,70 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import Tegels from '../components/Tegels.astro';
 import Artikel from '../components/Artikel.astro';
-import Foto from '../components/Foto.astro';
+import TrainingPanel from '../components/TrainingPanel.astro';
 import { site } from '../config';
 import { url } from '../lib/url';
 
 const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.volgorde - b.data.volgorde);
 
-const doelgroepen = [
-  { naam: 'Gemeenten en provincies', toelichting: 'Beleid, uitvoering en bestuur' },
-  { naam: 'Rijksoverheid en uitvoeringsorganisaties', toelichting: 'Van beleidsdirectie tot dienstverlening' },
-  { naam: 'Woningcorporaties', toelichting: 'Toewijzing, onderhoud en huurdersdienstverlening' },
-  { naam: 'Waterschappen en andere publieke organisaties', toelichting: 'Iedere organisatie met een publieke taak' },
-];
-
 const stappen = [
   { titel: 'Kennismaken', tekst: 'We bespreken jullie vraag, de doelgroep en waar jullie staan.' },
   { titel: 'Voorstel op maat', tekst: 'Een offerte met programma, planning en een vaste prijs.' },
   { titel: 'Training', tekst: 'Interactief, met casussen uit jullie eigen praktijk.' },
-  { titel: 'Evaluatie', tekst: 'We kijken samen terug en bespreken vervolgstappen.' },
+  { titel: 'Borgen', tekst: 'Evaluatie, naslagmateriaal en eventuele vervolgstappen.' },
+];
+const stapVormen = [
+  { kleur: 'var(--oker)', vorm: '100% 0 0 0' },
+  { kleur: 'var(--salie)', vorm: '50%' },
+  { kleur: 'var(--abrikoos)', vorm: '0 0 100% 0' },
+  { kleur: 'var(--roze)', vorm: 'var(--radius)' },
+];
+
+const doelgroepen = [
+  { naam: 'Gemeenten en provincies', toelichting: 'Beleid, uitvoering en bestuur', kleur: 'var(--terracotta)' },
+  { naam: 'Rijksoverheid en uitvoeringsorganisaties', toelichting: 'Van beleidsdirectie tot dienstverlening', kleur: 'var(--oker)' },
+  { naam: 'Woningcorporaties', toelichting: 'Toewijzing, onderhoud en huurdersdienstverlening', kleur: 'var(--olijf)' },
+  { naam: 'Waterschappen en andere publieke organisaties', toelichting: 'Iedere organisatie met een publieke taak', kleur: 'var(--ink)' },
 ];
 ---
 
 <Base>
-  <section class="section hero">
+  <section class="hero">
     <div class="container hero__grid">
       <div>
+        <p class="label">AI-geletterdheid & algoritmisch bestuur</p>
         <h1>Grip op AI in de publieke sector</h1>
-        <p class="intro">Trainingen in AI-geletterdheid en algoritmisch bestuur, voor overheden en woningcorporaties.</p>
-        <a class="button" href={url('aanbod/')}>Bekijk het aanbod</a>
+        <p class="intro">
+          Trainingen voor organisaties die AI verantwoord willen inzetten. Helder uitgelegd, inhoudelijk
+          onderbouwd en afgestemd op jullie praktijk.
+        </p>
+        <div class="hero__actions">
+          <a class="button" href={url('aanbod/')}>Bekijk het aanbod</a>
+          <a class="button button--outline" href={url('contact/')}>Plan een kennismaking</a>
+        </div>
+      </div>
+      <div class="hero__visual">
+        <Tegels variant="a" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--papier">
+    <div class="container visie">
+      <div>
+        <p class="label" style="--label-kleur: var(--olijf)">Visie</p>
+        <h2>AI begrijpen is de basis voor goed bestuur</h2>
+        <p>
+          Algoritmes en AI ondersteunen steeds vaker beslissingen die burgers en huurders direct raken. Dat vraagt
+          om medewerkers en bestuurders die weten wat deze systemen doen, waar de risico's zitten en welke
+          verantwoordelijkheid zij zelf dragen.
+        </p>
+        <p>
+          Mijn trainingen maken dat begrijpelijk, zonder hype en zonder onnodig jargon. Met diepgaande kennis van
+          algoritmisch bestuur en de AI-verordening, vertaald naar jullie dagelijkse praktijk.
+        </p>
       </div>
       <Artikel kop="Artikel 4 · AI-geletterdheid" bron="AI-verordening (EU) 2024/1689, van toepassing sinds 2 februari 2025">
         <p>
@@ -41,51 +76,34 @@ const stappen = [
     </div>
   </section>
 
-  <section class="section section--groen">
+  <section class="section">
     <div class="container">
-      <h2>AI begrijpen is de basis voor goed bestuur</h2>
-      <div class="kolommen">
-        <p>
-          Algoritmes en AI ondersteunen steeds vaker beslissingen die burgers en huurders direct raken. Dat vraagt
-          om medewerkers en bestuurders die weten wat deze systemen doen, waar de risico's zitten en welke
-          verantwoordelijkheid zij zelf dragen.
-        </p>
-        <p>
-          Mijn trainingen maken dat begrijpelijk, zonder hype en zonder onnodig jargon. Met diepgaande kennis van
-          algoritmisch bestuur en de AI-verordening, vertaald naar jullie dagelijkse praktijk.
-        </p>
+      <p class="label" style="--label-kleur: var(--terracotta)">Aanbod</p>
+      <h2>Trainingen</h2>
+      <p class="intro">Alle trainingen zijn incompany te boeken en worden afgestemd op jullie organisatie.</p>
+      <div class="panels">
+        {trainingen.map((t) => <TrainingPanel training={t} />)}
+      </div>
+      <div class="panels__maatwerk">
+        <p><strong>Niet gevonden wat je zoekt?</strong> Maatwerk is altijd mogelijk.</p>
+        <a class="button button--outline" href={url('contact/')}>Bespreek je vraag</a>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section--salie">
     <div class="container">
-      <h2>Trainingen</h2>
-      <p class="intro">Alle trainingen zijn incompany te boeken en worden afgestemd op jullie organisatie.</p>
-      <ul class="aanbod">
-        {
-          trainingen.map((t) => (
-            <li>
-              <h3><a href={url(`aanbod/${t.id}/`)}>{t.data.titel}</a></h3>
-              <p>{t.data.samenvatting}</p>
-              <p class="zacht">{t.data.duur} · {t.data.vorm.join(', ')}</p>
-            </li>
-          ))
-        }
-      </ul>
-      <p class="maatwerk">Niet gevonden wat je zoekt? <a href={url('contact/')}>Maatwerk is altijd mogelijk.</a></p>
-    </div>
-  </section>
-
-  <section class="section section--groen">
-    <div class="container">
+      <p class="label" style="--label-kleur: var(--ink)">Voor wie</p>
       <h2>Voor organisaties met een publieke taak</h2>
-      <ul class="raster">
+      <ul class="doelgroepen">
         {
           doelgroepen.map((d) => (
             <li>
-              <h3>{d.naam}</h3>
-              <p class="zacht">{d.toelichting}</p>
+              <span class="doelgroepen__vorm" style={`background: ${d.kleur}`} aria-hidden="true" />
+              <div>
+                <h3>{d.naam}</h3>
+                <p>{d.toelichting}</p>
+              </div>
             </li>
           ))
         }
@@ -95,85 +113,118 @@ const stappen = [
 
   <section class="section">
     <div class="container">
-      <h2>Werkwijze</h2>
-      <p class="intro">Een helder proces dat aansluit bij hoe publieke organisaties inkopen en plannen.</p>
-      <ul class="raster raster--vier">
+      <p class="label" style="--label-kleur: var(--olijf)">Werkwijze</p>
+      <h2>Van eerste gesprek tot blijvend resultaat</h2>
+      <ol class="stappen">
         {
-          stappen.map((s) => (
+          stappen.map((s, i) => (
             <li>
+              <span class="stappen__nr" style={`background: ${stapVormen[i].kleur}; border-radius: ${stapVormen[i].vorm}`} aria-hidden="true">
+                {i + 1}
+              </span>
               <h3>{s.titel}</h3>
               <p>{s.tekst}</p>
             </li>
           ))
         }
-      </ul>
+      </ol>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section--papier">
     <div class="container over">
-      <div class="over__foto"><Foto /></div>
-      <div>
-        <h2>Over {site.name}</h2>
-        <p>[Voorbeeldtekst: twee of drie zinnen over je achtergrond in algoritmisch bestuur.]</p>
-        <p><a href={url('over/')}>Meer over mij</a></p>
+      <div class="over__visual">
+        <Tegels variant="b" />
       </div>
-    </div>
-  </section>
-
-  <section class="section section--groen">
-    <div class="container">
-      <h2>Kennismaken?</h2>
-      <p class="intro">Vertel me wat jullie zoeken, dan denk ik graag mee.</p>
-      <a class="button" href={url('contact/')}>Neem contact op</a>
+      <div>
+        <p class="label" style="--label-kleur: var(--olijf)">Over</p>
+        <h2>{site.name}</h2>
+        <p>
+          [Voorbeeldtekst: een korte introductie over je achtergrond in algoritmisch bestuur, je ervaring met
+          overheden en corporaties, en waarom je deze trainingen geeft.]
+        </p>
+        <p><a href={url('over/')}>Lees meer over mij</a></p>
+        <div class="over__contact">
+          <a class="button button--accent" href={url('contact/')}>Kennismaken?</a>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </div>
+      </div>
     </div>
   </section>
 </Base>
 
 <style>
-  .hero__grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-l); align-items: center; }
-  .hero h1 { max-width: 14ch; }
-  .hero .intro { margin-bottom: var(--space-m); }
-
-  .kolommen { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-m); margin-top: var(--space-m); }
-
-  .aanbod {
-    list-style: none;
-    margin: var(--space-l) 0 0;
-    padding: 0;
+  .hero { padding-block: var(--space-xl); }
+  .hero__grid {
     display: grid;
-    gap: var(--space-l);
-    max-width: 44rem;
+    grid-template-columns: 1.3fr 1fr;
+    gap: var(--space-xl);
+    align-items: center;
   }
-  .aanbod h3 { margin-bottom: 0.5rem; }
-  .aanbod h3 a { text-decoration: none; }
-  .aanbod h3 a:hover { text-decoration: underline; }
-  .aanbod p { margin-bottom: 0.25rem; }
-  .maatwerk { margin-top: var(--space-l); }
+  .hero h1 { max-width: 14ch; }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-s); margin-top: var(--space-m); }
+  .hero__visual { max-width: 26rem; justify-self: end; width: 100%; }
 
-  .raster {
+  .visie { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-xl); align-items: center; }
+
+  .panels { display: grid; gap: var(--space-m); margin-top: var(--space-l); }
+  .panels__maatwerk {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-s);
+    margin-top: var(--space-m);
+    padding: var(--space-m) var(--space-l);
+    background: var(--papier);
+    border-radius: var(--radius);
+  }
+  .panels__maatwerk p { margin: 0; }
+
+  .doelgroepen {
     list-style: none;
     margin: var(--space-l) 0 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr;
     gap: var(--space-m) var(--space-l);
   }
-  .raster--vier { grid-template-columns: repeat(4, 1fr); gap: var(--space-m); }
-  .raster h3 { margin-bottom: 0.4rem; }
-  .raster p { margin: 0; }
+  .doelgroepen li { display: grid; grid-template-columns: 1.5rem 1fr; gap: var(--space-s); align-items: start; }
+  .doelgroepen__vorm { width: 1.5rem; height: 1.5rem; border-radius: 100% 0 0 0; margin-top: 0.2rem; }
+  .doelgroepen h3 { font-size: var(--step-1); margin-bottom: 0.2rem; }
+  .doelgroepen p { margin: 0; }
 
-  .over { display: grid; grid-template-columns: 18rem 1fr; gap: var(--space-l); align-items: center; }
-  .over > div:last-child { max-width: 34rem; }
+  .stappen {
+    list-style: none;
+    margin: var(--space-l) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-m);
+  }
+  .stappen__nr {
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    font-weight: 750;
+    font-size: var(--step-1);
+    margin-bottom: var(--space-s);
+  }
+  .stappen h3 { font-size: var(--step-1); margin-bottom: var(--space-xs); }
+
+  .over { display: grid; grid-template-columns: 1fr 1.4fr; gap: var(--space-xl); align-items: center; }
+  .over__visual { max-width: 24rem; }
+  .over__contact { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-m); margin-top: var(--space-m); }
 
   @media (max-width: 56rem) {
-    .hero__grid, .kolommen { grid-template-columns: 1fr; }
-    .raster--vier { grid-template-columns: repeat(2, 1fr); }
+    .hero__grid, .visie, .over { grid-template-columns: 1fr; gap: var(--space-l); }
+    .hero__visual { justify-self: start; max-width: 18rem; }
+    .stappen { grid-template-columns: 1fr 1fr; }
+    .doelgroepen { grid-template-columns: 1fr; }
   }
-  @media (max-width: 40rem) {
-    .raster, .raster--vier { grid-template-columns: 1fr; }
-    .kolommen { gap: 0; }
-    .over { grid-template-columns: 1fr; gap: var(--space-m); }
-    .over__foto { max-width: 14rem; }
+  @media (max-width: 32rem) {
+    .stappen { grid-template-columns: 1fr; }
+    .panels__maatwerk { padding: var(--space-m); }
   }
 </style>

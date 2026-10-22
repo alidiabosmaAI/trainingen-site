@@ -1,5 +1,4 @@
-@import '@fontsource-variable/source-serif-4/index.css';
-@import '@fontsource-variable/public-sans/index.css';
+@import '@fontsource-variable/plus-jakarta-sans/index.css';
 @import './tokens.css';
 
 *,
@@ -10,24 +9,25 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 6rem;
 }
 
 body {
   margin: 0;
-  background: var(--papier);
+  background: var(--white);
   color: var(--ink);
-  font-family: var(--font-sans);
+  font-family: var(--font);
   font-size: var(--step-0);
+  font-weight: 400;
   line-height: 1.7;
 }
 
 h1,
 h2,
 h3 {
-  font-family: var(--font-serif);
-  font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  font-weight: 750;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
   margin: 0 0 var(--space-s);
 }
 h1 { font-size: var(--step-3); }
@@ -35,16 +35,17 @@ h2 { font-size: var(--step-2); }
 h3 { font-size: var(--step-1); }
 
 p { margin: 0 0 var(--space-s); }
+strong { font-weight: 700; }
 
 a {
   color: var(--ink);
   text-decoration-thickness: 1px;
-  text-underline-offset: 0.22em;
+  text-underline-offset: 0.2em;
 }
 a:hover { text-decoration-thickness: 2px; }
 
 :focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 3px solid var(--terracotta);
   outline-offset: 3px;
 }
 
@@ -56,32 +57,66 @@ img, svg { max-width: 100%; height: auto; }
 }
 
 .section { padding-block: var(--space-xl); }
-.section--groen { background: var(--groen); }
+.section--papier { background: var(--papier); }
+.section--salie { background: var(--salie); }
+
+/* Sectielabel: kwartcirkel + tekst. De kwartcirkel is het terugkerende vormelement. */
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75em;
+  font-size: var(--step--1);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-s);
+}
+.label::before {
+  content: '';
+  width: 1em;
+  height: 1em;
+  border-top-left-radius: 100%;
+  background: var(--label-kleur, var(--terracotta));
+}
 
 .intro {
   font-size: var(--step-1);
-  line-height: 1.5;
-  max-width: 34ch;
+  line-height: 1.55;
+  max-width: 40ch;
 }
-
-.zacht { color: var(--ink-soft); }
 
 .button {
-  display: inline-block;
-  padding: 0.8em 1.5em;
-  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.85em 1.5em;
+  font-weight: 650;
   text-decoration: none;
+  border-radius: var(--radius);
   background: var(--ink);
   color: var(--white);
-  border-radius: 4px;
-  transition: opacity 0.15s ease;
+  border: 2px solid var(--ink);
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
-.button:hover { opacity: 0.85; }
+.button:hover { background: var(--ink-donker); border-color: var(--ink-donker); }
+.button--accent { background: var(--knop-accent); border-color: var(--knop-accent); }
+.button--accent:hover { background: #8f3a21; border-color: #8f3a21; }
+.button--outline { background: transparent; color: var(--ink); }
+.button--outline:hover { background: var(--ink); color: var(--white); }
 
-.prose { max-width: 62ch; }
+.prose { max-width: 65ch; }
 .prose h2 { font-size: var(--step-1); margin-top: var(--space-l); }
-.prose ul { padding-left: 1.2em; }
-.prose li { margin-bottom: 0.4em; }
+.prose ul { padding-left: 0; list-style: none; }
+.prose li { position: relative; padding-left: 1.6em; margin-bottom: 0.4em; }
+.prose li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 50%;
+  background: var(--terracotta);
+}
 
 .skip-link {
   position: absolute;

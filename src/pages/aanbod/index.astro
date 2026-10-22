@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import TrainingPanel from '../../components/TrainingPanel.astro';
 import { url } from '../../lib/url';
 
 const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.volgorde - b.data.volgorde);
@@ -9,33 +10,23 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
 <Base title="Aanbod" description="Overzicht van trainingen in AI-geletterdheid en algoritmisch bestuur.">
   <section class="section">
     <div class="container">
+      <p class="label" style="--label-kleur: var(--terracotta)">Aanbod</p>
       <h1>Trainingen</h1>
-      <p class="intro">Alle trainingen zijn incompany te boeken en worden afgestemd op jullie organisatie.</p>
-      <ul class="aanbod">
-        {
-          trainingen.map((t) => (
-            <li>
-              <h2><a href={url(`aanbod/${t.id}/`)}>{t.data.titel}</a></h2>
-              <p>{t.data.samenvatting}</p>
-              <p class="zacht">
-                {t.data.duur} · {t.data.vorm.join(', ')} · {t.data.groepsgrootte}
-              </p>
-            </li>
-          ))
-        }
-      </ul>
+      <p class="intro">
+        Alle trainingen zijn incompany te boeken en worden afgestemd op jullie organisatie. Maatwerk is altijd
+        mogelijk.
+      </p>
+      <div class="panels">
+        {trainingen.map((t) => <TrainingPanel training={t} />)}
+      </div>
       <p class="maatwerk">
-        Staat er niet tussen wat je zoekt? <a href={url('contact/')}>Neem contact op</a> voor maatwerk.
+        Staat er niet tussen wat je zoekt? <a href={url('contact/')}>Neem contact op</a> voor een training op maat.
       </p>
     </div>
   </section>
 </Base>
 
 <style>
-  .aanbod { list-style: none; margin: var(--space-l) 0 0; padding: 0; display: grid; gap: var(--space-l); max-width: 44rem; }
-  .aanbod h2 { font-size: var(--step-1); margin-bottom: 0.5rem; }
-  .aanbod h2 a { text-decoration: none; }
-  .aanbod h2 a:hover { text-decoration: underline; }
-  .aanbod p { margin-bottom: 0.25rem; }
+  .panels { display: grid; gap: var(--space-m); margin-top: var(--space-l); }
   .maatwerk { margin-top: var(--space-l); }
 </style>

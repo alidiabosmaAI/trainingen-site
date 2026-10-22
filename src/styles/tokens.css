@@ -2,29 +2,46 @@
  * Design tokens: de huisstijl in variabelen.
  * Deze file kan later één-op-één mee naar de leeromgeving.
  *
- * Uitgangspunt: rustig en luchtig. Aubergine voor tekst, lichtgroen als
- * enige vlakkleur, veel witruimte en geen decoratie.
+ * Regels:
+ * - Tekst is altijd --ink (op wit, papier of een pastel) of wit (op --ink / --knop-accent).
+ * - Terracotta, oker en olijf zijn voor vormen en vlakken, niet voor tekst.
+ *   Op terracotta staat nooit tekst (te weinig contrast).
  */
 :root {
-  --ink: #3a2140;            /* aubergine: tekst, knoppen */
-  --ink-soft: #75636f;       /* bijzaken, zoals duur en vorm */
-  --papier: #fbf9f6;         /* achtergrond */
+  /* Basis */
+  --ink: #3a2140;            /* aubergine: alle tekst, hoofdkleur */
+  --ink-donker: #2a1630;     /* hover */
   --white: #ffffff;
-  --groen: #e3ebdb;          /* lichtgroen: het enige kleurvlak */
-  --lijn: #e6e0d8;           /* alleen voor formuliervelden */
+  --papier: #faf7f2;         /* rustige achtergrondsectie */
+  --lijn: #e8dfd3;
 
-  --font-serif: 'Source Serif 4 Variable', Georgia, serif;
-  --font-sans: 'Public Sans Variable', system-ui, sans-serif;
+  /* Lichte vlakken */
+  --salie: #dfe8d5;          /* lichtgroen */
+  --zand: #f3eadc;
+  --abrikoos: #fadfca;
+  --roze: #f4dcd6;
 
-  --step--1: 0.9rem;
+  /* Accenten (vormen en vlakken) */
+  --oker: #e4a33a;
+  --terracotta: #cf6a43;
+  --olijf: #8aa66a;
+  --knop-accent: #a9472a;    /* terracotta-variant met witte tekst */
+
+  /* Typografie */
+  --font: 'Plus Jakarta Sans Variable', system-ui, sans-serif;
+
+  --step--1: 0.875rem;
   --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
-  --step-1: clamp(1.3rem, 1.2rem + 0.5vw, 1.6rem);
-  --step-2: clamp(1.8rem, 1.5rem + 1.3vw, 2.6rem);
-  --step-3: clamp(2.4rem, 1.8rem + 2.8vw, 4rem);
+  --step-1: clamp(1.2rem, 1.1rem + 0.4vw, 1.4rem);
+  --step-2: clamp(1.6rem, 1.35rem + 1.1vw, 2.4rem);
+  --step-3: clamp(2.1rem, 1.6rem + 2.4vw, 3.6rem);
 
+  /* Ruimte */
+  --space-xs: 0.5rem;
   --space-s: 1rem;
-  --space-m: 2rem;
-  --space-l: 4rem;
-  --space-xl: clamp(5rem, 3.5rem + 7vw, 10rem);
-  --max: 64rem;
+  --space-m: 1.75rem;
+  --space-l: 3rem;
+  --space-xl: clamp(4rem, 3rem + 5vw, 8rem);
+  --max: 70rem;
+  --radius: 10px;
 }

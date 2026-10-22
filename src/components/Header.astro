@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Logo from './Logo.astro';
 import { nav } from '../config';
 import { url } from '../lib/url';
+import { themaKleur } from '../lib/thema';
 
 const current = Astro.url.pathname;
 const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.volgorde - b.data.volgorde);
@@ -14,7 +15,10 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
       <Logo />
     </a>
 
-    <button class="header__toggle" aria-expanded="false" aria-controls="hoofdmenu">Menu</button>
+    <button class="header__toggle" aria-expanded="false" aria-controls="hoofdmenu">
+      <span class="header__toggle-icon" aria-hidden="true"></span>
+      Menu
+    </button>
 
     <nav id="hoofdmenu" class="header__nav" aria-label="Hoofdmenu">
       <ul class="menu">
@@ -22,26 +26,39 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
           nav.map((item) => {
             const href = url(item.href);
             const active = current.startsWith(href);
-            const isAanbod = item.href === 'aanbod/';
+            if (item.href === 'aanbod/') {
+              return (
+                <li class="menu__item menu__item--sub">
+                  <a href={href} aria-current={active ? 'page' : undefined}>
+                    {item.label}
+                  </a>
+                  <div class="submenu">
+                    <ul>
+                      {trainingen.map((t) => (
+                        <li style={`--accent: ${themaKleur[t.data.thema].accent}`}>
+                          <a href={url(`aanbod/${t.id}/`)}>
+                            <span class="submenu__thema">{t.data.thema}</span>
+                            {t.data.titel}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                    <a class="submenu__all" href={href}>Bekijk het hele aanbod →</a>
+                  </div>
+                </li>
+              );
+            }
             return (
-              <li class:list={['menu__item', { 'menu__item--sub': isAanbod }]}>
+              <li class="menu__item">
                 <a href={href} aria-current={active ? 'page' : undefined}>
                   {item.label}
                 </a>
-                {isAanbod && (
-                  <ul class="submenu">
-                    {trainingen.map((t) => (
-                      <li>
-                        <a href={url(`aanbod/${t.id}/`)}>{t.data.titel}</a>
-                      </li>
-                    ))}
-                  </ul>
-                )}
               </li>
             );
           })
         }
       </ul>
+      <a class="button button--accent header__cta" href={url('contact/')}>Kennismaken</a>
     </nav>
   </div>
 </header>
@@ -57,70 +74,136 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
 </script>
 
 <style>
+  .header {
+    background: var(--white);
+    border-bottom: 1px solid var(--lijn);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
   .header__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: var(--space-m);
-    min-height: 6rem;
+    min-height: 5rem;
   }
   .header__home { text-decoration: none; }
 
+  .header__nav { display: flex; align-items: center; gap: var(--space-m); }
   .menu { list-style: none; display: flex; gap: var(--space-m); margin: 0; padding: 0; }
   .menu__item { position: relative; }
-  .menu__item > a { display: block; padding-block: 1rem; text-decoration: none; }
+  .menu__item > a {
+    display: block;
+    padding-block: 1.6rem;
+    text-decoration: none;
+    font-weight: 550;
+    border-bottom: 3px solid transparent;
+  }
   .menu__item > a:hover,
-  .menu__item > a[aria-current='page'] { text-decoration: underline; }
+  .menu__item > a[aria-current='page'] { border-bottom-color: var(--oker); }
+  .menu__item--sub > a::after { content: ' ▾'; font-size: 0.75em; }
 
   .submenu {
-    list-style: none;
-    margin: 0;
-    padding: 0.75rem 0;
     position: absolute;
     top: 100%;
-    left: -1.25rem;
-    width: 22rem;
+    left: -1.5rem;
+    width: 24rem;
     background: var(--white);
-    border-radius: 4px;
-    box-shadow: 0 10px 30px -12px rgb(58 33 64 / 0.25);
+    border-radius: var(--radius);
+    padding: var(--space-s) 0;
+    box-shadow: 0 18px 40px -20px rgb(58 33 64 / 0.3);
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.15s ease;
-    z-index: 10;
   }
   .menu__item--sub:hover .submenu,
   .menu__item--sub:focus-within .submenu { visibility: visible; opacity: 1; }
-  .submenu a { display: block; padding: 0.5rem 1.25rem; text-decoration: none; line-height: 1.4; }
-  .submenu a:hover { background: var(--groen); }
+  .submenu ul { list-style: none; margin: 0; padding: 0; }
+  .submenu li a {
+    display: block;
+    padding: 0.6rem 1.5rem 0.6rem 2.6rem;
+    text-decoration: none;
+    position: relative;
+    line-height: 1.4;
+  }
+  .submenu li a::before {
+    content: '';
+    position: absolute;
+    left: 1.5rem;
+    top: 0.9rem;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 100% 0 0 0;
+    background: var(--accent);
+  }
+  .submenu li a:hover { background: var(--papier); }
+  .submenu__thema { display: block; font-size: 0.78rem; font-weight: 650; opacity: 0.75; }
+  .submenu__all {
+    display: block;
+    margin-top: var(--space-xs);
+    padding: 0.6rem 1.5rem 0;
+    border-top: 1px solid var(--lijn);
+    font-weight: 650;
+    font-size: var(--step--1);
+  }
 
   .header__toggle {
     display: none;
+    align-items: center;
+    gap: 0.6rem;
     font: inherit;
+    font-weight: 500;
     color: var(--ink);
     background: none;
-    border: 0;
-    padding: 0.5rem 0;
-    text-decoration: underline;
-    text-underline-offset: 0.22em;
+    border: 2px solid var(--ink);
+    border-radius: var(--radius);
+    padding: 0.45em 0.9em;
     cursor: pointer;
   }
+  .header__toggle-icon,
+  .header__toggle-icon::before,
+  .header__toggle-icon::after {
+    display: block;
+    width: 1.1rem;
+    height: 2px;
+    background: currentColor;
+    position: relative;
+  }
+  .header__toggle-icon::before,
+  .header__toggle-icon::after { content: ''; position: absolute; }
+  .header__toggle-icon::before { top: -6px; }
+  .header__toggle-icon::after { top: 6px; }
 
-  @media (max-width: 48rem) {
-    .header__inner { flex-wrap: wrap; min-height: 5rem; }
-    .header__toggle { display: block; }
-    .header__nav { display: none; flex-basis: 100%; padding-bottom: var(--space-m); }
-    .header.is-open .header__nav { display: block; }
+  @media (max-width: 56rem) {
+    .header__inner { flex-wrap: wrap; min-height: 4.5rem; }
+    .header__toggle { display: inline-flex; }
+    .header__nav {
+      display: none;
+      flex-basis: 100%;
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-s);
+      padding-bottom: var(--space-m);
+    }
+    .header.is-open .header__nav { display: flex; }
     .menu { flex-direction: column; gap: 0; }
-    .menu__item > a { padding-block: 0.6rem; font-size: var(--step-1); font-family: var(--font-serif); }
+    .menu__item > a { padding-block: 0.8rem; border-bottom: 1px solid var(--lijn); }
+    .menu__item > a:hover,
+    .menu__item > a[aria-current='page'] { border-bottom-color: var(--lijn); text-decoration: underline; }
+    .menu__item--sub > a::after { content: ''; }
     .submenu {
       position: static;
       width: auto;
       visibility: visible;
       opacity: 1;
+      border: 0;
       box-shadow: none;
-      background: none;
-      padding: 0 0 0.5rem;
+      padding: 0.3rem 0 0.5rem;
     }
-    .submenu a { padding: 0.35rem 0 0.35rem 1rem; color: var(--ink-soft); }
+    .submenu li a { padding-left: 2.1rem; }
+    .submenu li a::before { left: 0.8rem; }
+    .submenu__all { display: none; }
+    .header__cta { justify-content: center; }
   }
 </style>

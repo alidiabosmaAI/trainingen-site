@@ -20,23 +20,28 @@ const { bron, kop } = Astro.props;
 
 <style>
   .artikel {
+    position: relative;
     margin: 0;
     background: var(--white);
-    border-radius: 4px;
-    padding: var(--space-m);
-    box-shadow: 0 10px 30px -14px rgb(58 33 64 / 0.2);
+    border-radius: var(--radius);
+    padding: var(--space-l) var(--space-m) var(--space-m);
+    box-shadow: 0 16px 40px -20px rgb(58 33 64 / 0.3);
   }
-  figcaption { display: grid; gap: 0.1rem; margin-bottom: var(--space-s); }
-  .artikel__kop { font-family: var(--font-serif); font-size: var(--step-1); }
-  .artikel__bron { font-size: var(--step--1); color: var(--ink-soft); }
-  blockquote {
-    margin: 0;
-    font-family: var(--font-serif);
-    font-size: 1.05rem;
-    line-height: 1.65;
-    font-style: italic;
+  /* Kwartcirkel als hoekaccent, het terugkerende vormelement */
+  .artikel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 3rem;
+    height: 3rem;
+    background: var(--oker);
+    border-radius: 0 var(--radius) 0 100%;
   }
-  blockquote :global(p) { margin: 0 0 var(--space-s); }
-  blockquote :global(p:last-child) { margin: 0; }
-  blockquote :global(mark) { background: var(--groen); color: inherit; padding: 0 0.15em; }
+  figcaption { display: grid; gap: 0.1rem; margin-bottom: var(--space-s); padding-right: 3rem; }
+  .artikel__kop { font-weight: 750; font-size: var(--step-1); letter-spacing: -0.015em; }
+  .artikel__bron { font-size: var(--step--1); opacity: 0.8; }
+  blockquote { margin: 0; font-size: 1.02rem; line-height: 1.7; font-style: italic; }
+  blockquote :global(p) { margin: 0; }
+  blockquote :global(mark) { background: var(--salie); color: inherit; font-style: normal; font-weight: 650; padding: 0 0.15em; }
 </style>
