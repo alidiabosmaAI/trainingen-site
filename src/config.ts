@@ -7,7 +7,7 @@ export const site = {
   tagline: 'AI-geletterdheid & algoritmisch bestuur',
   description:
     'Trainingen in AI-geletterdheid en algoritmisch bestuur voor overheden en semi-publieke organisaties.',
-  email: 'info@example.nl',
+  email: 'alidia@bestuurskundigleerhuis.nl',
   phone: '',
   kvk: '',
   btw: '',
