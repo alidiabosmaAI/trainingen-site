@@ -10,7 +10,8 @@ interface Props {
 
 const { foto, fotoAlt = '', variant = 'a' } = Astro.props;
 
-// Per tegel: kleur en vorm. Vormen: vierkant, kwart-lb (kwartcirkel, hoek linksboven), kwart-ro, cirkel, leeg.
+// Per tegel: kleur en vorm. Vormen: vierkant, cirkel, leeg, en kwartcirkels met de ronding
+// linksboven (kwart-lb), rechtsboven (kwart-rb), rechtsonder (kwart-ro) of linksonder (kwart-lo).
 const composities = {
   a: [
     { kleur: 'var(--oker)', vorm: 'kwart-lb' },
@@ -19,12 +20,13 @@ const composities = {
     { kleur: 'var(--ink)', vorm: 'kwart-ro' },
     { kleur: 'transparent', vorm: 'leeg' },
   ],
+  // Gespiegelde versie van a: dezelfde kleuren en vormen, de foto rechts.
   b: [
-    { kleur: 'var(--salie)', vorm: 'cirkel' },
-    { kleur: 'var(--terracotta)', vorm: 'kwart-ro' },
+    { kleur: 'var(--oker)', vorm: 'kwart-rb' },
+    { kleur: 'var(--salie)', vorm: 'vierkant' },
     { kleur: 'transparent', vorm: 'leeg' },
-    { kleur: 'var(--abrikoos)', vorm: 'vierkant' },
-    { kleur: 'var(--olijf)', vorm: 'kwart-lb' },
+    { kleur: 'var(--ink)', vorm: 'kwart-lo' },
+    { kleur: 'var(--roze)', vorm: 'cirkel' },
   ],
 };
 const tegels = composities[variant];
@@ -74,5 +76,7 @@ const tegels = composities[variant];
   .tegel { display: block; aspect-ratio: 1; border-radius: var(--radius); }
   .tegel--kwart-lb { border-radius: 100% 0 0 0; }
   .tegel--kwart-ro { border-radius: 0 0 100% 0; }
+  .tegel--kwart-rb { border-radius: 0 100% 0 0; }
+  .tegel--kwart-lo { border-radius: 0 0 0 100%; }
   .tegel--cirkel { border-radius: 50%; }
 </style>
