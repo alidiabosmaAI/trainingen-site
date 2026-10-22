@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import Tegels from '../components/Tegels.astro';
+import Merk from '../components/Merk.astro';
 import Artikel from '../components/Artikel.astro';
 import TrainingPanel from '../components/TrainingPanel.astro';
 import { site } from '../config';
@@ -12,21 +12,14 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
 const stappen = [
   { titel: 'Kennismaken', tekst: 'We bespreken jullie vraag, de doelgroep en waar jullie staan.' },
   { titel: 'Voorstel op maat', tekst: 'Een offerte met programma, planning en een vaste prijs.' },
-  { titel: 'Training', tekst: 'Interactief, met casussen uit jullie eigen praktijk.' },
+  { titel: 'Training', tekst: 'Interactief, met spelvormen en casussen uit jullie eigen praktijk.' },
   { titel: 'Borgen', tekst: 'Evaluatie, naslagmateriaal en eventuele vervolgstappen.' },
 ];
-const stapVormen = [
-  { kleur: 'var(--oker)', vorm: '100% 0 0 0' },
-  { kleur: 'var(--salie)', vorm: '50%' },
-  { kleur: 'var(--abrikoos)', vorm: '0 0 100% 0' },
-  { kleur: 'var(--roze)', vorm: 'var(--radius)' },
-];
-
 const doelgroepen = [
-  { naam: 'Gemeenten en provincies', toelichting: 'Beleid, uitvoering en bestuur', kleur: 'var(--terracotta)' },
-  { naam: 'Rijksoverheid en uitvoeringsorganisaties', toelichting: 'Van beleidsdirectie tot dienstverlening', kleur: 'var(--oker)' },
-  { naam: 'Woningcorporaties', toelichting: 'Toewijzing, onderhoud en huurdersdienstverlening', kleur: 'var(--olijf)' },
-  { naam: 'Waterschappen en andere publieke organisaties', toelichting: 'Iedere organisatie met een publieke taak', kleur: 'var(--ink)' },
+  { naam: 'Gemeenten en provincies', toelichting: 'Beleid, uitvoering en bestuur' },
+  { naam: 'Rijksoverheid en uitvoeringsorganisaties', toelichting: 'Van beleidsdirectie tot dienstverlening' },
+  { naam: 'Woningcorporaties', toelichting: 'Toewijzing, onderhoud en huurdersdienstverlening' },
+  { naam: 'Waterschappen en andere publieke organisaties', toelichting: 'Iedere organisatie met een publieke taak' },
 ];
 ---
 
@@ -46,7 +39,7 @@ const doelgroepen = [
         </div>
       </div>
       <div class="hero__visual">
-        <Tegels variant="a" />
+        <Merk fotoplek />
       </div>
     </div>
   </section>
@@ -62,8 +55,10 @@ const doelgroepen = [
           verantwoordelijkheid zij zelf dragen.
         </p>
         <p>
-          Mijn trainingen maken dat begrijpelijk, zonder hype en zonder onnodig jargon. Met diepgaande kennis van
-          algoritmisch bestuur en de AI-verordening, vertaald naar jullie dagelijkse praktijk.
+          Mijn trainingen maken dat begrijpelijk, zonder hype en zonder onnodig jargon. Serieus van inhoud, met
+          diepgaande kennis van algoritmisch bestuur en de AI-verordening. Speels in de vorm: deelnemers oefenen
+          met begrippen in spelvormen en werken aan casussen uit hun eigen praktijk, in plaats van te luisteren naar
+          een lange presentatie.
         </p>
       </div>
       <Artikel kop="Artikel 4 · AI-geletterdheid" bron="AI-verordening (EU) 2024/1689, van toepassing sinds 2 februari 2025">
@@ -99,11 +94,8 @@ const doelgroepen = [
         {
           doelgroepen.map((d) => (
             <li>
-              <span class="doelgroepen__vorm" style={`background: ${d.kleur}`} aria-hidden="true" />
-              <div>
-                <h3>{d.naam}</h3>
-                <p>{d.toelichting}</p>
-              </div>
+              <h3>{d.naam}</h3>
+              <p>{d.toelichting}</p>
             </li>
           ))
         }
@@ -119,7 +111,7 @@ const doelgroepen = [
         {
           stappen.map((s, i) => (
             <li>
-              <span class="stappen__nr" style={`background: ${stapVormen[i].kleur}; border-radius: ${stapVormen[i].vorm}`} aria-hidden="true">
+              <span class="stappen__nr" aria-hidden="true">
                 {i + 1}
               </span>
               <h3>{s.titel}</h3>
@@ -134,7 +126,7 @@ const doelgroepen = [
   <section class="section section--papier">
     <div class="container over">
       <div class="over__visual">
-        <Tegels variant="b" />
+        <Merk fotoplek />
       </div>
       <div>
         <p class="label" style="--label-kleur: var(--olijf)">Over</p>
@@ -189,8 +181,6 @@ const doelgroepen = [
     grid-template-columns: 1fr 1fr;
     gap: var(--space-m) var(--space-l);
   }
-  .doelgroepen li { display: grid; grid-template-columns: 1.5rem 1fr; gap: var(--space-s); align-items: start; }
-  .doelgroepen__vorm { width: 1.5rem; height: 1.5rem; border-radius: 100% 0 0 0; margin-top: 0.2rem; }
   .doelgroepen h3 { font-size: var(--step-1); margin-bottom: 0.2rem; }
   .doelgroepen p { margin: 0; }
 
@@ -203,12 +193,11 @@ const doelgroepen = [
     gap: var(--space-m);
   }
   .stappen__nr {
-    display: grid;
-    place-items: center;
-    width: 3.25rem;
-    height: 3.25rem;
-    font-weight: 750;
-    font-size: var(--step-1);
+    display: block;
+    font-weight: 800;
+    font-size: var(--step-3);
+    line-height: 1;
+    color: var(--knop-accent);
     margin-bottom: var(--space-s);
   }
   .stappen h3 { font-size: var(--step-1); margin-bottom: var(--space-xs); }

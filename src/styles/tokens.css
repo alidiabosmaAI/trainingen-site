@@ -43,5 +43,5 @@
   --space-l: 3rem;
   --space-xl: clamp(4rem, 3rem + 5vw, 8rem);
   --max: 70rem;
-  --radius: 10px;
+  --radius: 4px;
 }

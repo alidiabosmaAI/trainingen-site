@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import { site } from '../../config';
 import { url } from '../../lib/url';
 import { themaKleur } from '../../lib/thema';
+import Merk from '../../components/Merk.astro';
 
 export async function getStaticPaths() {
   const trainingen = await getCollection('trainingen');
@@ -38,12 +39,7 @@ const feiten = [
             {d.kernpunten.map((k) => <li>{k}</li>)}
           </ul>
         </div>
-        <div class="top__vormen" aria-hidden="true">
-          <span style={`background: ${kleur.accent}; border-radius: 100% 0 0 0`}></span>
-          <span style="background: var(--white); border-radius: 50%"></span>
-          <span style="background: var(--white); border-radius: var(--radius)"></span>
-          <span style="background: var(--ink); border-radius: 0 0 100% 0"></span>
-        </div>
+        <div class="top__merk"><Merk accent={kleur.accent} /></div>
       </div>
     </section>
 
@@ -113,8 +109,6 @@ const feiten = [
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
   }
-  .top__vormen { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
-  .top__vormen span { aspect-ratio: 1; }
 
   .feiten {
     display: grid;
@@ -158,7 +152,7 @@ const feiten = [
 
   @media (max-width: 56rem) {
     .top__grid, .inhoud__grid { grid-template-columns: 1fr; gap: var(--space-l); }
-    .top__vormen { display: none; }
+    .top__merk { display: none; }
     .feiten { grid-template-columns: 1fr 1fr; }
     .feiten div:nth-child(3) { border-left: 0; }
     .feiten div:nth-child(n + 3) { border-top: 1px solid var(--lijn); }

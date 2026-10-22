@@ -3,10 +3,10 @@ import Base from '../layouts/Base.astro';
 import { url } from '../lib/url';
 
 const stappen = [
-  { titel: 'Kennismaking', tekst: 'We bespreken jullie vraag, de doelgroep en waar jullie staan met AI en algoritmes.', kleur: 'var(--oker)', vorm: '100% 0 0 0' },
-  { titel: 'Voorstel op maat', tekst: 'Je ontvangt een offerte met programma, planning en een vaste prijs. Geschikt voor jullie inkoopproces.', kleur: 'var(--salie)', vorm: '50%' },
-  { titel: 'Training', tekst: 'Interactieve sessies met casussen uit jullie eigen praktijk, op locatie of online.', kleur: 'var(--abrikoos)', vorm: '0 0 100% 0' },
-  { titel: 'Evaluatie & borging', tekst: 'We evalueren de opbrengst en kijken samen naar vervolgstappen en naslagmateriaal.', kleur: 'var(--roze)', vorm: 'var(--radius)' },
+  { titel: 'Kennismaking', tekst: 'We bespreken jullie vraag, de doelgroep en waar jullie staan met AI en algoritmes.' },
+  { titel: 'Voorstel op maat', tekst: 'Je ontvangt een offerte met programma, planning en een vaste prijs. Geschikt voor jullie inkoopproces.' },
+  { titel: 'Training', tekst: 'Interactieve sessies met spelvormen en casussen uit jullie eigen praktijk, op locatie of online.' },
+  { titel: 'Evaluatie & borging', tekst: 'We evalueren de opbrengst en kijken samen naar vervolgstappen en naslagmateriaal.' },
 ];
 ---
 
@@ -19,7 +19,7 @@ const stappen = [
       <ol class="stappen">
         {stappen.map((s, i) => (
           <li>
-            <span class="stappen__nr" style={`background: ${s.kleur}; border-radius: ${s.vorm}`} aria-hidden="true">{i + 1}</span>
+            <span class="stappen__nr" aria-hidden="true">{i + 1}</span>
             <div>
               <h2>{s.titel}</h2>
               <p>{s.tekst}</p>
@@ -45,7 +45,7 @@ const stappen = [
 <style>
   .stappen { list-style: none; padding: 0; margin: var(--space-l) 0 0; display: grid; gap: var(--space-m); max-width: 46rem; }
   .stappen li { display: grid; grid-template-columns: 3.5rem 1fr; gap: var(--space-m); align-items: start; }
-  .stappen__nr { display: grid; place-items: center; width: 3.5rem; height: 3.5rem; font-weight: 750; font-size: var(--step-1); }
+  .stappen__nr { font-weight: 800; font-size: var(--step-3); line-height: 1; color: var(--knop-accent); }
   .stappen h2 { font-size: var(--step-1); margin-bottom: var(--space-xs); }
   .section--papier { margin-top: 0; }
 </style>
