@@ -1,6 +1,7 @@
-// Elk thema heeft een vaste pastel (vlak) en accent (blokje), zodat bezoekers de lijnen herkennen.
-export const themaKleur: Record<string, { vlak: string; accent: string }> = {
-  'AI-geletterdheid': { vlak: 'var(--abrikoos)', accent: 'var(--oker)' },
-  'Algoritmisch bestuur': { vlak: 'var(--salie)', accent: 'var(--terracotta)' },
-  'AI in de praktijk': { vlak: 'var(--zand)', accent: 'var(--olijf)' },
+// Elk thema krijgt één vorm uit de tegelcompositie op de homepage, in dezelfde kleur.
+// `vlak` is de lichte achtergrond bovenaan de trainingspagina.
+export const themaKleur: Record<string, { vlak: string; accent: string; vorm: string }> = {
+  'AI-geletterdheid': { vlak: 'var(--abrikoos)', accent: 'var(--oker)', vorm: '100% 0 0 0' },
+  'Algoritmisch bestuur': { vlak: 'var(--salie)', accent: 'var(--ink)', vorm: '0 0 100% 0' },
+  'AI in de praktijk': { vlak: 'var(--roze)', accent: 'var(--terracotta)', vorm: '50%' },
 };

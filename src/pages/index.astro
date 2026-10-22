@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Tegels from '../components/Tegels.astro';
 import Artikel from '../components/Artikel.astro';
-import TrainingPanel from '../components/TrainingPanel.astro';
+import TrainingCard from '../components/TrainingCard.astro';
 import { site } from '../config';
 import { url } from '../lib/url';
 
@@ -79,7 +79,7 @@ const doelgroepen = [
       <h2>Trainingen</h2>
       <p class="intro">Alle trainingen zijn incompany te boeken en worden afgestemd op jullie organisatie.</p>
       <div class="panels">
-        {trainingen.map((t) => <TrainingPanel training={t} />)}
+        {trainingen.map((t) => <TrainingCard training={t} />)}
       </div>
       <div class="panels__maatwerk">
         <p><strong>Niet gevonden wat je zoekt?</strong> Maatwerk is altijd mogelijk.</p>
@@ -161,7 +161,12 @@ const doelgroepen = [
 
   .visie { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-xl); align-items: center; }
 
-  .panels { display: grid; gap: var(--space-m); margin-top: var(--space-l); }
+  .panels {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+    gap: var(--space-m);
+    margin-top: var(--space-l);
+  }
   .panels__maatwerk {
     display: flex;
     flex-wrap: wrap;

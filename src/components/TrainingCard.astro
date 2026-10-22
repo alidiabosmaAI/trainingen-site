@@ -1,0 +1,50 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Facts from './Facts.astro';
+import { url } from '../lib/url';
+import { themaKleur } from '../lib/thema';
+
+interface Props {
+  training: CollectionEntry<'trainingen'>;
+}
+
+const { training } = Astro.props;
+const d = training.data;
+const thema = themaKleur[d.thema];
+---
+
+<article class="kaart">
+  <span class="kaart__vorm" style={`background: ${thema.accent}; border-radius: ${thema.vorm}`} aria-hidden="true"></span>
+  <p class="kaart__thema">{d.thema}</p>
+  <h3><a href={url(`aanbod/${training.id}/`)}>{d.titel}</a></h3>
+  <p>{d.samenvatting}</p>
+  <div class="kaart__voet">
+    <Facts duur={d.duur} groepsgrootte={d.groepsgrootte} vorm={d.vorm} prijsindicatie={d.prijsindicatie} />
+    <p class="kaart__meer" aria-hidden="true">Meer over deze training →</p>
+  </div>
+</article>
+
+<style>
+  .kaart {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    border: 1px solid var(--lijn);
+    border-radius: var(--radius);
+    padding: var(--space-m);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .kaart:hover { transform: translateY(-3px); box-shadow: 0 16px 34px -22px rgb(58 33 64 / 0.4); }
+  .kaart__vorm { width: 3rem; height: 3rem; margin-bottom: var(--space-m); }
+  .kaart__thema { font-size: var(--step--1); font-weight: 700; margin-bottom: 0.3rem; }
+  .kaart h3 { font-size: var(--step-1); }
+  .kaart h3 a { text-decoration: none; }
+  .kaart h3 a::after { content: ''; position: absolute; inset: 0; }
+  .kaart:hover h3 a { text-decoration: underline; }
+  .kaart:focus-within { outline: 3px solid var(--terracotta); outline-offset: 3px; }
+  .kaart h3 a:focus-visible { outline: none; }
+  .kaart__voet { margin-top: auto; padding-top: var(--space-s); }
+  .kaart__voet :global(.facts li) { background: var(--papier); }
+  .kaart__meer { margin: var(--space-m) 0 0; font-weight: 700; }
+</style>

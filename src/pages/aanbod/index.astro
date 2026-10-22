@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import TrainingPanel from '../../components/TrainingPanel.astro';
+import TrainingCard from '../../components/TrainingCard.astro';
 import { url } from '../../lib/url';
 
 const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.volgorde - b.data.volgorde);
@@ -17,7 +17,7 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
         mogelijk.
       </p>
       <div class="panels">
-        {trainingen.map((t) => <TrainingPanel training={t} />)}
+        {trainingen.map((t) => <TrainingCard training={t} />)}
       </div>
       <p class="maatwerk">
         Staat er niet tussen wat je zoekt? <a href={url('contact/')}>Neem contact op</a> voor een training op maat.
@@ -27,6 +27,11 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
 </Base>
 
 <style>
-  .panels { display: grid; gap: var(--space-m); margin-top: var(--space-l); }
+  .panels {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+    gap: var(--space-m);
+    margin-top: var(--space-l);
+  }
   .maatwerk { margin-top: var(--space-l); }
 </style>
