@@ -49,63 +49,19 @@ import { url } from '../lib/url';
         >
           <p>Een studie naar de invloed van onderwijs en de werkpraktijk op leertransfer</p>
         </Artikel>
-        <p class="onderzoek__intro">
-          Ik onderzocht of studenten en pas afgestudeerden van de opleiding Bestuurskunde/Overheidsmanagement aan De
-          Haagse Hogeschool hun AI-geletterdheid ook echt toepassen in hun (stage)werk, en wat daarop van invloed is.
-          Met surveys, situatieschetsen met bestuurlijke dilemma's en interviews met startende ambtenaren.
-        </p>
-        <h3>Wat ik vond</h3>
+        <p>Drie lessen uit mijn onderzoek die ik meeneem in elke training:</p>
         <ul>
-          <li>
-            <strong>AI-geletterdheid is meer dan techniek.</strong> Het is een gelaagde competentie: technische
-            basiskennis, ethische reflectie (bijvoorbeeld om <em>automation bias</em> te voorkomen) en
-            politiek-bestuurlijke sensitiviteit horen bij elkaar.
-          </li>
-          <li>
-            <strong>Starters kunnen meer dan ze laten zien.</strong> In de dilemma's pasten de meesten publieke waarden
-            als gelijkheid, menselijke maat en transparantie bewust toe. Maar in hun dagelijkse werk bleef AI-gebruik
-            vrijwel beperkt tot generatieve AI, zoals hulp bij het schrijven van mails.
-          </li>
-          <li>
-            <strong>Verantwoordelijkheid is de blinde vlek.</strong> Bijna iedereen zei de basis van algoritmes te
-            begrijpen, maar slechts iets meer dan de helft wist wie er juridisch en praktisch verantwoordelijk is in de
-            verschillende fases van een AI-project.
-          </li>
-          <li>
-            <strong>De organisatie maakt het verschil.</strong> Slechts een kwart had collega's die een brug slaan
-            tussen AI-specialisten en beleidsmedewerkers, en minder dan de helft kreeg genoeg tijd om zich in AI te
-            verdiepen. Het geleerde blijft dan liggen: niet omdat starters het niet kunnen, maar omdat het werk er te
-            weinig om vraagt.
-          </li>
-          <li>
-            <strong>Van doorgeven naar duiden.</strong> Starters worden vaak de vraagbaak voor AI-tools op hun afdeling.
-            Ze geven kennis door (de <em>messenger</em>), maar komen nog zelden toe aan het duiden van wat een
-            algoritme betekent voor beleid en burgers (de <em>interpreter</em>).
-          </li>
+          <li><strong>Begin bij wat mensen al doen.</strong> Generatieve AI is de ingang naar bredere vragen over ethiek en publieke waarden.</li>
+          <li><strong>Oefen met de eigen praktijk.</strong> Wat je in een herkenbare situatie hebt geoefend, pas je later ook toe.</li>
+          <li><strong>Betrek de organisatie.</strong> Zonder tijd, visie en ruimte om te oefenen blijft kennis liggen.</li>
         </ul>
-        <p class="zacht">
-          Het onderzoek is uitgevoerd bij één opleiding met een beperkte groep alumni. De uitkomsten geven richting,
-          maar zijn geen landelijk beeld.
+
+        <h2>Mijn boek</h2>
+        <p>
+          Ik schrijf een boek over algoritmisch bestuur, dat aansluit op de trainingen. Het loopt van de basis (wat is
+          een algoritme eigenlijk?) via publieke waarden en wat er onder de motorkap gebeurt, naar de rol van de
+          ambtenaar zelf: als gebruiker, als opdrachtgever en als bewaker van de rechtsstaat.
         </p>
-        <h3>Wat dat betekent voor mijn trainingen</h3>
-        <ul>
-          <li>
-            <strong>Beginnen bij wat mensen al doen.</strong> Generatieve AI is voor de meeste deelnemers de ingang.
-            Van daaruit gaan we door naar bias, ethiek en publieke waarden.
-          </li>
-          <li>
-            <strong>Oefenen met dilemma's uit de praktijk.</strong> Situaties uit het eigen werk, in spelvormen en
-            casussen, zodat de stap naar de werkvloer klein is.
-          </li>
-          <li>
-            <strong>Aandacht voor verantwoordelijkheid.</strong> Wie beslist wat, in welke fase, en wie spreek je aan
-            als het misgaat?
-          </li>
-          <li>
-            <strong>De organisatie erbij betrekken.</strong> Met leidinggevenden kijken we naar tijd, ruimte voor
-            reflectie en wie de brugfunctie kan vervullen. Zo blijft het geleerde ook hangen.
-          </li>
-        </ul>
 
         <h2>Achtergrond</h2>
         <ul>
@@ -127,8 +83,5 @@ import { url } from '../lib/url';
   .over { display: grid; grid-template-columns: 1fr 1.5fr; gap: var(--space-xl); align-items: start; }
   .over__visual { max-width: 24rem; position: sticky; top: 7rem; }
   .prose :global(.artikel) { margin: var(--space-m) 0; }
-  .prose h3 { font-size: var(--step-0); margin-top: var(--space-m); }
-  .onderzoek__intro { margin-top: var(--space-m); }
-  .zacht { font-size: var(--step--1); opacity: 0.8; }
   @media (max-width: 56rem) { .over { grid-template-columns: 1fr; gap: var(--space-l); } .over__visual { max-width: 16rem; position: static; } }
 </style>

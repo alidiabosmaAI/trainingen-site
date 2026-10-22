@@ -11,7 +11,7 @@ const trainingen = defineCollection({
     ondertitel: z.string(),
     samenvatting: z.string(),
     kernpunten: z.array(z.string()).max(4),
-    thema: z.enum(['AI-geletterdheid', 'Algoritmisch bestuur', 'AI in de praktijk']),
+    thema: z.enum(['Basistraining', 'Verdieping voor adviseurs', 'Voor leidinggevenden']),
     doelgroep: z.string(),
     duur: z.string(),
     vorm: z.array(z.string()),
@@ -19,6 +19,8 @@ const trainingen = defineCollection({
     prijsindicatie: z.string(),
     // Alleen invullen voor open inschrijving, bijv. "dinsdag 17 november 2026, Utrecht"
     startdata: z.array(z.string()).default([]),
+    // Delen van het boek die bij deze training horen
+    boekdelen: z.array(z.string()).default([]),
     volgorde: z.number().default(99),
   }),
 });
