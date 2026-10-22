@@ -35,7 +35,7 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
                   <div class="submenu">
                     <ul>
                       {trainingen.map((t) => (
-                        <li style={`--accent: ${themaKleur[t.data.thema].accent}`}>
+                        <li style={`--accent: ${themaKleur[t.data.thema].lijn}`}>
                           <a href={url(`aanbod/${t.id}/`)}>
                             <span class="submenu__thema">{t.data.thema}</span>
                             {t.data.titel}
@@ -58,7 +58,7 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
           })
         }
       </ul>
-      <a class="button button--accent header__cta" href={url('contact/')}>Kennismaken</a>
+      <a class="button header__cta" href={url('contact/')}>Kennismaken</a>
     </nav>
   </div>
 </header>
@@ -75,8 +75,8 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
 
 <style>
   .header {
-    background: var(--white);
-    border-bottom: 1px solid var(--line);
+    background: var(--papier);
+    border-bottom: 1px solid var(--lijn);
     position: sticky;
     top: 0;
     z-index: 10;
@@ -86,18 +86,19 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
     align-items: center;
     justify-content: space-between;
     gap: var(--space-m);
-    min-height: 5rem;
+    min-height: 5.5rem;
   }
-  .header__home { text-decoration: none; }
+  .header__home { text-decoration: none; color: var(--ink); }
 
   .header__nav { display: flex; align-items: center; gap: var(--space-m); }
   .menu { list-style: none; display: flex; gap: var(--space-m); margin: 0; padding: 0; }
   .menu__item { position: relative; }
   .menu__item > a {
     display: block;
-    padding-block: 1.6rem;
+    padding-block: 1.9rem;
     text-decoration: none;
-    font-weight: 400;
+    color: var(--ink);
+    font-weight: 500;
     border-bottom: 3px solid transparent;
   }
   .menu__item > a:hover,
@@ -110,10 +111,10 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
     left: -1.5rem;
     width: 24rem;
     background: var(--white);
-    border: 1px solid var(--line);
-    border-top: 3px solid var(--oranje);
+    border: 1px solid var(--lijn);
+    border-top: 2px solid var(--ink);
     padding: var(--space-s) 0;
-    box-shadow: 0 18px 40px -20px rgb(10 69 88 / 0.35);
+    box-shadow: 0 18px 40px -20px rgb(58 33 64 / 0.35);
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.15s ease;
@@ -123,8 +124,9 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
   .submenu ul { list-style: none; margin: 0; padding: 0; }
   .submenu li a {
     display: block;
-    padding: 0.6rem 1.5rem 0.6rem 2.6rem;
+    padding: 0.6rem 1.5rem 0.6rem 2.4rem;
     text-decoration: none;
+    color: var(--ink);
     position: relative;
     line-height: 1.4;
   }
@@ -132,19 +134,19 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
     content: '';
     position: absolute;
     left: 1.5rem;
-    top: 0.95rem;
-    width: 0.6rem;
-    height: 0.6rem;
+    top: 0.75rem;
+    bottom: 0.75rem;
+    width: 3px;
     background: var(--accent);
   }
-  .submenu li a:hover { background: var(--mist); }
+  .submenu li a:hover { background: var(--zand); }
   .submenu__thema { display: block; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; }
   .submenu__all {
     display: block;
     margin-top: var(--space-xs);
     padding: 0.6rem 1.5rem 0;
-    border-top: 1px solid var(--line);
-    font-weight: 500;
+    border-top: 1px solid var(--lijn);
+    font-weight: 600;
     font-size: var(--step--1);
   }
 
@@ -158,6 +160,7 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
     background: none;
     border: 2px solid var(--ink);
     padding: 0.45em 0.9em;
+    border-radius: 3px;
     cursor: pointer;
   }
   .header__toggle-icon,
@@ -187,9 +190,9 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
     }
     .header.is-open .header__nav { display: flex; }
     .menu { flex-direction: column; gap: 0; }
-    .menu__item > a { padding-block: 0.8rem; border-bottom: 1px solid var(--line); }
+    .menu__item > a { padding-block: 0.8rem; border-bottom: 1px solid var(--lijn); }
     .menu__item > a:hover,
-    .menu__item > a[aria-current='page'] { border-bottom-color: var(--line); text-decoration: underline; }
+    .menu__item > a[aria-current='page'] { border-bottom-color: var(--lijn); text-decoration: underline; }
     .menu__item--sub > a::after { content: ''; }
     .submenu {
       position: static;
@@ -201,7 +204,7 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
       padding: 0.3rem 0 0.5rem;
     }
     .submenu li a { padding-left: 2.1rem; }
-    .submenu li a::before { left: 0.8rem; }
+    .submenu li a::before { left: 0.8rem; top: 0.7rem; bottom: 0.7rem; }
     .submenu__all { display: none; }
     .header__cta { justify-content: center; }
   }

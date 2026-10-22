@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import BlockGrid from '../components/BlockGrid.astro';
+import Foto from '../components/Foto.astro';
 import { site } from '../config';
 import { url } from '../lib/url';
 ---
@@ -8,11 +8,9 @@ import { url } from '../lib/url';
 <Base title="Over" description={`Over ${site.name}.`}>
   <section class="section">
     <div class="container over">
-      <div class="over__visual">
-        <BlockGrid kleuren={['var(--mint)', 'var(--lila)', 'var(--perzik)', 'var(--oranje)']} fotoVak={0} />
-      </div>
+      <div class="over__foto"><Foto achtergrond="var(--abrikoos)" /></div>
       <div class="prose">
-        <p class="label" style="--label-kleur: var(--lila)">Over</p>
+        <p class="bovenkop">Over</p>
         <h1>{site.name}</h1>
         <p class="intro">Expert in algoritmisch bestuur en AI-geletterdheid.</p>
         <p>
@@ -25,14 +23,14 @@ import { url } from '../lib/url';
           <li>[Relevante werkervaring]</li>
           <li>[Publicaties, lezingen, netwerken]</li>
         </ul>
-        <p><a class="button button--accent" href={url('contact/')}>Kennismaken?</a></p>
+        <p><a class="button" href={url('contact/')}>Plan een kennismaking</a></p>
       </div>
     </div>
   </section>
 </Base>
 
 <style>
-  .over { display: grid; grid-template-columns: 1fr 1.5fr; gap: var(--space-xl); align-items: start; }
-  .over__visual { max-width: 24rem; }
-  @media (max-width: 56rem) { .over { grid-template-columns: 1fr; gap: var(--space-l); } .over__visual { max-width: 16rem; } }
+  .over { display: grid; grid-template-columns: 1fr 1.6fr; gap: var(--space-xl); align-items: start; }
+  .over__foto { max-width: 22rem; }
+  @media (max-width: 56rem) { .over { grid-template-columns: 1fr; gap: var(--space-l); } .over__foto { max-width: 14rem; } }
 </style>

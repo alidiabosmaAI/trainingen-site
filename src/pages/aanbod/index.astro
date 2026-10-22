@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import TrainingPanel from '../../components/TrainingPanel.astro';
+import Register from '../../components/Register.astro';
 import { url } from '../../lib/url';
 
 const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.volgorde - b.data.volgorde);
@@ -10,14 +10,14 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
 <Base title="Aanbod" description="Overzicht van trainingen in AI-geletterdheid en algoritmisch bestuur.">
   <section class="section">
     <div class="container">
-      <p class="label" style="--label-kleur: var(--vermiljoen)">Aanbod</p>
+      <p class="bovenkop">Aanbod</p>
       <h1>Trainingen</h1>
       <p class="intro">
         Alle trainingen zijn incompany te boeken en worden afgestemd op jullie organisatie. Maatwerk is altijd
         mogelijk.
       </p>
-      <div class="panels">
-        {trainingen.map((t) => <TrainingPanel training={t} />)}
+      <div class="register-wrap">
+        <Register trainingen={trainingen} />
       </div>
       <p class="maatwerk">
         Staat er niet tussen wat je zoekt? <a href={url('contact/')}>Neem contact op</a> voor een training op maat.
@@ -27,6 +27,6 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
 </Base>
 
 <style>
-  .panels { display: grid; gap: var(--space-m); margin-top: var(--space-l); }
-  .maatwerk { margin-top: var(--space-l); }
+  .register-wrap { margin-top: var(--space-l); }
+  .maatwerk { margin-top: var(--space-m); }
 </style>

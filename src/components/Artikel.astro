@@ -1,0 +1,53 @@
+---
+// Citaat uit wet- of regelgeving, vormgegeven als uittreksel.
+interface Props {
+  bron: string;
+  kop: string;
+}
+
+const { bron, kop } = Astro.props;
+---
+
+<figure class="artikel">
+  <figcaption>
+    <span class="artikel__bron">{bron}</span>
+    <span class="artikel__kop">{kop}</span>
+  </figcaption>
+  <blockquote>
+    <slot />
+  </blockquote>
+</figure>
+
+<style>
+  .artikel {
+    margin: 0;
+    background: var(--white);
+    border: 1px solid var(--lijn);
+    border-top: 4px solid var(--oranje);
+    padding: var(--space-m);
+    box-shadow: 14px 14px 0 var(--abrikoos);
+  }
+  figcaption { display: grid; gap: 0.15rem; margin-bottom: var(--space-s); }
+  .artikel__bron {
+    font-size: var(--step--1);
+    font-weight: 650;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .artikel__kop { font-family: var(--font-serif); font-size: var(--step-1); font-weight: 600; }
+  blockquote {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.65;
+    font-style: italic;
+  }
+  blockquote :global(p) { margin: 0 0 var(--space-xs); }
+  blockquote :global(mark) {
+    background: linear-gradient(transparent 55%, var(--abrikoos) 55%);
+    color: inherit;
+    font-style: normal;
+    font-weight: 600;
+  }
+</style>

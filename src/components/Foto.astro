@@ -1,0 +1,36 @@
+---
+// Staande foto (4:5). Zonder `src` toont het een rustige plaatshouder.
+interface Props {
+  src?: string;
+  alt?: string;
+  achtergrond?: string;
+}
+
+const { src, alt = '', achtergrond = 'var(--zand)' } = Astro.props;
+---
+
+{
+  src ? (
+    <img class="foto" src={src} alt={alt} />
+  ) : (
+    <div class="foto foto--leeg" style={`background: ${achtergrond}`} aria-hidden="true">
+      <span>Foto volgt</span>
+    </div>
+  )
+}
+
+<style>
+  .foto { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+  .foto--leeg {
+    display: grid;
+    place-items: end start;
+    padding: var(--space-s);
+    border: 1px solid var(--lijn);
+  }
+  .foto--leeg span {
+    font-size: var(--step--1);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+</style>

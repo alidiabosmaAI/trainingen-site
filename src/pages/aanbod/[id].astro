@@ -24,25 +24,22 @@ const feiten = [
 ---
 
 <Base title={d.titel} description={d.samenvatting}>
-  <div style={`--vlak: ${kleur.vlak}; --label-kleur: ${kleur.accent}`}>
+  <div style={`--vlak: ${kleur.vlak}; --lijn-kleur: ${kleur.lijn}`}>
     <section class="top">
       <div class="container top__grid">
         <div>
           <nav class="kruimel" aria-label="Kruimelpad">
             <a href={url()}>Home</a> / <a href={url('aanbod/')}>Aanbod</a> /
           </nav>
-          <p class="label">{d.thema}</p>
+          <p class="bovenkop">{d.thema}</p>
           <h1>{d.titel}</h1>
           <p class="top__ondertitel">{d.ondertitel}</p>
+        </div>
+        <div class="kort">
+          <h2 class="kort__kop">Na deze training</h2>
           <ul class="kernpunten">
             {d.kernpunten.map((k) => <li>{k}</li>)}
           </ul>
-        </div>
-        <div class="top__blokken" aria-hidden="true">
-          <span style={`background: ${kleur.accent}`}></span>
-          <span style="background: var(--white)"></span>
-          <span style="background: var(--white)"></span>
-          <span style="background: var(--ink)"></span>
         </div>
       </div>
     </section>
@@ -85,7 +82,7 @@ const feiten = [
           <p class="kader__label">Investering</p>
           <p class="kader__prijs">{d.prijsindicatie}</p>
           <p class="kader__noot">Vaste prijs per groep, afgestemd op jullie vraag.</p>
-          <a class="button button--accent" href={url(`contact/?training=${training.id}`)}>Offerte aanvragen</a>
+          <a class="button" href={url(`contact/?training=${training.id}`)}>Offerte aanvragen</a>
           <a class="button kader__tweede" href={url('contact/')}>Vrijblijvend kennismaken</a>
           <p class="kader__mail">Of mail naar <a href={`mailto:${site.email}`}>{site.email}</a></p>
         </aside>
@@ -96,8 +93,12 @@ const feiten = [
 
 <style>
   .top { background: var(--vlak); padding-block: var(--space-l) calc(var(--space-l) + 2.5rem); }
-  .top__grid { display: grid; grid-template-columns: 1fr 12rem; gap: var(--space-xl); align-items: end; }
+  .top__grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-xl); align-items: end; }
+  .top .bovenkop { color: var(--ink); }
+  .kort { background: var(--white); padding: var(--space-m); border-top: 4px solid var(--lijn-kleur); }
+  .kort__kop { font-size: var(--step--1); font-family: var(--font-sans); font-weight: 650; letter-spacing: 0.08em; text-transform: uppercase; }
   .kruimel { font-size: var(--step--1); margin-bottom: var(--space-m); }
+  .kruimel a { color: var(--ink); }
   .top h1 { max-width: 18ch; }
   .top__ondertitel { font-size: var(--step-1); margin-bottom: var(--space-m); }
   .kernpunten { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.5rem; }
@@ -109,22 +110,20 @@ const feiten = [
     top: 0.35em;
     width: 0.5rem;
     height: 0.9rem;
-    border: solid var(--ink);
+    border: solid var(--roest);
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
   }
-  .top__blokken { display: grid; grid-template-columns: 1fr 1fr; }
-  .top__blokken span { aspect-ratio: 1; }
 
   .feiten {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     margin: -2.5rem 0 0;
     background: var(--white);
-    border: 1px solid var(--line);
+    border: 1px solid var(--lijn);
     position: relative;
   }
-  .feiten div { padding: var(--space-s) var(--space-m); border-left: 1px solid var(--line); }
+  .feiten div { padding: var(--space-s) var(--space-m); border-left: 1px solid var(--lijn); }
   .feiten div:first-child { border-left: 0; }
   .feiten dt { font-size: var(--step--1); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
   .feiten dd { margin: 0; }
@@ -132,7 +131,7 @@ const feiten = [
   .inhoud { padding-top: var(--space-l); }
   .inhoud__grid { display: grid; grid-template-columns: minmax(0, 1fr) 21rem; gap: var(--space-xl); align-items: start; }
   .inhoud__kop { font-size: var(--step-1); }
-  .prose :global(blockquote) { margin: 0 0 var(--space-m); padding: var(--space-s) var(--space-m); background: var(--roos); }
+  .prose :global(blockquote) { margin: 0 0 var(--space-m); padding: var(--space-s) var(--space-m); background: var(--zand); border-left: 3px solid var(--oranje); }
   .prose :global(blockquote p) { margin: 0; }
 
   .kader {
@@ -147,18 +146,19 @@ const feiten = [
   .kader p { margin: 0; }
   .kader a:not(.button) { color: var(--white); }
   .kader__label { font-size: var(--step--1); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
-  .kader__prijs { font-size: var(--step-2); font-weight: 650; line-height: 1.1; }
+  .kader__prijs { font-family: var(--font-serif); font-size: var(--step-2); font-weight: 600; line-height: 1.1; }
   .kader__noot, .kader__mail { font-size: var(--step--1); opacity: 0.9; }
   .kader .button { justify-content: center; }
   .kader__tweede { background: transparent; border-color: var(--white); }
   .kader__tweede:hover { background: var(--white); color: var(--ink); border-color: var(--white); }
+  .kader .button:not(.kader__tweede) { background: var(--abrikoos); border-color: var(--abrikoos); color: var(--ink); }
+  .kader .button:not(.kader__tweede):hover { background: var(--white); border-color: var(--white); }
 
   @media (max-width: 56rem) {
     .top__grid, .inhoud__grid { grid-template-columns: 1fr; gap: var(--space-l); }
-    .top__blokken { display: none; }
     .feiten { grid-template-columns: 1fr 1fr; }
     .feiten div:nth-child(3) { border-left: 0; }
-    .feiten div:nth-child(n + 3) { border-top: 1px solid var(--line); }
+    .feiten div:nth-child(n + 3) { border-top: 1px solid var(--lijn); }
     .kader { position: static; }
   }
 </style>

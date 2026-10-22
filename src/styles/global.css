@@ -1,4 +1,5 @@
-@import '@fontsource-variable/lexend/index.css';
+@import '@fontsource-variable/source-serif-4/index.css';
+@import '@fontsource-variable/public-sans/index.css';
 @import './tokens.css';
 
 *,
@@ -14,20 +15,20 @@ html {
 
 body {
   margin: 0;
-  background: var(--white);
+  background: var(--papier);
   color: var(--ink);
-  font-family: var(--font);
+  font-family: var(--font-sans);
   font-size: var(--step-0);
-  font-weight: 300;
   line-height: 1.7;
 }
 
 h1,
 h2,
 h3 {
-  font-weight: 650;
+  font-family: var(--font-serif);
+  font-weight: 600;
   line-height: 1.15;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.01em;
   margin: 0 0 var(--space-s);
 }
 h1 { font-size: var(--step-3); }
@@ -35,17 +36,17 @@ h2 { font-size: var(--step-2); }
 h3 { font-size: var(--step-1); }
 
 p { margin: 0 0 var(--space-s); }
-strong { font-weight: 600; }
+strong { font-weight: 650; }
 
 a {
-  color: var(--ink);
+  color: var(--roest);
   text-decoration-thickness: 1px;
-  text-underline-offset: 0.2em;
+  text-underline-offset: 0.22em;
 }
 a:hover { text-decoration-thickness: 2px; }
 
 :focus-visible {
-  outline: 3px solid var(--vermiljoen);
+  outline: 3px solid var(--oranje);
   outline-offset: 3px;
 }
 
@@ -57,63 +58,77 @@ img, svg { max-width: 100%; height: auto; }
 }
 
 .section { padding-block: var(--space-xl); }
-.section--mist { background: var(--mist); }
+.section--wit { background: var(--white); }
+.section--zand { background: var(--zand); }
 
-/* Sectielabel: klein vierkantje + kapitalen */
-.label {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75em;
-  font-size: var(--step--1);
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-bottom: var(--space-s);
+/*
+ * Hoofdstuk: links een kantlijn met nummer en titel, rechts de inhoud.
+ * Zoals in een rapport of beleidsnota.
+ */
+.hoofdstuk {
+  display: grid;
+  grid-template-columns: var(--kantlijn) minmax(0, 1fr);
+  gap: var(--space-l);
+  border-top: 1px solid var(--ink);
+  padding-top: var(--space-m);
 }
-.label::before {
-  content: '';
-  width: 0.85em;
-  height: 0.85em;
-  background: var(--label-kleur, var(--oranje));
+.kantlijn {
+  font-size: var(--step--1);
+  line-height: 1.4;
+}
+.kantlijn__nr {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--roest);
+  margin-bottom: var(--space-xs);
+  font-variant-numeric: lining-nums;
+}
+.kantlijn__titel {
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .intro {
   font-size: var(--step-1);
   line-height: 1.55;
-  max-width: 40ch;
+  max-width: 42ch;
+  color: var(--ink);
 }
 
 .button {
   display: inline-flex;
   align-items: center;
   gap: 0.6em;
-  padding: 0.85em 1.5em;
-  font-weight: 500;
+  padding: 0.8em 1.4em;
+  font-weight: 600;
   text-decoration: none;
   background: var(--ink);
   color: var(--white);
   border: 2px solid var(--ink);
-  transition: background 0.15s ease, border-color 0.15s ease;
+  border-radius: 3px;
+  transition: background 0.15s ease, color 0.15s ease;
 }
-.button:hover { background: var(--ink-deep); border-color: var(--ink-deep); }
-.button--accent { background: var(--vermiljoen-knop); border-color: var(--vermiljoen-knop); }
-.button--accent:hover { background: #a63a19; border-color: #a63a19; }
+.button:hover { background: #2a1630; border-color: #2a1630; }
 .button--outline { background: transparent; color: var(--ink); }
 .button--outline:hover { background: var(--ink); color: var(--white); }
 
+.pijl {
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 2px solid var(--oranje);
+  color: var(--ink);
+  padding-bottom: 0.1em;
+}
+.pijl:hover { border-bottom-color: var(--ink); }
+
 .prose { max-width: 65ch; }
 .prose h2 { font-size: var(--step-1); margin-top: var(--space-l); }
-.prose ul { padding-left: 0; list-style: none; }
-.prose li { position: relative; padding-left: 1.6em; margin-bottom: 0.4em; }
-.prose li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0.65em;
-  width: 0.55em;
-  height: 0.55em;
-  background: var(--oranje);
-}
+.prose ul { padding-left: 1.2em; }
+.prose li { margin-bottom: 0.4em; }
+.prose li::marker { color: var(--roest); }
 
 .skip-link {
   position: absolute;
@@ -126,6 +141,31 @@ img, svg { max-width: 100%; height: auto; }
 }
 .skip-link:focus { top: 1rem; }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 52rem) {
+  .hoofdstuk { grid-template-columns: 1fr; gap: var(--space-s); }
+  .kantlijn { display: flex; align-items: baseline; gap: var(--space-s); }
+  .kantlijn__nr { font-size: 2rem; margin: 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
+}
+
+/* Kleine kop boven een titel */
+.bovenkop {
+  font-size: var(--step--1);
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--roest);
+  margin-bottom: var(--space-s);
 }

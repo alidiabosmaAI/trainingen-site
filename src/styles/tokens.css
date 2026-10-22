@@ -2,44 +2,50 @@
  * Design tokens: de huisstijl in variabelen.
  * Deze file kan later één-op-één mee naar de leeromgeving.
  *
+ * Idee: een zorgvuldig vormgegeven beleidspublicatie. Genummerde hoofdstukken,
+ * een kantlijn, dunne lijnen en een klassieke serif, met warme kleuren.
+ *
  * Regels:
- * - Tekst is altijd --ink (op wit of op een pastel) of wit (op --ink / --vermiljoen).
- * - De felle accenten (oranje, vermiljoen-licht, groen) zijn voor vlakken en iconen, niet voor tekst.
+ * - Tekst is --ink of --ink-soft, op papier, wit of een pastel.
+ * - --roest mag als tekstkleur op wit/papier (links, nummers); niet op pastels.
+ * - --oranje, --groen en --roze zijn alleen voor lijnen en markeringen.
  */
 :root {
   /* Basis */
-  --ink: #0e5a73;            /* diep petrol: alle tekst, hoofdkleur */
-  --ink-deep: #0a4558;       /* hover, footer */
+  --ink: #3a2140;            /* diep aubergine: tekst en hoofdkleur */
+  --ink-soft: #6b5468;       /* secundaire tekst */
+  --papier: #fbf7f1;         /* paginakleur, warm gebroken wit */
   --white: #ffffff;
-  --mist: #f4f8f9;           /* rustige achtergrondsectie */
-  --line: #d6e3e7;
+  --lijn: #e3d6c6;           /* dunne lijnen */
 
-  /* Warme pastels (achtergrondvlakken) */
-  --perzik: #fbe7d6;
-  --roos: #f7ddd6;
-  --lila: #e3d7ee;
-  --mint: #cde6d8;
+  /* Warme vlakken */
+  --zand: #f4eadb;
+  --abrikoos: #f9ddc8;
+  --salie: #dde6d3;
+  --rozenhout: #f1dbd6;
 
-  /* Accenten (vlakken, iconen, blokjes) */
-  --oranje: #ee8a1e;
-  --vermiljoen: #e0532a;
-  --vermiljoen-knop: #c4461f; /* toegankelijke variant met witte tekst */
-  --groen: #13906f;
+  /* Accenten */
+  --roest: #b84a1a;          /* tekstaccent, toegankelijk op wit en papier */
+  --oranje: #e07a3a;
+  --groen: #6f8f5e;
+  --roze: #c9707a;
 
-  /* Typografie: Lexend is ontworpen voor leesbaarheid */
-  --font: 'Lexend Variable', system-ui, sans-serif;
+  /* Typografie */
+  --font-serif: 'Source Serif 4 Variable', Georgia, serif;
+  --font-sans: 'Public Sans Variable', system-ui, sans-serif;
 
   --step--1: 0.875rem;
   --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
-  --step-1: clamp(1.2rem, 1.1rem + 0.4vw, 1.4rem);
-  --step-2: clamp(1.6rem, 1.35rem + 1.1vw, 2.4rem);
-  --step-3: clamp(2.1rem, 1.6rem + 2.4vw, 3.6rem);
+  --step-1: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --step-2: clamp(1.7rem, 1.4rem + 1.3vw, 2.5rem);
+  --step-3: clamp(2.3rem, 1.7rem + 2.8vw, 3.9rem);
 
   /* Ruimte */
   --space-xs: 0.5rem;
   --space-s: 1rem;
   --space-m: 1.75rem;
   --space-l: 3rem;
-  --space-xl: clamp(4rem, 3rem + 5vw, 8rem);
-  --max: 70rem;
+  --space-xl: clamp(4rem, 3rem + 5vw, 7.5rem);
+  --max: 72rem;
+  --kantlijn: 14rem;
 }
