@@ -15,7 +15,7 @@ export const site = {
   // Optioneel: adres van een formulierdienst (bijv. https://formspree.io/f/...).
   // Leeg = het formulier opent het mailprogramma van de bezoeker met een ingevulde mail.
   // Ingevuld = eerst via de dienst versturen; lukt dat niet, dan alsnog via het mailprogramma.
-  formAction: '',
+  formAction: 'https://formspree.io/f/xzeewldo',
 };
 
 export const nav = [
