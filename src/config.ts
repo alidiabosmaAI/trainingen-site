@@ -12,9 +12,10 @@ export const site = {
   kvk: '',
   btw: '',
   crkbo: '',
-  // Formulierdienst: FormSubmit stuurt ingevulde formulieren door naar het e-mailadres hierboven.
-  // Het eerste bericht levert een activatiemail op die eenmalig bevestigd moet worden.
-  formAction: 'https://formsubmit.co/alidia@bestuurskundigleerhuis.nl',
+  // Optioneel: adres van een formulierdienst (bijv. https://formspree.io/f/...).
+  // Leeg = het formulier opent het mailprogramma van de bezoeker met een ingevulde mail.
+  // Ingevuld = eerst via de dienst versturen; lukt dat niet, dan alsnog via het mailprogramma.
+  formAction: '',
 };
 
 export const nav = [

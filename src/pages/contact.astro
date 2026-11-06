@@ -5,10 +5,10 @@ import { site } from '../config';
 import { url } from '../lib/url';
 
 const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.volgorde - b.data.volgorde);
-// Het formulier wordt op de achtergrond verstuurd, zodat bezoekers bij een storing van de
-// formulierdienst een nette melding zien. Ondersteund: Formspree en FormSubmit.
+// Zonder formulierdienst opent het formulier het mailprogramma van de bezoeker.
+// Met een formulierdienst (Formspree) wordt eerst daar verstuurd, met het mailprogramma als terugval.
 const formspree = site.formAction.includes('formspree.io');
-const verzendAdres = formspree ? site.formAction : site.formAction.replace('formsubmit.co/', 'formsubmit.co/ajax/');
+const onderwerp = 'Aanvraag via bestuurskundigleerhuis.nl';
 ---
 
 <Base title="Contact" description="Vraag een offerte aan of plan een kennismaking.">
@@ -24,17 +24,16 @@ const verzendAdres = formspree ? site.formAction : site.formAction.replace('form
       <form
         class="form"
         method="post"
-        action={site.formAction || undefined}
-        data-verzend={verzendAdres}
+        action={site.formAction || `mailto:${site.email}`}
+        enctype={site.formAction ? undefined : 'text/plain'}
+        data-dienst={site.formAction}
+        data-email={site.email}
+        data-onderwerp={onderwerp}
         data-bedankt={url('bedankt/')}
       >
-        {!site.formAction && (
-          <p class="form__note" role="note">Formulier is nog niet gekoppeld aan een verzenddienst.</p>
-        )}
-        <input type="hidden" name="_subject" value="Nieuwe aanvraag via bestuurskundigleerhuis.nl" />
-        {!formspree && <input type="hidden" name="_template" value="table" />}
+        {formspree && <input type="hidden" name="_subject" value={onderwerp} />}
         <!-- Verborgen veld tegen spam: mensen zien het niet, bots vullen het in -->
-        <input type="text" name={formspree ? '_gotcha' : '_honey'} class="form__honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <input type="text" name="_gotcha" class="form__honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <label>Naam <input name="naam" autocomplete="name" required /></label>
         <label>Organisatie <input name="organisatie" autocomplete="organization" required /></label>
         <label>E-mailadres <input type="email" name="email" autocomplete="email" required /></label>
@@ -48,10 +47,17 @@ const verzendAdres = formspree ? site.formAction : site.formAction.replace('form
         <label>Aantal deelnemers (indicatie) <input name="deelnemers" inputmode="numeric" /></label>
         <label>Je vraag <textarea name="bericht" rows="5" required></textarea></label>
         <button class="button button--accent" type="submit">Versturen</button>
-        <p class="form__status" role="alert" hidden>
-          Versturen is helaas niet gelukt. Probeer het later nog eens, of mail direct naar
-          <a href={`mailto:${site.email}`}>{site.email}</a>.
-        </p>
+        <div class="form__status" role="status" hidden>
+          <p>
+            <strong>Je mailprogramma is geopend</strong> met een kant-en-klare mail aan mij. Klik daar op
+            Versturen.
+          </p>
+          <p>
+            Opende er niets? Kopieer je bericht en mail het naar{' '}
+            <a href={`mailto:${site.email}`}>{site.email}</a>.
+          </p>
+          <button class="button button--outline form__kopieer" type="button">Kopieer je bericht</button>
+        </div>
         <p class="form__privacy">
           Ik gebruik je gegevens alleen om je aanvraag te beantwoorden. Lees ook de <a href={url('privacy/')}>privacyverklaring</a>.
         </p>
@@ -67,29 +73,66 @@ const verzendAdres = formspree ? site.formAction : site.formAction.replace('form
   const optie = select?.querySelector<HTMLOptionElement>(`option[data-id="${gekozen}"]`);
   if (optie) optie.selected = true;
 
-  // Verstuur het formulier op de achtergrond en ga bij succes naar de bedankpagina.
+  // Verstuur het formulier: via de formulierdienst als die is ingesteld, anders (of als die
+  // niet bereikbaar is) via het mailprogramma van de bezoeker.
   const form = document.querySelector<HTMLFormElement>('form.form');
+  const knop = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+  const status = form?.querySelector<HTMLElement>('.form__status');
+  const kopieer = form?.querySelector<HTMLButtonElement>('.form__kopieer');
+
+  const velden: [string, string][] = [
+    ['naam', 'Naam'],
+    ['organisatie', 'Organisatie'],
+    ['email', 'E-mailadres'],
+    ['training', 'Interesse in'],
+    ['deelnemers', 'Aantal deelnemers'],
+  ];
+
+  function bericht(f: HTMLFormElement) {
+    const data = new FormData(f);
+    const regels = velden.map(([naam, label]) => `${label}: ${String(data.get(naam) ?? '').trim() || '-'}`);
+    return `${regels.join('\n')}\n\nVraag:\n${String(data.get('bericht') ?? '').trim()}`;
+  }
+
+  function viaMail(f: HTMLFormElement) {
+    const { email = '', onderwerp = '' } = f.dataset;
+    location.href = `mailto:${email}?subject=${encodeURIComponent(onderwerp)}&body=${encodeURIComponent(bericht(f))}`;
+    if (status) status.hidden = false;
+  }
+
+  kopieer?.addEventListener('click', async () => {
+    if (!form) return;
+    try {
+      await navigator.clipboard.writeText(bericht(form));
+      kopieer.textContent = 'Gekopieerd';
+    } catch {
+      kopieer.textContent = 'Kopiëren lukte niet';
+    }
+  });
+
   form?.addEventListener('submit', async (event) => {
-    if (!form.dataset.verzend) return;
     event.preventDefault();
-    const knop = form.querySelector<HTMLButtonElement>('button[type="submit"]');
-    const status = form.querySelector<HTMLElement>('.form__status');
+    if ((form.elements.namedItem('_gotcha') as HTMLInputElement | null)?.value) return;
+    const dienst = form.dataset.dienst;
+    if (!dienst) {
+      viaMail(form);
+      return;
+    }
     if (knop) {
       knop.disabled = true;
       knop.textContent = 'Bezig met versturen…';
     }
-    if (status) status.hidden = true;
     try {
-      const antwoord = await fetch(form.dataset.verzend, {
+      const antwoord = await fetch(dienst, {
         method: 'POST',
         body: new FormData(form),
         headers: { Accept: 'application/json' },
       });
-      const data = await antwoord.json().catch(() => ({}));
-      if (!antwoord.ok || data.success === 'false' || data.success === false) throw new Error('niet verstuurd');
+      if (!antwoord.ok) throw new Error('niet verstuurd');
       location.href = form.dataset.bedankt ?? '/';
     } catch {
-      if (status) status.hidden = false;
+      viaMail(form);
+    } finally {
       if (knop) {
         knop.disabled = false;
         knop.textContent = 'Versturen';
@@ -113,9 +156,11 @@ const verzendAdres = formspree ? site.formAction : site.formAction.replace('form
   }
   .form input:focus, .form select:focus, .form textarea:focus { border-color: var(--ink); outline: none; }
   .form .button { justify-self: start; cursor: pointer; font: inherit; font-weight: 500; }
-  .form__note { background: var(--white); border-left: 4px solid var(--oker); padding: 0.6em 1em; margin: 0; font-size: var(--step--1); }
   .form__privacy { font-size: var(--step--1); margin: 0; }
-  .form__status { margin: 0; padding: 0.75em 1em; background: var(--white); border-left: 4px solid var(--koper); font-size: var(--step--1); }
+  .form__status { display: grid; gap: var(--space-xs); padding: var(--space-s) var(--space-m); background: var(--white); border-radius: var(--radius); font-size: var(--step--1); }
+  .form__status p { margin: 0; }
+  .form__status .button { justify-self: start; padding: 0.5em 1em; font-size: var(--step--1); }
+  .form__status[hidden] { display: none; }
   .form__honey { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
   @media (max-width: 56rem) { .layout { grid-template-columns: 1fr; gap: var(--space-l); } .form { padding: var(--space-m); } }
 </style>
