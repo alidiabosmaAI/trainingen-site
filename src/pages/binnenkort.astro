@@ -1,0 +1,53 @@
+---
+// Tijdelijke pagina "Binnenkort online". Wordt de homepage zolang BINNENKORT in astro.config.mjs aanstaat.
+import '../styles/global.css';
+import Logo from '../components/Logo.astro';
+import { site } from '../config';
+---
+
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{site.name} | Binnenkort online</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <main class="binnenkort">
+      <div class="binnenkort__inhoud">
+        <Logo />
+        <h1>Binnenkort online</h1>
+        <p class="intro">Aan deze website wordt nog gewerkt. Kom snel terug.</p>
+      </div>
+      <div class="binnenkort__vormen" aria-hidden="true">
+        <span style="background: var(--oker); border-radius: 100% 0 0 0"></span>
+        <span style="background: var(--salie); border-radius: var(--radius)"></span>
+        <span style="background: var(--denim); border-radius: 50%"></span>
+        <span style="background: var(--ink); border-radius: 0 0 100% 0"></span>
+      </div>
+    </main>
+  </body>
+</html>
+
+<style>
+  .binnenkort {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 14rem;
+    align-items: center;
+    gap: var(--space-xl);
+    width: min(100% - 2rem, 56rem);
+    margin-inline: auto;
+    padding-block: var(--space-l);
+  }
+  .binnenkort h1 { margin-top: var(--space-l); }
+  .binnenkort .intro { margin: 0; }
+  .binnenkort__vormen { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+  .binnenkort__vormen span { aspect-ratio: 1; }
+  @media (max-width: 40rem) {
+    .binnenkort { grid-template-columns: 1fr; align-content: center; gap: var(--space-l); }
+    .binnenkort__vormen { width: 8rem; }
+  }
+</style>

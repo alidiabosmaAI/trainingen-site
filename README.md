@@ -35,6 +35,14 @@ git commit -m "Korte omschrijving van de wijziging"
 git push
 ```
 
+## Binnenkort-pagina en vindbaarheid
+
+- In `astro.config.mjs` staat `BINNENKORT`. Op `true` wordt alleen de pagina "Binnenkort online" gepubliceerd
+  (elke andere link toont die ook). Zet hem op `false` om de volledige website live te zetten.
+  Lokaal (`npm run dev`) zie je altijd de volledige site.
+- In `src/config.ts` staat `vindbaar`. Op `false` vragen alle pagina's zoekmachines om ze niet op te nemen.
+  Zet hem op `true` als de site vindbaar mag zijn in Google.
+
 ## Online
 
 De site staat op https://bestuurskundigleerhuis.nl en wordt gehost via GitHub Pages.
