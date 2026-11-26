@@ -5,7 +5,7 @@ export const site = {
   // De persoon achter het leerhuis (pagina Over)
   eigenaar: 'Alidia Bosma',
   // false = zoekmachines indexeren de site niet (tijdelijk, tot de officiële start). Zet op true om vindbaar te worden.
-  vindbaar: false,
+  vindbaar: true,
   tagline: 'AI-geletterdheid & algoritmisch bestuur',
   description:
     'Trainingen in AI-geletterdheid en algoritmisch bestuur voor overheden en semi-publieke organisaties.',

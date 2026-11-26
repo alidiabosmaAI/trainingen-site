@@ -6,7 +6,7 @@ import { join } from 'node:path';
 
 // true = alleen de pagina "Binnenkort online" wordt gepubliceerd; elke andere link toont die ook.
 // false = de volledige website wordt gepubliceerd. Lokaal (npm run dev) zie je altijd de volledige site.
-const BINNENKORT = true;
+const BINNENKORT = false;
 
 // Bestanden die de binnenkort-pagina nodig heeft en dus blijven staan.
 const BEHOUDEN = new Set(['_astro', 'favicon.svg', 'CNAME', 'index.html', '404.html']);
