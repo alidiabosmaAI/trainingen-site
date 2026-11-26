@@ -8,6 +8,8 @@ interface Props {
 const { bron, kop } = Astro.props;
 ---
 
+<div class="artikel-wrap">
+<span class="artikel__zon" aria-hidden="true"></span>
 <figure class="artikel">
   <figcaption>
     <span class="artikel__kop">{kop}</span>
@@ -17,6 +19,7 @@ const { bron, kop } = Astro.props;
     <slot />
   </blockquote>
 </figure>
+</div>
 
 <style>
   .artikel {
@@ -27,16 +30,17 @@ const { bron, kop } = Astro.props;
     padding: var(--space-l) var(--space-m) var(--space-m);
     box-shadow: 0 16px 40px -20px rgb(58 33 64 / 0.3);
   }
-  /* Kwartcirkel als hoekaccent, het terugkerende vormelement */
-  .artikel::before {
-    content: '';
+  /* De oker zon uit het logo kijkt achter de kaart vandaan */
+  .artikel-wrap { position: relative; isolation: isolate; }
+  .artikel__zon {
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 3rem;
-    height: 3rem;
+    z-index: -1;
+    top: -1.3rem;
+    right: -0.9rem;
+    width: 4rem;
+    height: 4rem;
     background: var(--oker);
-    border-radius: 0 var(--radius) 0 100%;
+    border-radius: 50%;
   }
   figcaption { display: grid; gap: 0.1rem; margin-bottom: var(--space-s); padding-right: 3rem; }
   .artikel__kop { font-weight: 750; font-size: var(--step-1); letter-spacing: -0.015em; }

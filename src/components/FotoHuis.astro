@@ -1,0 +1,49 @@
+---
+// Portretfoto in de vorm van het huisje uit het logo, met de oker zon die over het dak kijkt.
+// spiegel: de zon links in plaats van rechts.
+interface Props {
+  foto: string;
+  fotoAlt: string;
+  // Welk deel van de foto zichtbaar blijft bij bijsnijden, bijv. 'center 20%'.
+  fotoPositie?: string;
+  spiegel?: boolean;
+}
+
+const { foto, fotoAlt, fotoPositie = 'center', spiegel = false } = Astro.props;
+const fotoSrc = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${foto.replace(/^\//, '')}`;
+---
+
+<div class:list={['fotohuis', { 'fotohuis--spiegel': spiegel }]}>
+  <span class="fotohuis__zon" aria-hidden="true"></span>
+  <img class="fotohuis__foto" src={fotoSrc} alt={fotoAlt} style={`object-position: ${fotoPositie}`} />
+</div>
+
+<style>
+  .fotohuis {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    padding: 9% 11% 0 0;
+  }
+  .fotohuis--spiegel { padding: 9% 0 0 11%; }
+  .fotohuis__foto {
+    display: block;
+    width: 100%;
+    aspect-ratio: 100 / 118;
+    object-fit: cover;
+    /* Huisvorm met afgeronde hoeken, dezelfde verhoudingen als het logo */
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 118' preserveAspectRatio='none'%3E%3Cpath d='M50 3 L97 40 L97 112 Q97 115 94 115 L6 115 Q3 115 3 112 L3 40 Z' fill='%23000' stroke='%23000' stroke-width='6' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 118' preserveAspectRatio='none'%3E%3Cpath d='M50 3 L97 40 L97 112 Q97 115 94 115 L6 115 Q3 115 3 112 L3 40 Z' fill='%23000' stroke='%23000' stroke-width='6' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  }
+  .fotohuis__zon {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: 0;
+    width: 40%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--oker);
+  }
+  .fotohuis--spiegel .fotohuis__zon { right: auto; left: 0; }
+</style>

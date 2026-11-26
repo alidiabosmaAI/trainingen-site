@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import Logo from './Logo.astro';
 import { nav } from '../config';
 import { url } from '../lib/url';
-import { themaKleur } from '../lib/thema';
 
 const current = Astro.url.pathname;
 const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.volgorde - b.data.volgorde);
@@ -35,7 +34,7 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
                   <div class="submenu">
                     <ul>
                       {trainingen.map((t) => (
-                        <li style={`--accent: ${themaKleur[t.data.thema].accent}`}>
+                        <li>
                           <a href={url(`aanbod/${t.id}/`)}>
                             <span class="submenu__thema">{t.data.thema}</span>
                             {t.data.titel}
@@ -134,8 +133,8 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
     top: 0.9rem;
     width: 0.7rem;
     height: 0.7rem;
-    border-radius: 100% 0 0 0;
-    background: var(--accent);
+    border-radius: 50%;
+    background: var(--oker);
   }
   .submenu li a:hover { background: var(--papier); }
   .submenu__thema { display: block; font-size: 0.78rem; font-weight: 650; opacity: 0.75; }

@@ -60,7 +60,7 @@ img, svg { max-width: 100%; height: auto; }
 .section--papier { background: var(--papier); }
 .section--salie { background: var(--salie); }
 
-/* Sectielabel: kwartcirkel + tekst. De kwartcirkel is het terugkerende vormelement. */
+/* Sectielabel: oker zon + tekst. De zon (uit het logo) is het terugkerende speelse detail. */
 .label {
   display: inline-flex;
   align-items: center;
@@ -72,10 +72,10 @@ img, svg { max-width: 100%; height: auto; }
 }
 .label::before {
   content: '';
-  width: 1em;
-  height: 1em;
-  border-top-left-radius: 100%;
-  background: var(--label-kleur, var(--koper));
+  width: 0.8em;
+  height: 0.8em;
+  border-radius: 50%;
+  background: var(--oker);
 }
 
 .intro {
@@ -115,7 +115,7 @@ img, svg { max-width: 100%; height: auto; }
   width: 0.5em;
   height: 0.5em;
   border-radius: 50%;
-  background: var(--koper);
+  background: var(--oker);
 }
 
 .skip-link {

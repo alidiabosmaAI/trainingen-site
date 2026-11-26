@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import Tegels from '../components/Tegels.astro';
+import FotoHuis from '../components/FotoHuis.astro';
 import TrainingCard from '../components/TrainingCard.astro';
 import Artikel from '../components/Artikel.astro';
 import Werkwijze from '../components/Werkwijze.astro';
@@ -27,7 +27,7 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
         </div>
       </div>
       <div class="hero__visual">
-        <Tegels variant="a" foto="images/alidia-bosma.webp" fotoAlt="Portret van Alidia Bosma" fotoPositie="center 28%" />
+        <FotoHuis foto="images/alidia-bosma.webp" fotoAlt="Portret van Alidia Bosma" fotoPositie="center 28%" />
       </div>
     </div>
   </section>
@@ -35,7 +35,7 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
   <section class="section section--papier">
     <div class="container visie">
       <div>
-        <p class="label" style="--label-kleur: var(--olijf)">Visie</p>
+        <p class="label">Visie</p>
         <h2>In elk algoritme zitten keuzes</h2>
         <p>
           Wie krijgt een toeslag? Welke aanvraag wordt extra gecontroleerd? Achter zulke uitkomsten zitten opvattingen
@@ -58,7 +58,7 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
 
   <section class="section" id="werkwijze">
     <div class="container">
-      <p class="label" style="--label-kleur: var(--oker)">Werkwijze</p>
+      <p class="label">Werkwijze</p>
       <h2>Leren door te doen</h2>
       <p class="intro">
         Serieus van inhoud, speels in de vorm. Van het eerste gesprek tot en met de borging: zo ziet een traject eruit.
@@ -70,7 +70,7 @@ const trainingen = (await getCollection('trainingen')).sort((a, b) => a.data.vol
 
   <section class="section section--papier">
     <div class="container">
-      <p class="label" style="--label-kleur: var(--koper)">Aanbod</p>
+      <p class="label">Aanbod</p>
       <h2>Drie rollen, drie trainingen</h2>
       <p class="intro">Voor de professional die met AI werkt, de adviseur die algoritmes beoordeelt en de leidinggevende die richting geeft.</p>
       <div class="panels">

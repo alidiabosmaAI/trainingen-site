@@ -1,0 +1,27 @@
+---
+// Het huisje uit het logo, als terugkerend beeldelement.
+// zon: waar de zon staat. 'hoog' is het logo (de zon kijkt over het dak),
+// 'midden' kijkt langs de dakrand, 'laag' gluurt om de hoek van het huis.
+interface Props {
+  zon?: 'laag' | 'midden' | 'hoog';
+  class?: string;
+}
+
+const { zon = 'hoog', class: klasse } = Astro.props;
+const zonPlek = { hoog: { cx: 29, cy: 12 }, midden: { cx: 34, cy: 20 }, laag: { cx: 34.5, cy: 30 } }[zon];
+---
+
+<svg class:list={['huisje', klasse]} viewBox="0 0 40 40" aria-hidden="true">
+  <circle cx={zonPlek.cx} cy={zonPlek.cy} r="6.5" fill="var(--oker)" />
+  <path
+    d="M17 6 L31 18 L31 35 Q31 37 29 37 L5 37 Q3 37 3 35 L3 18 Z"
+    fill="var(--huisje-kleur, var(--ink))"
+    stroke="var(--huisje-kleur, var(--ink))"
+    stroke-width="2"
+    stroke-linejoin="round"
+  />
+</svg>
+
+<style>
+  .huisje { display: block; width: 3rem; height: 3rem; overflow: visible; }
+</style>

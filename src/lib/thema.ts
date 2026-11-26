@@ -1,7 +1,7 @@
-// Elke trainingssoort krijgt één vorm uit de tegelcompositie op de homepage, in dezelfde kleur.
-// `vlak` is de lichte achtergrond bovenaan de trainingspagina.
-export const themaKleur: Record<string, { vlak: string; accent: string; vorm: string }> = {
-  'Basistraining': { vlak: 'var(--perzik)', accent: 'var(--oker)', vorm: '100% 0 0 0' },
-  'Verdieping voor adviseurs': { vlak: 'var(--salie)', accent: 'var(--ink)', vorm: '0 0 100% 0' },
-  'Voor leidinggevenden': { vlak: 'var(--hemel)', accent: 'var(--denim)', vorm: '50%' },
+// Elke trainingssoort krijgt een eigen lichte achtergrond en een eigen stand van de zon bij het huisje
+// uit het logo (zie Huisje.astro).
+export const themaKleur: Record<string, { vlak: string; zon: 'laag' | 'midden' | 'hoog' }> = {
+  'Basistraining': { vlak: 'var(--perzik)', zon: 'laag' },
+  'Verdieping voor adviseurs': { vlak: 'var(--salie)', zon: 'midden' },
+  'Voor leidinggevenden': { vlak: 'var(--hemel)', zon: 'hoog' },
 };

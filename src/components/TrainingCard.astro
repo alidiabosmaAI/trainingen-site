@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import Facts from './Facts.astro';
 import { url } from '../lib/url';
 import { themaKleur } from '../lib/thema';
+import Huisje from './Huisje.astro';
 
 interface Props {
   training: CollectionEntry<'trainingen'>;
@@ -14,7 +15,7 @@ const thema = themaKleur[d.thema];
 ---
 
 <article class="kaart">
-  <span class="kaart__vorm" style={`background: ${thema.accent}; border-radius: ${thema.vorm}`} aria-hidden="true"></span>
+  <Huisje zon={thema.zon} class="kaart__vorm" />
   <p class="kaart__thema">{d.thema}</p>
   <h3><a href={url(`aanbod/${training.id}/`)}>{d.titel}</a></h3>
   <p>{d.samenvatting}</p>
@@ -36,7 +37,7 @@ const thema = themaKleur[d.thema];
     transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
   .kaart:hover { transform: translateY(-3px); box-shadow: 0 16px 34px -22px rgb(58 33 64 / 0.4); }
-  .kaart__vorm { width: 3rem; height: 3rem; margin-bottom: var(--space-m); }
+  .kaart :global(.kaart__vorm) { margin-bottom: var(--space-m); }
   .kaart__thema { font-size: var(--step--1); font-weight: 700; margin-bottom: 0.3rem; }
   .kaart h3 { font-size: var(--step-1); }
   .kaart h3 a { text-decoration: none; }
