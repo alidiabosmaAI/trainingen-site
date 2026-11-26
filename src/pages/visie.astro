@@ -4,7 +4,6 @@ import Base from '../layouts/Base.astro';
 import Artikel from '../components/Artikel.astro';
 import { url } from '../lib/url';
 import { themaKleur } from '../lib/thema';
-import Huisje from '../components/Huisje.astro';
 
 const trainingen = await getCollection('trainingen');
 const trainingVoor = (thema: string) => trainingen.find((t) => t.data.thema === thema);
@@ -123,7 +122,6 @@ const niveaus = [
             const k = themaKleur[n.thema];
             return (
               <li>
-                <Huisje zon={k.zon} class="niveaus__vorm" />
                 <h3>{n.rol}</h3>
                 <p>{n.tekst}</p>
                 {t && (
@@ -182,7 +180,6 @@ const niveaus = [
     padding: var(--space-m);
     background: var(--white);
   }
-  .niveaus :global(.niveaus__vorm) { margin-bottom: var(--space-m); }
   .niveaus h3 { font-size: var(--step-1); }
   .niveaus__link { margin: auto 0 0; padding-top: var(--space-s); font-weight: 700; }
   .niveaus__link a { text-decoration: none; }

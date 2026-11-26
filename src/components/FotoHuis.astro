@@ -1,19 +1,21 @@
 ---
 // Portretfoto in de vorm van het huisje uit het logo, met de oker zon die over het dak kijkt.
 // spiegel: de zon links in plaats van rechts.
+// huis={false}: een gewone afgeronde foto, met dezelfde zon erachter (het huisje blijft voor het logo en de homepage).
 interface Props {
   foto: string;
   fotoAlt: string;
   // Welk deel van de foto zichtbaar blijft bij bijsnijden, bijv. 'center 20%'.
   fotoPositie?: string;
   spiegel?: boolean;
+  huis?: boolean;
 }
 
-const { foto, fotoAlt, fotoPositie = 'center', spiegel = false } = Astro.props;
+const { foto, fotoAlt, fotoPositie = 'center', spiegel = false, huis = true } = Astro.props;
 const fotoSrc = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${foto.replace(/^\//, '')}`;
 ---
 
-<div class:list={['fotohuis', { 'fotohuis--spiegel': spiegel }]}>
+<div class:list={['fotohuis', { 'fotohuis--spiegel': spiegel, 'fotohuis--recht': !huis }]}>
   <span class="fotohuis__zon" aria-hidden="true"></span>
   <img class="fotohuis__foto" src={fotoSrc} alt={fotoAlt} style={`object-position: ${fotoPositie}`} />
 </div>
@@ -35,6 +37,7 @@ const fotoSrc = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/${foto.replace(/
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 118' preserveAspectRatio='none'%3E%3Cpath d='M50 3 L97 40 L97 112 Q97 115 94 115 L6 115 Q3 115 3 112 L3 40 Z' fill='%23000' stroke='%23000' stroke-width='6' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 118' preserveAspectRatio='none'%3E%3Cpath d='M50 3 L97 40 L97 112 Q97 115 94 115 L6 115 Q3 115 3 112 L3 40 Z' fill='%23000' stroke='%23000' stroke-width='6' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
   }
+  .fotohuis--recht .fotohuis__foto { -webkit-mask: none; mask: none; border-radius: var(--radius); aspect-ratio: 4 / 5; }
   .fotohuis__zon {
     position: absolute;
     z-index: -1;

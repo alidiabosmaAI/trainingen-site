@@ -4,7 +4,6 @@ import Base from '../../layouts/Base.astro';
 import { site } from '../../config';
 import { url } from '../../lib/url';
 import { themaKleur } from '../../lib/thema';
-import Huisje from '../../components/Huisje.astro';
 
 export async function getStaticPaths() {
   const trainingen = await getCollection('trainingen');
@@ -39,7 +38,7 @@ const feiten = [
             {d.kernpunten.map((k) => <li>{k}</li>)}
           </ul>
         </div>
-        <Huisje zon={kleur.zon} class="top__vorm" />
+        <span class="top__zon" aria-hidden="true"></span>
       </div>
     </section>
 
@@ -92,7 +91,7 @@ const feiten = [
 
 <style>
   .top { background: var(--vlak); padding-block: var(--space-l) calc(var(--space-l) + 2.5rem); }
-  .top :global(.top__vorm) { width: 12rem; height: 12rem; }
+  .top__zon { display: block; width: 10rem; height: 10rem; border-radius: 50%; background: var(--oker); }
   .top__grid { display: grid; grid-template-columns: 1fr 12rem; gap: var(--space-xl); align-items: end; }
   .kruimel { font-size: var(--step--1); margin-bottom: var(--space-m); }
   .top h1 { max-width: 18ch; }
@@ -153,7 +152,7 @@ const feiten = [
 
   @media (max-width: 56rem) {
     .top__grid, .inhoud__grid { grid-template-columns: 1fr; gap: var(--space-l); }
-    .top :global(.top__vorm) { display: none; }
+    .top__zon { display: none; }
     .feiten { grid-template-columns: 1fr 1fr; }
     .feiten div:nth-child(3) { border-left: 0; }
     .feiten div:nth-child(n + 3) { border-top: 1px solid var(--lijn); }
