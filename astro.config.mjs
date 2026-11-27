@@ -9,7 +9,7 @@ import { join } from 'node:path';
 const BINNENKORT = false;
 
 // Bestanden die de binnenkort-pagina nodig heeft en dus blijven staan.
-const BEHOUDEN = new Set(['_astro', 'favicon.svg', 'CNAME', 'index.html', '404.html']);
+const BEHOUDEN = new Set(['_astro', 'favicon.svg', 'favicon.ico', 'favicon-32.png', 'apple-touch-icon.png', 'CNAME', 'index.html', '404.html']);
 
 /** Na het bouwen: vervang de site door de binnenkort-pagina. */
 const binnenkort = {
